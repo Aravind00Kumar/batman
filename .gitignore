@@ -1,0 +1,11 @@
+# Ignore node_modules folder
+node_modules
+
+# ignore sass cache folder
+.sass-cache/
+
+# ignore all source map
+*.map
+
+# ignore all javascript files under src folder
+src/**/*.js
