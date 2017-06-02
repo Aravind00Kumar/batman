@@ -27,9 +27,3 @@ npm start
 * [node.js V8.0.0](https://nodejs.org/en/)
 * ruby (for sass compiler)
 * vs code
-
-## TypeScript latest version setup in VS Code
-
-```
-    npm list -g depth=0
-```
