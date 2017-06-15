@@ -1,14 +1,6 @@
-svg{
-  background-color: #111;
-}
-.path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: dash 3s linear forwards alternate;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
+.doughnut-component {
+    background-color: #111;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
 }
