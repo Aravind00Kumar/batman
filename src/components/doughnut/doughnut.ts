@@ -7,7 +7,7 @@
 import { IBaseComponent, BaseComponent } from '../base-component'
 
 export interface IDoughnutComponent {
-
+    animateTo(startAngle, angle): void;
 }
 
 export interface IDoughnutOptions {
@@ -21,16 +21,16 @@ export interface IDoughnutOptions {
     fillCircle?: boolean
 }
 
-export class Doughnut extends BaseComponent {
+export class Doughnut extends BaseComponent implements IDoughnutComponent {
     public defaultOptions: IDoughnutOptions = {
         size: 100,
         stroke: 10,
-        arc: false,
+        arc: true,
         startAngle: 0,
         angle: 180,
         sectorColor: '#789',
         circleColor: '#DDD',
-        fillCircle: true
+        fillCircle: false
     }
 
     //private element: any;

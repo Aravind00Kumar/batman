@@ -1,18 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    var context = document.querySelector('.example-two');
-    var doughnut = new window.Batman.Doughnut(context,
+    var d1 = new window.Batman.Doughnut(document.querySelector('.d1'),
         {
-            size: 200,
-            stroke: 20,
-            arc: true,
             angle: window.endAngle.value,
             startAngle: window.startAngle.value,
-            sectorColor: '#bD2828',
-            fillCircle: false,
-            angleOffset: 0
+            sectorColor: '#03a9f4',
         });
-
+    var d2 = new window.Batman.Doughnut(document.querySelector('.d2'),
+        {
+            angle: window.endAngle.value,
+            startAngle: window.startAngle.value,
+            sectorColor: '#ff5722',
+        });
+    var d3 = new window.Batman.Doughnut(document.querySelector('.d3'),
+        {
+            angle: window.endAngle.value,
+            startAngle: window.startAngle.value,
+            sectorColor: '#4caf50',
+        });
+    var d4 = new window.Batman.Doughnut(document.querySelector('.d4'),
+        {
+            angle: window.endAngle.value,
+            startAngle: window.startAngle.value,
+            sectorColor: '#e91e63',
+        });
 
     document.getElementById('add').addEventListener('click', function () {
         window.endAngle.value++;
@@ -27,7 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('apply').addEventListener('click', function () {
        var startAngle = window.startAngle.value;
         var endAngle = window.endAngle.value;
-        doughnut.animateTo(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
+        d1.animateTo(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
+        d2.animateTo(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
+        d3.animateTo(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
+        d4.animateTo(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
     });
 
 

@@ -107,12 +107,12 @@ var Doughnut = (function (_super) {
         _this.defaultOptions = {
             size: 100,
             stroke: 10,
-            arc: false,
+            arc: true,
             startAngle: 0,
             angle: 180,
             sectorColor: '#789',
             circleColor: '#DDD',
-            fillCircle: true
+            fillCircle: false
         };
         //this.context = context;
         _this.options = __assign({}, _this.defaultOptions, options);
