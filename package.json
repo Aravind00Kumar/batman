@@ -2,12 +2,12 @@
   "name": "batman",
   "version": "1.0.0",
   "description": "UI Components in vanilla js (TypeScript)",
-  "main": "index.html",
+  "main": "demo/scripts/batman.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "start": "tsc && concurrently \"scss src/sass:src/css --watch\" \"scss demo/sass:demo/css --watch\" \"tsc -w\" \"lite-server\" ",
+    "start": "tsc && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
     "postinstall": "typings install",
     "tsc": "tsc",
@@ -21,6 +21,18 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^3.4.0",
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "ts-loader": "^2.1.0",
+    "webpack": "^2.6.1"
+  },
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "nodeDependencies",
+          "name": "Node Dependencies"
+        }
+      ]
+    }
   }
 }

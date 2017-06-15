@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box; }
+
+/* Padding Margin Border*/
+.no-pad {
+  padding: 0; }
+
+.no-mar {
+  padding: 0; }
+
+.no-pad-mar, .no-mar-pad {
+  padding: 0;
+  padding: 0; }
+
+.pad-1x {
+  padding: 2px; }
+
+.mar-1x {
+  padding: 2px; }
+
+.pad-mar-1x, .mar-pad-1x {
+  padding: 2px;
+  padding: 2px; }
+
+.pad-2x {
+  padding: 5px; }
+
+.mar-2x {
+  padding: 5px; }
+
+.pad-mar-2x, .mar-pad-2x {
+  padding: 5px;
+  padding: 5px; }
+
+.no-mar-collapse {
+  border: 1px solid transparent; }
+
+/* Borders */
+.border {
+  border-style: solid;
+  border-width: 1px; }
+
+.border-2x {
+  border-style: solid;
+  border-width: 2px; }
+
+/* Clear Floats */
+.clear::after {
+  display: table;
+  content: '';
+  clear: both; }
+
+/* Flex*/
+.flex {
+  display: flex; }
+
+.flex.column {
+  flex-direction: column; }
+
+.flex.row {
+  flex-direction: row; }
+
+.flex.container {
+  align-items: stretch; }
+
+.flex.full > * {
+  flex: 1; }
+
+/* Visibility*/
+.hide {
+  display: none; }
+
+.hide-silent {
+  opacity: 0; }
+
+.show-silent {
+  opacity: 1; }
+
+.h1 {
+  font-size: 2em;
+  margin: 1em 0; }
+
+.h2 {
+  font-size: 1.8em;
+  margin: 0.8em 0; }
+
+.h3 {
+  font-size: 1.6em;
+  margin: 0.6em 0; }
+
+.h4 {
+  font-size: 1.4em;
+  margin: 0.4em 0; }
+
+.h5 {
+  font-size: 1.2em;
+  margin: 0.2em 0; }
+
+.h6 {
+  font-size: 1em;
+  margin: 0.2em 0; }
+
+.p {
+  margin: 0.6em 0; }
+
+/* Components */
+svg {
+  background-color: #111; }
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3s linear forwards alternate; }
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0; } }
+
+/*# sourceMappingURL=batman.css.map */

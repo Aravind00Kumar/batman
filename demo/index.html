@@ -1,10 +1,264 @@
 <html>
-    <head>
-        <title></title>
-        <link rel="shortcut icon" href="./img/favicon.ico" />
-    </head>
-    <body>
-        <h1>Batman</h1>
-        <img src="./img/logo_64.png" alt="">
-    </body>
+
+<head>
+    <title></title>
+    <link rel="shortcut icon" href="./img/favicon.ico" />
+    <link rel="stylesheet" href="./css/batman.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+
+            var sektor2 = new Sektor('.example-two', {
+                size: 200,
+                stroke: 20,
+                arc: true,
+                angle: 200,
+                sectorColor: '#bD2828',
+                fillCircle: false,
+                angleOffset: 0
+            });
+
+            document.getElementById('add').addEventListener('click', function () {
+                window.endAngle.value++;
+                document.getElementById('apply').click();
+            })
+
+            document.getElementById('remove').addEventListener('click', function () {
+                window.endAngle.value--;
+                document.getElementById('apply').click();
+            })
+
+            document.getElementById('apply').addEventListener('click', function () {
+                //A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+                var startAngle = window.startAngle.value;
+                var endAngle = window.endAngle.value;
+                sektor2.animateTo(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
+            });
+
+
+        });
+
+
+
+
+        var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+        function Sektor(selector, options) {
+            this.element = document.querySelector(selector);
+
+            var defaultOptions = {
+                size: 100,
+                stroke: 10,
+                arc: false,
+                startAngle: 20,
+                angle: 225,
+                sectorColor: '#789',
+                circleColor: '#DDD',
+                fillCircle: true
+            };
+
+            // Merge options with default ones
+            options = _extends(defaultOptions, options);
+
+            // Reset stroke to 0 if drawing full sector
+            options.stroke = options.arc ? options.stroke : 0;
+
+            // Circle dimenstions
+            options.center = options.size / 2;
+            options.radius = options.stroke ? options.center - options.stroke / 2 : options.center;
+
+            this.options = options;
+
+            this.checkAngle();
+
+            var svg = '<svg class=\'Sektor\' viewBox=\'0 0 ' + options.size + ' ' + options.size + '\'>\n      ' + this.getCircle() + '\n      ' + this.getSector() + '\n    </svg>';
+
+            this.element.innerHTML = svg;
+            this.sector = this.element.querySelector('.Sektor-sector');
+        }
+
+        Sektor.prototype.checkAngle = function () {
+            if (this.options.angle > 360) {
+                this.options.angle = this.options.angle % 360;
+            }
+            if(this.options.startAngle > this.options.angle ){
+                this.options.startAngle = 0;
+            }
+        };
+
+        Sektor.prototype.changeAngle = function (startAngle, angle) {
+            this.options.angle = angle;
+            this.options.startAngle = startAngle;
+            this.checkAngle();
+            this.sector.setAttribute('d', this.getSector(true));
+        };
+
+        Sektor.prototype.step = function (startAngleOffset, angleOffset, startAngle,  endAngle, time, endTime) {
+            var _this = this;
+
+            var now = new Date().valueOf();
+            var timeOffset = endTime - now;
+
+            if (timeOffset <= 0) {
+                this.changeAngle(startAngle, endAngle);
+            } else {
+                var angle = endAngle - angleOffset * timeOffset / time;
+                var sAngle = startAngle - startAngleOffset * timeOffset / time;
+
+                this.changeAngle(sAngle, angle);
+                requestAnimationFrame(function () {
+                    return _this.step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime);
+                });
+            }
+        };
+
+        Sektor.prototype.animateTo = function (startAngle, angle) {
+            var _this2 = this;
+
+            var time = arguments.length <= 1 || arguments[1] === undefined ? 300 : arguments[1];
+
+            if (angle > 360) {
+                angle = angle % 360;
+            }
+
+            var startTime = new Date().valueOf();
+            var endTime = startTime + time;
+            if(startAngleOffset > angleOffset){
+                startAngleOffset = 0;
+            }
+            var startAngleOffset = startAngle - this.options.startAngle;
+            var angleOffset = angle - this.options.angle;
+
+            this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
+            // requestAnimationFrame(function () {
+            //     return _this2.step(angleOffset, angle, time, endTime);
+            // });
+        };
+
+        Sektor.prototype.getSector = function () {
+            var returnD = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+            var options = this.options;
+
+            // Colors
+            var sectorFill = options.arc ? 'none' : options.sectorColor;
+            var sectorStroke = options.arc ? options.sectorColor : 'none';
+
+            // Arc angles
+            var firstAngle = options.angle > 180 ? 90 : options.angle - 90;
+            var secondAngle = -270 + options.angle - 180;
+
+            var fsAngle = options.startAngle > 180 ? 90 : options.startAngle - 90;
+            var ssAngle = -270 + options.startAngle - 180;
+
+            // Arcs
+            var firstArc = this.getArc(firstAngle, options);
+            var secondArc = options.angle > 180 ? this.getArc(secondAngle, options) : '';
+
+            var fArc = this.getMove(fsAngle, options);
+            var sArc = options.startAngle > 180 ? this.getMove(ssAngle, options) : '';
+
+            // start -> starting line
+            // end -> will path be closed or not
+            var end = '';
+            var start = null;
+
+            if (options.arc) {
+                if (sArc)
+                    start = sArc;
+                else if (fArc)
+                    start = fArc;
+                else
+                    start = 'M' + options.center + ',' + options.stroke / 2;
+            } else {
+                start = 'M' + options.center + ',' + options.center + ' L' + options.center + ',' + options.stroke / 2;
+                end = 'z';
+            }
+
+            var d = start + ' ' + firstArc + ' ' + secondArc + ' ' + end;
+
+            if (returnD) {
+                return d;
+            }
+
+            return '<path\n    class=\'Sektor-sector\'\n    stroke-width=\'' + options.stroke + '\'\n    fill=' + sectorFill + '\n    stroke=' + sectorStroke + '\n    d=\'' + d + '\' />';
+        };
+
+        Sektor.prototype.getCircle = function () {
+            var options = this.options;
+            var circleFill = options.fillCircle || !options.arc ? options.circleColor : 'none';
+
+            return '<circle\n      class=\'Sektor-circle\'\n      stroke-width=\'' + options.stroke + '\'\n      fill=' + circleFill + '\n      stroke=' + options.circleColor + '\n      cx=\'' + options.center + '\'\n      cy=\'' + options.center + '\'\n      r=\'' + options.radius + '\' />';
+        };
+
+        // Generates SVG arc string
+        Sektor.prototype.getArc = function (angle) {
+            var options = this.options;
+
+            var x = options.center + options.radius * Math.cos(this.radians(angle));
+            var y = options.center + options.radius * Math.sin(this.radians(angle));
+
+            return 'A' + options.radius + ',' + options.radius + ' 1 0 1 ' + x + ',' + y;
+        };
+
+        Sektor.prototype.getMove = function (angle) {
+            var options = this.options;
+
+            var x = options.center + options.radius * Math.cos(this.radians(angle));
+            var y = options.center + options.radius * Math.sin(this.radians(angle));
+
+            return 'M' + x + ',' + y;
+        };
+
+        // Converts from degrees to radians.
+        Sektor.prototype.radians = function (degrees) {
+            return degrees / 180 * Math.PI;
+        };
+    </script>
+
+    <style>
+        .Sektor {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <img style="float:left" src="./img/logo_64.png" alt="">
+    <h1>Batman</h1>
+
+    <h1 class="h1"> Doughnut Component </h1>
+    <input id="startAngle" placeholder="Start angle" value="0" />
+    <input id="endAngle" placeholder="End angle" value="90" />
+    <button id="apply"> Apply</button>
+    <button id="add"> +</button>
+    <button id="remove"> -</button>
+
+    <div class="doughnut-component">
+        <!--<svg id="chart1" width="120" , height="120" xmlns="http://www.w3.org/2000/svg">
+
+            <circle cx="60" cy="60" r="50" stroke="yellow" stroke-width="1" fill="none" />
+            <path class="path" d="M60,10 A50,50,0 0,1 110,60" style="stroke: #0000ff; stroke-width:6; fill:none;" />
+            <path class="path" d="M110,60 A50,50,0 0,1 60,110" style="stroke: #00ff00; stroke-width:6; fill:none;" />
+            <path class="path" d="M60,110 A50,50,0 0,1 10,60" style="stroke: #ffff00; stroke-width:6; fill:none;" />
+            <path class="path" d="M10,60 A50,50,0 0,1 60,10" style="stroke: #ff00ff; stroke-width:6; fill:none;" />
+
+        </svg>-->
+        <div class='example-two'></div>
+
+        <!--<svg id="chart2" width="400" , height="400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="180" stroke="yellow" stroke-width="20" fill="none" />
+
+        </svg>-->
+    </div>
+    <script src="scripts/batman.bundle.js"></script>
+    
+    <script src="index.js"></script>
+</body>
+
 </html>

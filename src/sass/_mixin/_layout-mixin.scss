@@ -1,0 +1,50 @@
+@mixin padding($val:0){
+    padding: $val;
+}
+
+@mixin margin($val:0){
+    padding: $val;
+}
+
+@mixin padding-margin($pad:0, $mar:0){
+    @include padding($pad);
+    @include margin($mar);
+}
+
+@mixin solid-border(){
+    border-style: solid;
+}
+
+@mixin truncate($truncation-boundary: 100%) {
+    max-width: $truncation-boundary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

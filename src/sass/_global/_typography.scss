@@ -1,0 +1,36 @@
+@import "../_variables/_layout-variables";
+@import "../_mixin/_layout-mixin";
+
+$font-size-diff : 0.2em;
+$font-size-init: 1em;
+$font-margin: 0.2em;
+
+.h1{
+    font-size: $font-size-init + ($font-size-diff * 5);
+    margin: ($font-margin* 5) 0;
+}
+.h2{
+    font-size: $font-size-init + ($font-size-diff * 4);
+    margin: ($font-margin* 4) 0;
+}
+.h3{
+    font-size: $font-size-init + ($font-size-diff * 3);
+    margin: ($font-margin* 3) 0;
+}
+.h4{
+    font-size: $font-size-init + ($font-size-diff * 2);
+    margin: ($font-margin* 2) 0;
+}
+.h5{
+    font-size: $font-size-init + $font-size-diff;
+    margin: $font-margin 0;
+}
+.h6{
+    font-size: $font-size-init;
+    margin: $font-margin 0;
+}
+.p{
+    margin: ($font-margin* 3) 0;
+}
+
+
