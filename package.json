@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "tsc && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"tsc -w\" \"lite-server\" ",
+    "start": "webpack && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
     "lite": "lite-server",
     "postinstall": "typings install",
     "tsc": "tsc",
@@ -15,7 +15,7 @@
     "typings": "typings"
   },
   "keywords": [
-    "batman"
+    "Batman"
   ],
   "author": "Aravind Kumar P",
   "license": "ISC",

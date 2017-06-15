@@ -3,15 +3,15 @@ module.exports = {
     context: __dirname,
     entry:{
         // application entry point
-        app:'./demo/index.js',
-        // components entry point
         batman:'./src/components.ts'
     },
     output:{
+        libraryTarget:'var',
+        library:'Batman',
         path: __dirname + '/demo/scripts',
-        filename: "[name].bundle.js",
-        sourceMapFilename: "[name].bundle.js.map",
-        chunkFilename: "[id].bundle.js"
+        filename: "[name].js",
+        sourceMapFilename: "[name].js.map",
+        chunkFilename: "[id].js"
     },
     resolve: {
         // Add '.ts' and '.tsx' as a resolvable extension.

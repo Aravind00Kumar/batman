@@ -8,6 +8,7 @@ export interface IDoughnutComponent{
 
 export class Doughnut extends BaseComponent{
     constructor(element, options) {
+        debugger;
         super('Doughnut2');
     }
 }

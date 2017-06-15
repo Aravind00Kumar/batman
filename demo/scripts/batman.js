@@ -1,3 +1,4 @@
+var Batman =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -63,16 +64,16 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Doughnut; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_component__ = __webpack_require__(2);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -83,49 +84,49 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-var base_component_1 = __webpack_require__(4);
+
 var Doughnut = (function (_super) {
     __extends(Doughnut, _super);
     function Doughnut(element, options) {
-        return _super.call(this, 'Doughnut2') || this;
+        var _this = this;
+        debugger;
+        _this = _super.call(this, 'Doughnut2') || this;
+        return _this;
     }
     return Doughnut;
-}(base_component_1.BaseComponent));
-exports.Doughnut = Doughnut;
+}(__WEBPACK_IMPORTED_MODULE_0__base_component__["a" /* BaseComponent */]));
+
 
 
 /***/ }),
-/* 2 */,
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-exports.__esModule = true;
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__ = __webpack_require__(0);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__["a"]; });
 // export all components
-__export(__webpack_require__(1));
+
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-exports.__esModule = true;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseComponent; });
 var BaseComponent = (function () {
     function BaseComponent(name) {
         BaseComponent.Name = name;
+        BaseComponent.Version = '1.0.0';
+        this.options = {};
     }
     return BaseComponent;
 }());
-exports.BaseComponent = BaseComponent;
+
 
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=batman.bundle.js.map
+//# sourceMappingURL=batman.js.map
