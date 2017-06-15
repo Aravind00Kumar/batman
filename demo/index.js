@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     var d2 = new window.Batman.Doughnut(document.querySelector('.d2'),
         {
+            stroke: 5,
+            size:40,
             angle: window.endAngle.value,
             startAngle: window.startAngle.value,
             sectorColor: '#ff5722',

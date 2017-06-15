@@ -22,7 +22,7 @@ export interface IDoughnutOptions {
 }
 
 export class Doughnut extends BaseComponent implements IDoughnutComponent {
-    public defaultOptions: IDoughnutOptions = {
+    public static defaultOptions: IDoughnutOptions = {
         size: 100,
         stroke: 10,
         arc: true,
@@ -39,7 +39,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
     constructor(private element: HTMLElement, options?: IDoughnutOptions) {
         super('Doughnut');
         //this.context = context;
-        this.options = <IDoughnutOptions>{ ...this.defaultOptions, ...options };
+        this.options = <IDoughnutOptions>{ ...Doughnut.defaultOptions, ...options };
 
         // Reset stroke to 0 if drawing full sector
         this.options.stroke = this.options.arc ? this.options.stroke : 0;

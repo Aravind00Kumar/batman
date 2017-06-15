@@ -104,18 +104,8 @@ var Doughnut = (function (_super) {
     function Doughnut(element, options) {
         var _this = _super.call(this, 'Doughnut') || this;
         _this.element = element;
-        _this.defaultOptions = {
-            size: 100,
-            stroke: 10,
-            arc: true,
-            startAngle: 0,
-            angle: 180,
-            sectorColor: '#789',
-            circleColor: '#DDD',
-            fillCircle: false
-        };
         //this.context = context;
-        _this.options = __assign({}, _this.defaultOptions, options);
+        _this.options = __assign({}, Doughnut.defaultOptions, options);
         // Reset stroke to 0 if drawing full sector
         _this.options.stroke = _this.options.arc ? _this.options.stroke : 0;
         // Circle dimensions
@@ -238,6 +228,16 @@ var Doughnut = (function (_super) {
     return Doughnut;
 }(__WEBPACK_IMPORTED_MODULE_0__base_component__["a" /* BaseComponent */]));
 
+Doughnut.defaultOptions = {
+    size: 100,
+    stroke: 10,
+    arc: true,
+    startAngle: 0,
+    angle: 180,
+    sectorColor: '#789',
+    circleColor: '#DDD',
+    fillCircle: false
+};
 
 
 /***/ }),
