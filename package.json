@@ -22,14 +22,9 @@
     "ts-loader": "^2.1.0",
     "webpack": "^2.6.1"
   },
-  "contributes": {
-    "views": {
-      "explorer": [
-        {
-          "id": "nodeDependencies",
-          "name": "Node Dependencies"
-        }
-      ]
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   }
 }
