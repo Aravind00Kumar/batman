@@ -7,8 +7,7 @@ UI Components in vanilla js (TypeScript)
 Install typescript as a global package
 
 ```
-npm install typescript -g
-npm install typedoc --global
+npm install typescript typedoc -g
 npm install
 
 ```
