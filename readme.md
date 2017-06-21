@@ -7,7 +7,7 @@ UI Components in vanilla js (TypeScript)
 Install typescript as a global package
 
 ```
-npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab -g
+npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g
 npm link typescript
 npm install
 
