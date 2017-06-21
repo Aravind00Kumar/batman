@@ -26,5 +26,9 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://aravind.pampana@code.siemens.com/batman.git#commit-ish"
   }
 }
