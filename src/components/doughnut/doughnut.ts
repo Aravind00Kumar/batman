@@ -48,12 +48,19 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         this.options.center = this.options.size / 2;
         this.options.radius = this.options.stroke ? this.options.center - this.options.stroke / 2 : this.options.center;
 
-        var svg = '<svg class=\'doughnut-component\' viewBox=\'0 0 ' + this.options.size + ' ' + this.options.size + '\'>\n      ' + this.getCircle() + '\n      ' + this.getSector() + '\n    </svg>';
-
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" class=\'doughnut-component\' viewBox=\'0 0 ' + this.options.size + ' ' 
+        + this.options.size + '\'>\n      ' + this.getCircle() + '\n      ' + this.getSector() 
+        + '\n';
         this.element.innerHTML = svg;
         this.sector = this.element.querySelector('.doughnut-sector');
+
+        this.logger.log('Component Created!');
     }
 
+/**
+ * method to draw circle around the arc
+ * 
+ */
     private getCircle() {
         var options = this.options;
         var circleFill = options.fillCircle || !options.arc ? options.circleColor : 'none';

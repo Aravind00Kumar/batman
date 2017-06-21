@@ -1,4 +1,4 @@
-![alt](./docs/images/logo_64.png) 
+![alt](../docs/images/logo_64.png) 
 # Batman
 UI Components in vanilla js (TypeScript)
 
@@ -8,6 +8,7 @@ Install typescript as a global package
 
 ```
 npm install typescript -g
+npm install typedoc --global
 npm install
 
 ```
@@ -17,6 +18,17 @@ Start the lite-server
 ```
 npm start
 
+//Demo page
+http://localhost:8000/demo/index.html
+```
+
+Generate documentation  
+
+```
+npm docs
+
+//Demo page
+http://localhost:8000/documentation/index.html
 ```
 
 ## Technology Stack

@@ -9,10 +9,7 @@
   "scripts": {
     "start": "webpack && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
     "lite": "lite-server",
-    "postinstall": "typings install",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings"
+    "docs":"typedoc --out documentation/ src/ --name batman --readme readme.md --hideGenerator"
   },
   "keywords": [
     "Batman"

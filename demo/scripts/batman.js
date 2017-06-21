@@ -111,11 +111,18 @@ var Doughnut = (function (_super) {
         // Circle dimensions
         _this.options.center = _this.options.size / 2;
         _this.options.radius = _this.options.stroke ? _this.options.center - _this.options.stroke / 2 : _this.options.center;
-        var svg = '<svg class=\'doughnut-component\' viewBox=\'0 0 ' + _this.options.size + ' ' + _this.options.size + '\'>\n      ' + _this.getCircle() + '\n      ' + _this.getSector() + '\n    </svg>';
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" class=\'doughnut-component\' viewBox=\'0 0 ' + _this.options.size + ' '
+            + _this.options.size + '\'>\n      ' + _this.getCircle() + '\n      ' + _this.getSector()
+            + '\n';
         _this.element.innerHTML = svg;
         _this.sector = _this.element.querySelector('.doughnut-sector');
+        _this.logger.log('Component Created!');
         return _this;
     }
+    /**
+     * method to draw circle around the arc
+     *
+     */
     Doughnut.prototype.getCircle = function () {
         var options = this.options;
         var circleFill = options.fillCircle || !options.arc ? options.circleColor : 'none';
@@ -279,6 +286,7 @@ var BaseComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(4);
 
 var Global = (function () {
+    //    public static Logger :ILogger = Logger.getInstance(); 
     function Global() {
     }
     return Global;
@@ -287,8 +295,7 @@ var Global = (function () {
 Global.Name = 'Batman';
 Global.Version = '1.0.0.alpha.1';
 Global.AnimationDuration = 150;
-//    public static Logger :ILogger = Logger.getInstance(new ProfileWriter()); 
-Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
+Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance(new __WEBPACK_IMPORTED_MODULE_0__utility_logger__["b" /* ProfileWriter */]());
 
 
 /***/ }),
@@ -297,7 +304,7 @@ Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].
 
 "use strict";
 /* unused harmony export ConsoleWriter */
-/* unused harmony export ProfileWriter */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ProfileWriter; });
 /* unused harmony export Message */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
 var ConsoleWriter = (function () {
