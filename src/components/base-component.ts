@@ -1,6 +1,6 @@
 import Global from '../global'
 import {ILogger} from '../utility/logger'
-import { h, createProjector, Projector, ProjectorOptions } from '../common/dom';
+import { h, createProjector, Projector, ProjectorOptions } from '../common/maquette';
 
 export interface IBaseComponent{
     elements: Array<string>;

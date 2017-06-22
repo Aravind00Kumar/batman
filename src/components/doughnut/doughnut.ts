@@ -1,10 +1,4 @@
-/**
- * --------------------------------------------------------------------------
- * Doughnut Component
- * Licensed under MIT 
- * --------------------------------------------------------------------------
- */
-import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/dom';
+import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
 import { IBaseComponent, BaseComponent } from '../base-component'
 
 /**
@@ -32,7 +26,9 @@ export interface IDoughnutOptions {
     endAngle?: number,
     sectorColor?: string,
     circleColor?: string
-    values?: Array<IDoughnutValue>
+    image: URL,
+    values?: Array<IDoughnutValue>,
+    title?: string
 }
 
 export class Doughnut extends BaseComponent implements IDoughnutComponent {
@@ -45,7 +41,9 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         endAngle: 0,
         sectorColor: '#789',
         circleColor: '#DDD',
-        values: <Array<IDoughnutValue>>[]
+        image: null,
+        values: <Array<IDoughnutValue>>[],
+        title: ''
     }
 
     /**
@@ -98,12 +96,12 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         return h('div', { class: 'parent' }, [
             h('div', { class: 'child', 'style': `border-radius: 100%; overflow: hidden; transform:scale(${1 - (this.options.stroke) / 70})` }, [
                 h('img', {
-                    src: './img/bat1.jpg',
+                    src: this.options.image,
                     height: '100%',
                     width: '100%'
                 })
             ]),
-            h('div', { class: 'child' }, [
+            h('div', { class: 'child', title: this.options.title }, [
                 h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
                     h('circle', {
                         class: 'doughnut-circle',
@@ -134,41 +132,43 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         ]);
     }
 
+
+
     /**
      * Generates H template for single arc
      */
     private singleArc() {
-        return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-            h('circle', {
-                class: 'doughnut-circle',
-                'stroke-width': this.options.stroke,
-                fill: 'none',
-                stroke: this.options.circleColor,
-                cx: this.options.center,
-                cy: this.options.center,
-                r: this.options.radius
-            }),
-            h('path', {
-                class: 'doughnut-sector',
-                'stroke-width': this.options.stroke,
-                fill: 'none',
-                stroke: this.options.sectorColor,
-                d: this.getAcr(this.options.startAngle, this.options.endAngle)
-            })
-        ]);
-    }
+    return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
+        h('circle', {
+            class: 'doughnut-circle',
+            'stroke-width': this.options.stroke,
+            fill: 'none',
+            stroke: this.options.circleColor,
+            cx: this.options.center,
+            cy: this.options.center,
+            r: this.options.radius
+        }),
+        h('path', {
+            class: 'doughnut-sector',
+            'stroke-width': this.options.stroke,
+            fill: 'none',
+            stroke: this.options.sectorColor,
+            d: this.getAcr(this.options.startAngle, this.options.endAngle)
+        })
+    ]);
+}
 
     /**
      * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350) 
      */
     private checkAngle() {
-        if (this.options.endAngle > 360) {
-            this.options.endAngle = this.options.endAngle % 360;
-        }
-        if (this.options.startAngle > this.options.endAngle) {
-            this.options.startAngle = 0;
-        }
+    if (this.options.endAngle > 360) {
+        this.options.endAngle = this.options.endAngle % 360;
     }
+    if (this.options.startAngle > this.options.endAngle) {
+        this.options.startAngle = 0;
+    }
+}
 
     /**
      * Converts polar values to cartesian
@@ -178,12 +178,12 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * @param angleInDegrees arc angle value
      */
     private polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-        return {
-            x: (centerX + (radius * Math.cos(angleInRadians))),
-            y: (centerY + (radius * Math.sin(angleInRadians)))
-        };
-    }
+    var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+    return {
+        x: (centerX + (radius * Math.cos(angleInRadians))),
+        y: (centerY + (radius * Math.sin(angleInRadians)))
+    };
+}
 
     /**
      * Generated 'd' value for the arc 
@@ -192,66 +192,66 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      */
     public getAcr(startAngle, endAngle) {
 
-        var x = this.options.center;
-        var y = this.options.center;
-        var radius = this.options.radius;
+    var x = this.options.center;
+    var y = this.options.center;
+    var radius = this.options.radius;
 
-        var start = this.polarToCartesian(x, y, radius, endAngle);
-        var end = this.polarToCartesian(x, y, radius, startAngle);
+    var start = this.polarToCartesian(x, y, radius, endAngle);
+    var end = this.polarToCartesian(x, y, radius, startAngle);
 
-        var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+    var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
-        var d = [
-            "M", start.x, start.y,
-            "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-        ].join(" ");
+    var d = [
+        "M", start.x, start.y,
+        "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+    ].join(" ");
 
-        return d;
-    }
+    return d;
+}
 
     private step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime) {
-        var now = new Date().valueOf();
-        var timeOffset = endTime - now;
-        var eAngle = endAngle - angleOffset * timeOffset / time;
-        var sAngle = startAngle - startAngleOffset * timeOffset / time;
-        if (timeOffset <= 0) {
-            this.logger.log(`${sAngle}: ${eAngle}`)
-            this.updateAngle(sAngle, eAngle);
-        } else {
-            this.updateAngle(sAngle, eAngle);
-            requestAnimationFrame(() => {
-                return this.step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime);
-            });
-        }
+    var now = new Date().valueOf();
+    var timeOffset = endTime - now;
+    var eAngle = endAngle - angleOffset * timeOffset / time;
+    var sAngle = startAngle - startAngleOffset * timeOffset / time;
+    if (timeOffset <= 0) {
+        this.logger.log(`${sAngle}: ${eAngle}`)
+        this.updateAngle(sAngle, eAngle);
+    } else {
+        this.updateAngle(sAngle, eAngle);
+        requestAnimationFrame(() => {
+            return this.step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime);
+        });
     }
+}
     /**
      * Updates the arc
      * @param startAngle Start angle angle 
      * @param endAngle End angle value
      */
     public updateAngle(startAngle: number, endAngle: number) {
-        this.options.endAngle = endAngle;
-        this.options.startAngle = startAngle;
-        this.checkAngle();
-        this.projector.scheduleRender();
-    }
+    this.options.endAngle = endAngle;
+    this.options.startAngle = startAngle;
+    this.checkAngle();
+    this.projector.scheduleRender();
+}
 
     public animateTo(startAngle, angle, time: number = 0) {
-        if (angle > 360) {
-            angle = angle % 360;
-        }
-        var startTime = new Date().valueOf();
-        var endTime = startTime + time;
-        if (startAngleOffset > angleOffset) {
-            startAngleOffset = 0;
-        }
-        var startAngleOffset = startAngle - this.options.startAngle;
-        var angleOffset = angle - this.options.endAngle;
-
-        this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
-        requestAnimationFrame(() => {
-            return this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
-        });
+    if (angle > 360) {
+        angle = angle % 360;
     }
+    var startTime = new Date().valueOf();
+    var endTime = startTime + time;
+    if (startAngleOffset > angleOffset) {
+        startAngleOffset = 0;
+    }
+    var startAngleOffset = startAngle - this.options.startAngle;
+    var angleOffset = angle - this.options.endAngle;
+
+    this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
+    requestAnimationFrame(() => {
+        return this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
+    });
+}
 
 }
