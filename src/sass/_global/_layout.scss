@@ -62,8 +62,8 @@
 /* Flex*/
 
 .flex { display: flex; }
-.flex.column { flex-direction: column;}
-.flex.row { flex-direction: row;}
+.flex.column { flex-direction: column;flex-wrap: wrap;}
+.flex.row { flex-direction: row; flex-wrap: wrap;}
 .flex.container { align-items: stretch;}
 .flex.full > * {  flex: 1;}
 

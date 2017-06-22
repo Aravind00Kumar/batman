@@ -55,10 +55,12 @@
   display: flex; }
 
 .flex.column {
-  flex-direction: column; }
+  flex-direction: column;
+  flex-wrap: wrap; }
 
 .flex.row {
-  flex-direction: row; }
+  flex-direction: row;
+  flex-wrap: wrap; }
 
 .flex.container {
   align-items: stretch; }

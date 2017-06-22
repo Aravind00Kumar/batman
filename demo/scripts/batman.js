@@ -297,6 +297,15 @@ var Doughnut = (function (_super) {
         this.checkAngle();
         this.projector.scheduleRender();
     };
+    /**
+     * Updates the arc
+     * @param startAngle Start angle angle
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.updateOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+        this.projector.scheduleRender();
+    };
     Doughnut.prototype.animateTo = function (startAngle, angle, time) {
         var _this = this;
         if (time === void 0) { time = 0; }

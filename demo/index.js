@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
         example1.updateAngle(parseInt(startAngle, 10), parseInt(endAngle, 10), 500);
     })
 
+    document.getElementById('stroke').addEventListener('change', function () {
+        window.strokeValue.value = window.stroke.value;
+        example1.updateOptions({stroke: window.stroke.value });
+    })
+
     document.getElementById('apply').addEventListener('click', function () {
         var startAngle = window.startAngle.value;
         var endAngle = window.endAngle.value;

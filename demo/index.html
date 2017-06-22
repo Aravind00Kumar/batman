@@ -21,13 +21,20 @@
     <div class="flex row">
         <div class="panel">
             <h2> Single mono color </h2>
-            <input id="startAngle" placeholder="Start angle" value="0" />
-            <input id="endAngle" placeholder="End angle" value="200" />
-            <button id="apply"> Apply</button><br>
-            <input id="start" type="range" min="0" max="360" step="1">
-            <input id="end" type="range" min="0" max="360" step="1">
             <div class="flex row">
                 <div class='flex full parent pad-mar-2x example1' style="height:200px; width:200px;">
+                </div>
+                <div>
+                    <label> Start Angle</label>
+                    <label> End Angle</label>
+                    <label> Stroke </label>
+                    <input id="startAngle" placeholder="Start angle" value="0" />
+                    <input id="endAngle" placeholder="End angle" value="200" />
+                    <input id="strokeValue" readonly value="10">
+                    <button id="apply"> Apply</button><br>
+                    <input id="start" type="range" min="0" max="360" step="1">
+                    <input id="end" type="range" min="0" max="360" step="1">
+                    <input id="stroke" type="range" min="2" max="10" step="1">
                 </div>
             </div>
         </div>
