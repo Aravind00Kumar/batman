@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 { percentage: 70, color: '#00bcd4' }
             ],
             sectorColor: '#03a9f4',
-            image:'https://vignette3.wikia.nocookie.net/newdcmovieuniverse/images/3/39/FwG8UYtj.jpg/revision/latest/scale-to-width-down/250?cb=20160724112551', 
+            image:'./img/FwG8UYtj.jpg', 
 
         });
 
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             values: [
                 { percentage: 90, color: '#e91e63'}
             ],
-            image:'https://www.drawingtutorials101.com/drawing-tutorials/Cartoon-Characters/Superman/superman-full/tn_how-to-draw-superman.jpg', 
+            image:'./img/tn_how-to-draw-superman.jpg', 
             sectorColor: '#03a9f4',
             title:'Superman'
         });
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
             values: [
                 { percentage: 40, color: '#e91e63'}
             ],
-            image:'http://cartoonbros.com/wp-content/uploads/2016/05/Batman-6-150x150.jpg', 
+            image:'./img/Batman-7-150x150.jpg', 
             sectorColor: '#03a9f4',
             title:'Batman'
         });
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             values: [
                 { percentage: 80, color: '#e91e63'}
             ],
-            image:'http://www.ramascreen.com/wp-content/uploads/2017/05/Wonder-Woman-9-150x150.jpg', 
+            image:'./img/Wonder-Woman-9-150x150.jpg', 
             sectorColor: '#03a9f4',
             title:'Wonder Woman'
         });
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             values: [
                 { percentage: 60, color: '#e91e63'}
             ],
-            image:'https://i0.wp.com/9jarocks.com/wp-content/uploads/2017/02/The-Flash-Season-2-Subtitle-Indonesia-English.jpg?resize=150%2C150', 
+            image:'./img/The-Flash-Season-2-Subtitle-Indonesia-English.jpg?resize=150%2C150', 
             sectorColor: '#03a9f4',
             title:'Flash'
         });
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
             values: [
                 { percentage: 70, color: '#e91e63'}
             ],
-            image:'http://blackherodatabase.com/wp-content/uploads/2017/02/Green-Lantern-Movie-Universe-John-Stewart-150x150.jpg', 
+            image:'./img/Green-Lantern-Movie-Universe-John-Stewart-150x150.jpg', 
             sectorColor: '#03a9f4',
             title:'Green Lantern'
         });

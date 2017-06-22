@@ -46,6 +46,8 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         title: ''
     }
 
+    private scale: number = 70;
+    private strokeScale: number = 0;
     /**
      * Constructor to initiate the doughnut component 
      * @param element Context of the component 
@@ -84,6 +86,8 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
             if (sum > 100) {
                 this.logger.error('Doughnut sum of percentages values should be less than or equal to 100%');
                 return false;
+            } else if (sum < 100) {
+                this.options.values.push(<IDoughnutValue>{ percentage: 100 - sum, color: this.options.circleColor })
             }
         }
         return true;
@@ -94,45 +98,59 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      */
     private multiArc() {
         return h('div', { class: 'parent' }, [
-            h('div', { class: 'child', 'style': `border-radius: 100%; overflow: hidden; transform:scale(${1 - (this.options.stroke) / 70})` }, [
-                h('img', {
-                    src: this.options.image,
-                    height: '100%',
-                    width: '100%'
-                })
-            ]),
-            h('div', { class: 'child', title: this.options.title }, [
-                h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-                    h('circle', {
-                        class: 'doughnut-circle',
-                        'stroke-width': this.options.stroke,
-                        fill: 'none',
-                        stroke: this.options.circleColor,
-                        cx: this.options.center,
-                        cy: this.options.center,
-                        r: this.options.radius
-                    }),
-                    this.options.values.map((item, index) => {
-
-                        this.options.startAngle = this.options.endAngle;
-                        var p = (item.percentage * 360) / 100;
-                        this.options.endAngle = p + this.options.startAngle;
-
-                        return h('path', {
-                            kay: 'p_' + index,
-                            'class': "doughnut-sector",
-                            'stroke-width': this.options.stroke,
-                            'fill': "none",
-                            'stroke': item.color,
-                            'd': this.getAcr(this.options.startAngle, this.options.endAngle)
-                        })
+            h('div', {
+                class: 'child',
+                'style': `border-radius: 100%; overflow: hidden; transition:transform linear 100ms;  transform:scale(${1 - (this.options.stroke) / this.scale})`
+            }, [
+                    h('img', {
+                        src: this.options.image,
+                        height: '100%',
+                        width: '100%'
                     })
+                ]),
+            h('div', {
+                key: this.options.title,
+                class: 'child', title: this.options.title,
+                onmouseenter: this.imageHover.bind(this),
+                onmouseleave: this.imageExit.bind(this)
+            }, [
+                    h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
+                        h('circle', {
+                            class: 'doughnut-circle',
+                            'stroke-width': this.options.stroke,
+                            fill: 'none',
+                            stroke: this.options.circleColor,
+                            cx: this.options.center,
+                            cy: this.options.center,
+                            r: this.options.radius
+                        }),
+                        this.options.values.map((item, index) => {
+
+                            this.options.startAngle = this.options.endAngle;
+                            var p = (item.percentage * 360) / 100;
+                            this.options.endAngle = p + this.options.startAngle;
+
+                            return h('path', {
+                                kay: 'p_' + index,
+                                'class': "doughnut-sector",
+                                'stroke-width': this.options.stroke,
+                                'fill': "none",
+                                'stroke': item.color,
+                                'd': this.getAcr(this.options.startAngle, this.options.endAngle)
+                            })
+                        })
+                    ])
                 ])
-            ])
         ]);
     }
 
+    private imageHover(ev) {
+        this.scale = 90;
+    }
 
+    private imageExit(ev) {
+        this.scale = 70;
+    }
 
     /**
      * Generates H template for single arc
@@ -157,6 +175,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
             })
         ]);
     }
+
 
     /**
      * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350) 
@@ -242,7 +261,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * @param startAngle Start angle angle 
      * @param endAngle End angle value
      */
-    public updateOptions(options:any) {
+    public updateOptions(options: any) {
         this.options = <IDoughnutOptions>{ ...this.options, ...options };
         this.projector.scheduleRender();
     }

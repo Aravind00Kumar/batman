@@ -579,8 +579,9 @@ let updateProperties = function (domNode: Node, previousProperties: VNodePropert
       } else if (propValue !== previousValue) {
         let type = typeof propValue;
         if (type === 'function') {
-          throw new Error('Functions may not be updated on subsequent renders (property: ' + propName +
-            '). Hint: declare event handler functions outside the render() function.');
+          return;
+          // throw new Error('Functions may not be updated on subsequent renders (property: ' + propName +
+          //   '). Hint: declare event handler functions outside the render() function.');
         }
         if (type === 'string' && propName !== 'innerHTML') {
           if (projectionOptions.namespace === NAMESPACE_SVG && propName === 'href') {

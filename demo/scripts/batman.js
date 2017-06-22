@@ -128,6 +128,8 @@ var Doughnut = (function (_super) {
     function Doughnut(element, options) {
         var _this = _super.call(this, 'Doughnut', { namespace: 'NAMESPACE_SVG' }) || this;
         _this.element = element;
+        _this.scale = 70;
+        _this.strokeScale = 0;
         _this.options = __assign({}, Doughnut.defaultOptions, options);
         // Circle dimensions
         _this.options.center = 50; //this.options.size / 2;
@@ -159,6 +161,9 @@ var Doughnut = (function (_super) {
                 this.logger.error('Doughnut sum of percentages values should be less than or equal to 100%');
                 return false;
             }
+            else if (sum < 100) {
+                this.options.values.push({ percentage: 100 - sum, color: this.options.circleColor });
+            }
         }
         return true;
     };
@@ -168,14 +173,22 @@ var Doughnut = (function (_super) {
     Doughnut.prototype.multiArc = function () {
         var _this = this;
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'child', 'style': "border-radius: 100%; overflow: hidden; transform:scale(" + (1 - (this.options.stroke) / 70) + ")" }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                "class": 'child',
+                'style': "border-radius: 100%; overflow: hidden; transition:transform linear 100ms;  transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+            }, [
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
                     src: this.options.image,
                     height: '100%',
                     width: '100%'
                 })
             ]),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'child', title: this.options.title }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                key: this.options.title,
+                "class": 'child', title: this.options.title,
+                onmouseenter: this.imageHover.bind(this),
+                onmouseleave: this.imageExit.bind(this)
+            }, [
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
                         "class": 'doughnut-circle',
@@ -202,6 +215,12 @@ var Doughnut = (function (_super) {
                 ])
             ])
         ]);
+    };
+    Doughnut.prototype.imageHover = function (ev) {
+        this.scale = 90;
+    };
+    Doughnut.prototype.imageExit = function (ev) {
+        this.scale = 70;
     };
     /**
      * Generates H template for single arc
@@ -812,8 +831,9 @@ var updateProperties = function (domNode, previousProperties, properties, projec
             else if (propValue !== previousValue) {
                 var type = typeof propValue;
                 if (type === 'function') {
-                    throw new Error('Functions may not be updated on subsequent renders (property: ' + propName +
-                        '). Hint: declare event handler functions outside the render() function.');
+                    return;
+                    // throw new Error('Functions may not be updated on subsequent renders (property: ' + propName +
+                    //   '). Hint: declare event handler functions outside the render() function.');
                 }
                 if (type === 'string' && propName !== 'innerHTML') {
                     if (projectionOptions.namespace === NAMESPACE_SVG && propName === 'href') {
