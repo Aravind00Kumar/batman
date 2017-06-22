@@ -354,7 +354,7 @@ let emptyArray = <VNode[]>[];
 
 let extend = <T>(base: T, overrides: any): T => {
   let result = {} as any;
-  Object.keys(base).forEach(function(key) {
+  Object.keys(base).forEach(function (key) {
     result[key] = (base as any)[key];
   });
   if (overrides) {
@@ -390,7 +390,7 @@ let toTextVNode = (data: any): VNode => {
   };
 };
 
-let appendChildren = function(parentSelector: string, insertions: any[], main: VNode[]) {
+let appendChildren = function (parentSelector: string, insertions: any[], main: VNode[]) {
   for (let i = 0, length = insertions.length; i < length; i++) {
     let item = insertions[i];
     if (Array.isArray(item)) {
@@ -408,14 +408,14 @@ let appendChildren = function(parentSelector: string, insertions: any[], main: V
 
 // Render helper functions
 
-let missingTransition = function() {
+let missingTransition = function () {
   throw new Error('Provide a transitions object to the projectionOptions to do animations');
 };
 
 const DEFAULT_PROJECTION_OPTIONS: ProjectionOptions = {
   namespace: undefined,
   eventHandlerInterceptor: undefined,
-  styleApplyer: function(domNode: HTMLElement, styleName: string, value: string) {
+  styleApplyer: function (domNode: HTMLElement, styleName: string, value: string) {
     // Provides a hook to add vendor prefixes for browsers that still need it.
     (domNode.style as any)[styleName] = value;
   },
@@ -435,7 +435,7 @@ let checkStyleValue = (styleValue: Object) => {
   }
 };
 
-let setProperties = function(domNode: Node, properties: VNodeProperties | undefined, projectionOptions: ProjectionOptions) {
+let setProperties = function (domNode: Node, properties: VNodeProperties | undefined, projectionOptions: ProjectionOptions) {
   if (!properties) {
     return;
   }
@@ -481,18 +481,18 @@ let setProperties = function(domNode: Node, properties: VNodeProperties | undefi
             propValue = eventHandlerInterceptor(propName, propValue, domNode, properties); // intercept eventhandlers
           }
           if (propName === 'oninput') {
-            (function() {
+            (function () {
               // record the evt.target.value, because IE and Edge sometimes do a requestAnimationFrame between changing value and running oninput
               let oldPropValue = propValue;
-              propValue = function(this: HTMLElement, evt: Event) {
+              propValue = function (this: HTMLElement, evt: Event) {
                 (evt.target as any)['oninput-value'] = (evt.target as HTMLInputElement).value; // may be HTMLTextAreaElement as well
                 oldPropValue.apply(this, [evt]);
               };
-            } ());
+            }());
           }
           (domNode as any)[propName] = propValue;
         }
-      } else if (type === 'string' && propName !== 'value' && propName !== 'innerHTML') {
+      } else if ((type === 'string' || type === 'number') && propName !== 'value' && propName !== 'innerHTML') {
         if (projectionOptions.namespace === NAMESPACE_SVG && propName === 'href') {
           (domNode as Element).setAttributeNS(NAMESPACE_XLINK, propName, propValue);
         } else {
@@ -505,7 +505,7 @@ let setProperties = function(domNode: Node, properties: VNodeProperties | undefi
   }
 };
 
-let updateProperties = function(domNode: Node, previousProperties: VNodeProperties | undefined, properties: VNodeProperties | undefined, projectionOptions: ProjectionOptions) {
+let updateProperties = function (domNode: Node, previousProperties: VNodeProperties | undefined, properties: VNodeProperties | undefined, projectionOptions: ProjectionOptions) {
   if (!properties) {
     return;
   }
@@ -586,7 +586,7 @@ let updateProperties = function(domNode: Node, previousProperties: VNodeProperti
           if (projectionOptions.namespace === NAMESPACE_SVG && propName === 'href') {
             (domNode as Element).setAttributeNS(NAMESPACE_XLINK, propName, propValue);
           } else if (propName === 'role' && propValue === '') {
-              (domNode as any).removeAttribute(propName);
+            (domNode as any).removeAttribute(propName);
           } else {
             (domNode as Element).setAttribute(propName, propValue);
           }
@@ -602,7 +602,7 @@ let updateProperties = function(domNode: Node, previousProperties: VNodeProperti
   return propertiesUpdated;
 };
 
-let findIndexOfChild = function(children: VNode[], sameAs: VNode, start: number) {
+let findIndexOfChild = function (children: VNode[], sameAs: VNode, start: number) {
   if (sameAs.vnodeSelector !== '') {
     // Never scan for text-nodes
     for (let i = start; i < children.length; i++) {
@@ -614,7 +614,7 @@ let findIndexOfChild = function(children: VNode[], sameAs: VNode, start: number)
   return -1;
 };
 
-let nodeAdded = function(vNode: VNode, transitions: TransitionStrategy) {
+let nodeAdded = function (vNode: VNode, transitions: TransitionStrategy) {
   if (vNode.properties) {
     let enterAnimation = vNode.properties.enterAnimation;
     if (enterAnimation) {
@@ -627,13 +627,13 @@ let nodeAdded = function(vNode: VNode, transitions: TransitionStrategy) {
   }
 };
 
-let nodeToRemove = function(vNode: VNode, transitions: TransitionStrategy) {
+let nodeToRemove = function (vNode: VNode, transitions: TransitionStrategy) {
   let domNode: Node = vNode.domNode!;
   if (vNode.properties) {
     let exitAnimation = vNode.properties.exitAnimation;
     if (exitAnimation) {
       (domNode as HTMLElement).style.pointerEvents = 'none';
-      let removeDomNode = function() {
+      let removeDomNode = function () {
         if (domNode.parentNode) {
           domNode.parentNode.removeChild(domNode);
         }
@@ -652,7 +652,7 @@ let nodeToRemove = function(vNode: VNode, transitions: TransitionStrategy) {
   }
 };
 
-let checkDistinguishable = function(childNodes: VNode[], indexToCheck: number, parentVNode: VNode, operation: string) {
+let checkDistinguishable = function (childNodes: VNode[], indexToCheck: number, parentVNode: VNode, operation: string) {
   let childNode = childNodes[indexToCheck];
   if (childNode.vnodeSelector === '') {
     return; // Text nodes need not be distinguishable
@@ -680,7 +680,7 @@ let checkDistinguishable = function(childNodes: VNode[], indexToCheck: number, p
 let createDom: (vnode: VNode, parentNode: Node, insertBefore: Node | null | undefined, projectionOptions: ProjectionOptions) => void;
 let updateDom: (previous: VNode, vnode: VNode, projectionOptions: ProjectionOptions) => boolean;
 
-let updateChildren = function(vnode: VNode, domNode: Node, oldChildren: VNode[] | undefined, newChildren: VNode[] | undefined, projectionOptions: ProjectionOptions) {
+let updateChildren = function (vnode: VNode, domNode: Node, oldChildren: VNode[] | undefined, newChildren: VNode[] | undefined, projectionOptions: ProjectionOptions) {
   if (oldChildren === newChildren) {
     return false;
   }
@@ -729,16 +729,16 @@ let updateChildren = function(vnode: VNode, domNode: Node, oldChildren: VNode[] 
   return textUpdated;
 };
 
-let addChildren = function(domNode: Node, children: VNode[] | undefined, projectionOptions: ProjectionOptions) {
+let addChildren = function (domNode: Node, children: VNode[] | undefined, projectionOptions: ProjectionOptions) {
   if (!children) {
     return;
   }
   for (let i = 0; i < children.length; i++) {
-      createDom(children[i], domNode, undefined, projectionOptions);
+    createDom(children[i], domNode, undefined, projectionOptions);
   }
 };
 
-let initPropertiesAndChildren = function(domNode: Node, vnode: VNode, projectionOptions: ProjectionOptions) {
+let initPropertiesAndChildren = function (domNode: Node, vnode: VNode, projectionOptions: ProjectionOptions) {
   addChildren(domNode, vnode.children, projectionOptions); // children before properties, needed for value property of <select>.
   if (vnode.text) {
     domNode.textContent = vnode.text;
@@ -749,7 +749,7 @@ let initPropertiesAndChildren = function(domNode: Node, vnode: VNode, projection
   }
 };
 
-createDom = function(vnode, parentNode, insertBefore, projectionOptions) {
+createDom = function (vnode, parentNode, insertBefore, projectionOptions) {
   let domNode: Node | undefined, i: number, c: string, start = 0, type: string, found: string;
   let vnodeSelector = vnode.vnodeSelector;
   let doc = parentNode.ownerDocument;
@@ -796,7 +796,7 @@ createDom = function(vnode, parentNode, insertBefore, projectionOptions) {
   }
 };
 
-updateDom = function(previous, vnode, projectionOptions) {
+updateDom = function (previous, vnode, projectionOptions) {
   let domNode = previous.domNode!;
   let textUpdated = false;
   if (previous === vnode) {
@@ -836,9 +836,9 @@ updateDom = function(previous, vnode, projectionOptions) {
   return textUpdated;
 };
 
-let createProjection = function(vnode: VNode, projectionOptions: ProjectionOptions): Projection {
+let createProjection = function (vnode: VNode, projectionOptions: ProjectionOptions): Projection {
   return {
-    update: function(updatedVnode: VNode) {
+    update: function (updatedVnode: VNode) {
       if (vnode.vnodeSelector !== updatedVnode.vnodeSelector) {
         throw new Error('The selector for the root VNode may not be changed. (consider using dom.merge and add one extra level to the virtual DOM)');
       }
@@ -890,7 +890,7 @@ export interface H {
 export let h: H;
 
 // The other two parameters are not added here, because the Typescript compiler creates surrogate code for destructuring 'children'.
-h = function(selector: string): VNode {
+h = function (selector: string): VNode {
   let properties = arguments[1];
   if (typeof selector !== 'string') {
     throw new Error();
@@ -951,7 +951,7 @@ export let dom = {
    * @param projectionOptions - Options to be used to create and update the projection.
    * @returns The [[Projection]] which also contains the DOM Node that was created.
    */
-  create: function(vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
+  create: function (vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
     projectionOptions = applyDefaultProjectionOptions(projectionOptions);
     createDom(vnode, document.createElement('div'), undefined, projectionOptions);
     return createProjection(vnode, projectionOptions);
@@ -966,7 +966,7 @@ export let dom = {
    * @param projectionOptions - Options to be used to create and update the [[Projection]].
    * @returns The [[Projection]] that was created.
    */
-  append: function(parentNode: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
+  append: function (parentNode: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
     projectionOptions = applyDefaultProjectionOptions(projectionOptions);
     createDom(vnode, parentNode, undefined, projectionOptions);
     return createProjection(vnode, projectionOptions);
@@ -981,7 +981,7 @@ export let dom = {
    * @param projectionOptions - Options to be used to create and update the projection, see [[createProjector]].
    * @returns The [[Projection]] that was created.
    */
-  insertBefore: function(beforeNode: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
+  insertBefore: function (beforeNode: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
     projectionOptions = applyDefaultProjectionOptions(projectionOptions);
     createDom(vnode, beforeNode.parentNode!, beforeNode, projectionOptions);
     return createProjection(vnode, projectionOptions);
@@ -998,7 +998,7 @@ export let dom = {
    * @param projectionOptions - Options to be used to create and update the projection, see [[createProjector]].
    * @returns The [[Projection]] that was created.
    */
-  merge: function(element: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
+  merge: function (element: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
     projectionOptions = applyDefaultProjectionOptions(projectionOptions);
     vnode.domNode = element;
     initPropertiesAndChildren(element, vnode, projectionOptions);
@@ -1014,7 +1014,7 @@ export let dom = {
    * @param projectionOptions - Options to be used to create and update the [[Projection]].
    * @returns The [[Projection]] that was created.
    */
-  replace: function(element: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
+  replace: function (element: Element, vnode: VNode, projectionOptions?: ProjectionOptions): Projection {
     projectionOptions = applyDefaultProjectionOptions(projectionOptions);
     createDom(vnode, element.parentNode!, element, projectionOptions);
     element.parentNode!.removeChild(element);
@@ -1058,12 +1058,12 @@ export let createCache = <Result>(): CalculationCache<Result> => {
   let cachedOutcome: Result | undefined;
   return {
 
-    invalidate: function() {
+    invalidate: function () {
       cachedOutcome = undefined;
       cachedInputs = undefined;
     },
 
-    result: function(inputs: Object[], calculation: () => Result) {
+    result: function (inputs: Object[], calculation: () => Result) {
       if (cachedInputs) {
         for (let i = 0; i < inputs.length; i++) {
           if (cachedInputs[i] !== inputs[i]) {
@@ -1125,7 +1125,7 @@ export let createMapping = <Source, Target>(
 
   return {
     results: results,
-    map: function(newSources: Source[]) {
+    map: function (newSources: Source[]) {
       let newKeys = newSources.map(getSourceKey);
       let oldTargets = results.slice();
       let oldIndex = 0;
@@ -1166,11 +1166,11 @@ export let createMapping = <Source, Target>(
  *
  * @param projectorOptions   Options that influence how the DOM is rendered and updated.
  */
-export let createProjector = function(projectorOptions?: ProjectorOptions): Projector {
+export let createProjector = function (projectorOptions?: ProjectorOptions): Projector {
   let projector: Projector;
   let projectionOptions = applyDefaultProjectionOptions(projectorOptions);
-  projectionOptions.eventHandlerInterceptor = function(propertyName: string, eventHandler: Function, domNode: Node, properties: VNodeProperties) {
-    return function(this: Node) {
+  projectionOptions.eventHandlerInterceptor = function (propertyName: string, eventHandler: Function, domNode: Node, properties: VNodeProperties) {
+    return function (this: Node) {
       // intercept function calls (event handlers) to do a render afterwards.
       projector.scheduleRender();
       return eventHandler.apply(properties.bind || this, arguments);
@@ -1182,7 +1182,7 @@ export let createProjector = function(projectorOptions?: ProjectorOptions): Proj
   let projections = [] as Projection[];
   let renderFunctions = [] as (() => VNode)[]; // matches the projections array
 
-  let doRender = function() {
+  let doRender = function () {
     scheduled = undefined;
     if (!renderCompleted) {
       return; // The last render threw an error, it should be logged in the browser console.
@@ -1197,12 +1197,12 @@ export let createProjector = function(projectorOptions?: ProjectorOptions): Proj
 
   projector = {
     renderNow: doRender,
-    scheduleRender: function() {
+    scheduleRender: function () {
       if (!scheduled && !stopped) {
         scheduled = requestAnimationFrame(doRender);
       }
     },
-    stop: function() {
+    stop: function () {
       if (scheduled) {
         cancelAnimationFrame(scheduled);
         scheduled = undefined;
@@ -1210,33 +1210,33 @@ export let createProjector = function(projectorOptions?: ProjectorOptions): Proj
       stopped = true;
     },
 
-    resume: function() {
+    resume: function () {
       stopped = false;
       renderCompleted = true;
       projector.scheduleRender();
     },
 
-    append: function(parentNode, renderMaquetteFunction) {
+    append: function (parentNode, renderMaquetteFunction) {
       projections.push(dom.append(parentNode, renderMaquetteFunction(), projectionOptions));
       renderFunctions.push(renderMaquetteFunction);
     },
 
-    insertBefore: function(beforeNode, renderMaquetteFunction) {
+    insertBefore: function (beforeNode, renderMaquetteFunction) {
       projections.push(dom.insertBefore(beforeNode, renderMaquetteFunction(), projectionOptions));
       renderFunctions.push(renderMaquetteFunction);
     },
 
-    merge: function(domNode, renderMaquetteFunction) {
+    merge: function (domNode, renderMaquetteFunction) {
       projections.push(dom.merge(domNode, renderMaquetteFunction(), projectionOptions));
       renderFunctions.push(renderMaquetteFunction);
     },
 
-    replace: function(domNode, renderMaquetteFunction) {
+    replace: function (domNode, renderMaquetteFunction) {
       projections.push(dom.replace(domNode, renderMaquetteFunction(), projectionOptions));
       renderFunctions.push(renderMaquetteFunction);
     },
 
-    detach: function(renderMaquetteFunction) {
+    detach: function (renderMaquetteFunction) {
       for (let i = 0; i < renderFunctions.length; i++) {
         if (renderFunctions[i] === renderMaquetteFunction) {
           renderFunctions.splice(i, 1);

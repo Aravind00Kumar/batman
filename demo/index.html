@@ -10,31 +10,33 @@
 </head>
 
 <body>
-    <img style="float:left" src="./img/logo_64.png" alt="">
+    <img style="float:left" src="../logo_64.png" alt="">
     <h1>Batman</h1>
 
     <h1 class="h1"> Doughnut Component </h1>
-    <input id="startAngle" placeholder="Start angle" value="0" />
-    <input id="endAngle" placeholder="End angle" value="90" />
-    <button id="apply"> Apply</button>
-    <button id="add"> +</button>
-    <button id="remove"> -</button>
-
+    <input style="width:200px" id="startAngle" placeholder="Start angle" value="0" />
+    <input style="width:200px" id="endAngle" placeholder="End angle" value="200" />
+    <button id="apply"> Apply</button><br>
+    <input style="width:200px" id="start" type="range" min="0" max="360" step="1">
+    <input style="width:200px" id="end" type="range" min="0" max="360" step="1">
     <div class="flex row">
-        <div class='flex full pad-mar-2x d1'></div>
+        <div class='flex full parent pad-mar-2x d1' style="height:200px; width:200px;">
+        </div>
         <div class='flex full pad-mar-2x d2'></div>
         <div class='flex full pad-mar-2x d3'></div>
         <div class='flex full pad-mar-2x d4'></div>
     </div>
 
-    <svg width="500" height="250">
+    <!--<svg width="500" height="250">
         <defs>
             <clipPath id="circleView">
                 <circle cx="250" cy="125" r="125" fill="#FFFFFF" />
             </clipPath>
         </defs>
-        <!--<image width="500" height="250" xlink:href="./img/bat1.jpg" clip-path="url(#circleView)" />-->
-    </svg>
+        <image width="500" height="250" xlink:href="./img/bat1.jpg" clip-path="url(#circleView)" />
+    </svg>-->
+
+    <div class="dropdown"></div>
 
     <script src="scripts/batman.js"></script>
     <script src="index.js"></script>
