@@ -1,9 +1,11 @@
 import Global from '../global'
 import {ILogger} from '../utility/logger'
+import { h, createProjector, Projector, ProjectorOptions } from '../common/maquette';
 
 export interface IBaseComponent{
     elements: Array<string>;
     options: any; 
+    projector: Projector
 }
 
 export class BaseComponent implements IBaseComponent{
@@ -14,10 +16,12 @@ export class BaseComponent implements IBaseComponent{
     public elements: Array<string>;
     public context: HTMLElement;
     public options: any;
+    public projector: Projector
 
-    constructor(name){
+    constructor(name, projectorOptions?: ProjectorOptions){
         BaseComponent.Name = name;
         BaseComponent.Version = Global.Version
         this.logger = Global.Logger;
+        this.projector = createProjector();
     } 
 } 

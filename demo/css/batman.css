@@ -76,6 +76,12 @@
 .show-silent {
   opacity: 1; }
 
+.parent {
+  position: relative; }
+
+.child {
+  position: absolute; }
+
 .h1 {
   font-size: 2em;
   margin: 1em 0; }
@@ -106,8 +112,6 @@
 /* Components */
 .doughnut-component {
   background-color: transparent;
-  width: 200px;
-  height: 200px;
-  margin-bottom: 10px; }
+  height: 100%; }
 
 /*# sourceMappingURL=batman.css.map */

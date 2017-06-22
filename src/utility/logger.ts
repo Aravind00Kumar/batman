@@ -25,6 +25,7 @@ export class ConsoleWriter implements IWriter {
 export class ProfileWriter implements IWriter {
 
     public element: HTMLElement;
+    public logElement: HTMLElement;
 
     constructor(profilerId?: string) {
         var elm = document.getElementById('global-profiler');
@@ -37,24 +38,32 @@ export class ProfileWriter implements IWriter {
     private createProfileElement() {
         var div = document.createElement("div");
         div.setAttribute('id', 'global-profiler');
-        div.setAttribute('style', 'width: 400px; height: 100vh; position:fixed; background-color:#000; opacity:0.6; top:0; right:20px; overflow-y:auto');
+        div.setAttribute('style', 'width: 500px; height: 100vh; position:fixed; background-color:#000; opacity:0.6; top:0; right:20px; overflow-y:auto');
+        var button = document.createElement("button");
+        button.innerHTML = "Clear"
+        button.setAttribute('style','position:absolute; right:10px; top :10px; border: 1px solid #6c8490; background:#607D8B; opacity:.7; color:#FFF')
+        button.addEventListener('click', this.clear.bind(this));
+        this.logElement = document.createElement('div');
+        this.logElement.setAttribute('class','log-context');
+        div.appendChild(this.logElement);
+        div.appendChild(button)
         document.body.appendChild(div);
         return div;
     }
 
     private createElement(message: IMessage) {
         var div = document.createElement('div');
-        div.innerHTML = `<span>${message.time()}</span><span>${message.text}</span>`;
+        div.innerHTML = `<span style="padding:5px">${message.time()}</span><span>${message.text}</span>`;
         div.setAttribute('style', `color:${message.type === 'log' ? 'green' : 'orange'}`);
         div.setAttribute('class', `${message.type === 'log' ? 'log' : 'error'}`);
         return div;
     }
 
     public write(message: IMessage): void {
-        this.element.appendChild(this.createElement(message));
+        this.logElement.appendChild(this.createElement(message));
     }
     public clear(): void {
-        this.element.innerText = '';
+        this.logElement.innerText = '';
     }
 }
 
