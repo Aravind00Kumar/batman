@@ -68,490 +68,7 @@ var Batman =
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_maquette__ = __webpack_require__(7);
-
-
-var BaseComponent = (function () {
-    function BaseComponent(name, projectorOptions) {
-        BaseComponent.Name = name;
-        BaseComponent.Version = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Version;
-        this.logger = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Logger;
-        this.projector = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["b" /* createProjector */])();
-    }
-    return BaseComponent;
-}());
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Doughnut; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_maquette__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-
-
-var Doughnut = (function (_super) {
-    __extends(Doughnut, _super);
-    /**
-     * Constructor to initiate the doughnut component
-     * @param element Context of the component
-     * @param options Component options
-     */
-    function Doughnut(element, options) {
-        var _this = _super.call(this, 'Doughnut', { namespace: 'NAMESPACE_SVG' }) || this;
-        _this.element = element;
-        _this.scale = 70;
-        _this.strokeScale = 0;
-        _this.options = __assign({}, Doughnut.defaultOptions, options);
-        // Circle dimensions
-        _this.options.center = 50; //this.options.size / 2;
-        _this.options.radius = _this.options.stroke ? _this.options.center - _this.options.stroke / 2 : _this.options.center;
-        if (!_this.validateValues())
-            return _this;
-        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
-        _this.logger.log('sa');
-        return _this;
-    }
-    /**
-     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
-     */
-    Doughnut.prototype.renderMaquette = function () {
-        if (this.options.values.length > 0)
-            return this.multiArc();
-        return this.singleArc();
-    };
-    /**
-     * Validation method for values; values will be invalid when  values property in the options together should not exceed 100
-     */
-    Doughnut.prototype.validateValues = function () {
-        if (this.options.values.length > 0) {
-            var sum = 0;
-            for (var index = 0; index < this.options.values.length; index++) {
-                var element = this.options.values[index];
-                sum += element.percentage;
-            }
-            if (sum > 100) {
-                this.logger.error('Doughnut sum of percentages values should be less than or equal to 100%');
-                return false;
-            }
-            else if (sum < 100) {
-                this.options.values.push({ percentage: 100 - sum, color: this.options.circleColor });
-            }
-        }
-        return true;
-    };
-    /**
-     * Generates H template for multiple arcs
-     */
-    Doughnut.prototype.multiArc = function () {
-        var _this = this;
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                "class": 'child',
-                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
-                    src: this.options.image,
-                    height: '100%',
-                    width: '100%',
-                    style: this.options.image ? 'display:block' : 'display:none'
-                }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
-                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
-                }, [this.options.title])
-            ]),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                key: this.options.title,
-                "class": 'child', title: this.options.title,
-                onmouseenter: this.imageHover.bind(this),
-                onmouseleave: this.imageExit.bind(this)
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
-                        "class": 'doughnut-circle',
-                        'stroke-width': this.options.stroke,
-                        fill: 'none',
-                        stroke: this.options.circleColor,
-                        cx: this.options.center,
-                        cy: this.options.center,
-                        r: this.options.radius
-                    }),
-                    this.options.values.map(function (item, index) {
-                        _this.options.startAngle = _this.options.endAngle;
-                        var p = (item.percentage * 360) / 100;
-                        _this.options.endAngle = p + _this.options.startAngle;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
-                            kay: 'p_' + index,
-                            'class': "doughnut-sector",
-                            'stroke-width': _this.options.stroke,
-                            'fill': "none",
-                            'stroke': item.color,
-                            'd': _this.getAcr(_this.options.startAngle, _this.options.endAngle)
-                        });
-                    })
-                ])
-            ])
-        ]);
-    };
-    Doughnut.prototype.imageHover = function (ev) {
-        this.scale = 90;
-    };
-    Doughnut.prototype.imageExit = function (ev) {
-        this.scale = 70;
-    };
-    /**
-     * Generates H template for single arc
-     */
-    Doughnut.prototype.singleArc = function () {
-        // return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-        //     h('circle', {
-        //         class: 'doughnut-circle',
-        //         'stroke-width': this.options.stroke,
-        //         fill: 'none',
-        //         stroke: this.options.circleColor,
-        //         cx: this.options.center,
-        //         cy: this.options.center,
-        //         r: this.options.radius
-        //     }),
-        //     h('path', {
-        //         class: 'doughnut-sector',
-        //         'stroke-width': this.options.stroke,
-        //         fill: 'none',
-        //         stroke: this.options.sectorColor,
-        //         d: this.getAcr(this.options.startAngle, this.options.endAngle)
-        //     })
-        // ]);
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                "class": 'child',
-                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
-                    src: this.options.image,
-                    height: '100%',
-                    width: '100%',
-                    style: this.options.image ? 'display:block' : 'display:none'
-                }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
-                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
-                }, [this.options.title])
-            ]),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                key: this.options.title,
-                "class": 'child', title: this.options.title,
-                onmouseenter: this.imageHover.bind(this),
-                onmouseleave: this.imageExit.bind(this)
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
-                        "class": 'doughnut-circle',
-                        'stroke-width': this.options.stroke,
-                        fill: 'none',
-                        stroke: this.options.circleColor,
-                        cx: this.options.center,
-                        cy: this.options.center,
-                        r: this.options.radius
-                    }),
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
-                        "class": 'doughnut-sector',
-                        'stroke-width': this.options.stroke,
-                        fill: 'none',
-                        stroke: this.options.sectorColor,
-                        d: this.getAcr(this.options.startAngle, this.options.endAngle)
-                    })
-                ])
-            ])
-        ]);
-    };
-    /**
-     * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350)
-     */
-    Doughnut.prototype.checkAngle = function () {
-        if (this.options.endAngle > 360) {
-            this.options.endAngle = this.options.endAngle % 360;
-        }
-        if (this.options.startAngle > this.options.endAngle) {
-            this.options.startAngle = 0;
-        }
-    };
-    /**
-     * Converts polar values to cartesian
-     * @param centerX X center value
-     * @param centerY Y center value
-     * @param radius radius of the circle
-     * @param angleInDegrees arc angle value
-     */
-    Doughnut.prototype.polarToCartesian = function (centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-        return {
-            x: (centerX + (radius * Math.cos(angleInRadians))),
-            y: (centerY + (radius * Math.sin(angleInRadians)))
-        };
-    };
-    /**
-     * Generated 'd' value for the arc
-     * @param startAngle Start angle value
-     * @param endAngle End angle value
-     */
-    Doughnut.prototype.getAcr = function (startAngle, endAngle) {
-        var x = this.options.center;
-        var y = this.options.center;
-        var radius = this.options.radius;
-        var start = this.polarToCartesian(x, y, radius, endAngle);
-        var end = this.polarToCartesian(x, y, radius, startAngle);
-        var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-        var d = [
-            "M", start.x, start.y,
-            "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-        ].join(" ");
-        return d;
-    };
-    /**
-     * Updates the arc
-     * @param startAngle Start angle angle
-     * @param endAngle End angle value
-     */
-    Doughnut.prototype.updateAngle = function (startAngle, endAngle) {
-        this.options.endAngle = endAngle;
-        this.options.startAngle = startAngle;
-        this.checkAngle();
-        this.projector.scheduleRender();
-    };
-    /**
-     * Updates the arc
-     * @param startAngle Start angle angle
-     * @param endAngle End angle value
-     */
-    Doughnut.prototype.updateOptions = function (options) {
-        this.options = __assign({}, this.options, options);
-        this.projector.scheduleRender();
-    };
-    return Doughnut;
-}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
-
-/**
- * Component default option. These options can be overridden from constructor
- */
-Doughnut.defaultOptions = {
-    stroke: 10,
-    startAngle: 0,
-    endAngle: 0,
-    sectorColor: '#789',
-    circleColor: '#DDD',
-    image: null,
-    values: [],
-    title: ''
-};
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Dropdown; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_maquette__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-/**
- * --------------------------------------------------------------------------
- * Dropdown Component
- * Licensed under MIT
- * --------------------------------------------------------------------------
- */
-
-
-var Dropdown = (function (_super) {
-    __extends(Dropdown, _super);
-    function Dropdown(element, options, data) {
-        var _this = _super.call(this, 'Dropdown') || this;
-        _this.element = element;
-        //this.context = context;
-        _this.options = __assign({}, Dropdown.defaultOptions, options);
-        _this.logger.log('Dropdown loaded');
-        _this.display = false;
-        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
-        return _this;
-    }
-    Dropdown.prototype.renderMaquette = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { style: 'height:200px; position:absolute; width:200px; background:orange; display: ' + (this.display == true ? 'block' : 'none'), "class": this.options["class"] }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'saucer', value: 'Greetings' })
-        ]);
-    };
-    Dropdown.prototype.show = function () {
-        this.display = true;
-        this.projector.scheduleRender();
-    };
-    Dropdown.prototype.hide = function () {
-        this.display = false;
-        this.projector.scheduleRender();
-    };
-    return Dropdown;
-}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
-
-Dropdown.defaultOptions = {
-    "class": '.dropdown'
-};
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__ = __webpack_require__(2);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__ = __webpack_require__(3);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__["a"]; });
-// Comment that is displayed in the API documentation for the Doughnut module:
-/**
- * Welcome to the API documentation of the **batman** library.
- * @preferred
- */
-// export all components
-
-
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(6);
-
-var Global = (function () {
-    function Global() {
-    }
-    return Global;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (Global);
-Global.Name = 'Batman';
-Global.Version = '1.0.0.alpha.1';
-Global.AnimationDuration = 150;
-//   public static Logger :ILogger = Logger.getInstance(new ProfilerWriter()); 
-Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export ConsoleWriter */
-/* unused harmony export Message */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
-var ConsoleWriter = (function () {
-    function ConsoleWriter() {
-    }
-    ConsoleWriter.prototype.write = function (message) {
-        if (message.type === 'error')
-            console.error(message.format());
-        else
-            console.log(message.format());
-    };
-    ConsoleWriter.prototype.clear = function () {
-        console.clear();
-    };
-    return ConsoleWriter;
-}());
-
-var Message = (function () {
-    function Message(text, type) {
-        this.text = text;
-        this.dateTime = new Date();
-        this.type = type || 'log';
-    }
-    Message.prototype.time = function () {
-        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds();
-    };
-    Message.prototype.format = function () {
-        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds() + ': ' + this.text;
-    };
-    return Message;
-}());
-
-var Logger = (function () {
-    function Logger(writer) {
-        if (writer === undefined)
-            this._writer = new ConsoleWriter();
-        else
-            this._writer = writer;
-        this._stack = [];
-        Logger._instance = this;
-    }
-    Logger.getInstance = function (writer) {
-        if (this._instance === undefined) {
-            this._instance = new Logger(writer);
-        }
-        return this._instance;
-    };
-    Logger.prototype.clear = function () {
-        this._stack.length = 0;
-    };
-    Logger.prototype.log = function (value) {
-        var message = new Message(value);
-        this._stack.push(message);
-        this._writer.write(message);
-    };
-    Logger.prototype.error = function (value) {
-        var message = new Message(value, 'error');
-        this._stack.push(message);
-        this._writer.write(message);
-    };
-    return Logger;
-}());
-
-
-
-/***/ }),
-/* 7 */
+/* 0 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1379,6 +896,470 @@ var createProjector = function (projectorOptions) {
     };
     return projector;
 };
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_maquette__ = __webpack_require__(0);
+
+
+var BaseComponent = (function () {
+    function BaseComponent(name, projectorOptions) {
+        BaseComponent.Name = name;
+        BaseComponent.Version = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Version;
+        this.logger = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Logger;
+        this.projector = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["b" /* createProjector */])();
+    }
+    return BaseComponent;
+}());
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Doughnut; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_maquette__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var Doughnut = (function (_super) {
+    __extends(Doughnut, _super);
+    /**
+     * Constructor to initiate the doughnut component
+     * @param element Context of the component
+     * @param options Component options
+     */
+    function Doughnut(element, options) {
+        var _this = _super.call(this, 'Doughnut', { namespace: 'NAMESPACE_SVG' }) || this;
+        _this.element = element;
+        _this.scale = 70;
+        _this.strokeScale = 0;
+        _this.options = __assign({}, Doughnut.defaultOptions, options);
+        // Circle dimensions
+        _this.options.center = 50; //this.options.size / 2;
+        _this.options.radius = _this.options.stroke ? _this.options.center - _this.options.stroke / 2 : _this.options.center;
+        if (!_this.validateValues())
+            return _this;
+        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
+        _this.logger.log('sa');
+        return _this;
+    }
+    /**
+     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
+     */
+    Doughnut.prototype.renderMaquette = function () {
+        if (this.options.values.length > 0)
+            return this.multiArc();
+        return this.singleArc();
+    };
+    /**
+     * Validation method for values; values will be invalid when  values property in the options together should not exceed 100
+     */
+    Doughnut.prototype.validateValues = function () {
+        if (this.options.values.length > 0) {
+            var sum = 0;
+            for (var index = 0; index < this.options.values.length; index++) {
+                var element = this.options.values[index];
+                sum += element.percentage;
+            }
+            if (sum > 100) {
+                this.logger.error('Doughnut sum of percentages values should be less than or equal to 100%');
+                return false;
+            }
+            else if (sum < 100) {
+                this.options.values.push({ percentage: 100 - sum, color: this.options.circleColor });
+            }
+        }
+        return true;
+    };
+    /**
+     * Generates H template for multiple arcs
+     */
+    Doughnut.prototype.multiArc = function () {
+        var _this = this;
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                "class": 'child',
+                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
+                    src: this.options.image,
+                    height: '100%',
+                    width: '100%',
+                    style: this.options.image ? 'display:block' : 'display:none'
+                }),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
+                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
+                }, [this.options.title])
+            ]),
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                key: this.options.title,
+                "class": 'child', title: this.options.title,
+                onmouseenter: this.imageHover.bind(this),
+                onmouseleave: this.imageExit.bind(this)
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
+                        "class": 'doughnut-circle',
+                        'stroke-width': this.options.stroke,
+                        fill: 'none',
+                        stroke: this.options.circleColor,
+                        cx: this.options.center,
+                        cy: this.options.center,
+                        r: this.options.radius
+                    }),
+                    this.options.values.map(function (item, index) {
+                        _this.options.startAngle = _this.options.endAngle;
+                        var p = (item.percentage * 360) / 100;
+                        _this.options.endAngle = p + _this.options.startAngle;
+                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
+                            kay: 'p_' + index,
+                            'class': "doughnut-sector",
+                            'stroke-width': _this.options.stroke,
+                            'fill': "none",
+                            'stroke': item.color,
+                            'd': _this.getAcr(_this.options.startAngle, _this.options.endAngle)
+                        });
+                    })
+                ])
+            ])
+        ]);
+    };
+    Doughnut.prototype.imageHover = function (ev) {
+        this.scale = 90;
+    };
+    Doughnut.prototype.imageExit = function (ev) {
+        this.scale = 70;
+    };
+    /**
+     * Generates H template for single arc
+     */
+    Doughnut.prototype.singleArc = function () {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                "class": 'child',
+                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
+                    src: this.options.image,
+                    height: '100%',
+                    width: '100%',
+                    style: this.options.image ? 'display:block' : 'display:none'
+                }),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
+                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
+                }, [this.options.title])
+            ]),
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                key: this.options.title,
+                "class": 'child', title: this.options.title,
+                onmouseenter: this.imageHover.bind(this),
+                onmouseleave: this.imageExit.bind(this)
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
+                        "class": 'doughnut-circle',
+                        'stroke-width': this.options.stroke,
+                        fill: 'none',
+                        stroke: this.options.circleColor,
+                        cx: this.options.center,
+                        cy: this.options.center,
+                        r: this.options.radius
+                    }),
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
+                        "class": 'doughnut-sector',
+                        'stroke-width': this.options.stroke,
+                        fill: 'none',
+                        stroke: this.options.sectorColor,
+                        d: this.getAcr(this.options.startAngle, this.options.endAngle)
+                    })
+                ])
+            ])
+        ]);
+    };
+    /**
+     * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350)
+     */
+    Doughnut.prototype.checkAngle = function () {
+        if (this.options.endAngle > 360) {
+            this.options.endAngle = this.options.endAngle % 360;
+        }
+        if (this.options.startAngle > this.options.endAngle) {
+            this.options.startAngle = 0;
+        }
+    };
+    /**
+     * Converts polar values to cartesian
+     * @param centerX X center value
+     * @param centerY Y center value
+     * @param radius radius of the circle
+     * @param angleInDegrees arc angle value
+     */
+    Doughnut.prototype.polarToCartesian = function (centerX, centerY, radius, angleInDegrees) {
+        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+        return {
+            x: (centerX + (radius * Math.cos(angleInRadians))),
+            y: (centerY + (radius * Math.sin(angleInRadians)))
+        };
+    };
+    /**
+     * Generated 'd' value for the arc
+     * @param startAngle Start angle value
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.getAcr = function (startAngle, endAngle) {
+        var x = this.options.center;
+        var y = this.options.center;
+        var radius = this.options.radius;
+        var start = this.polarToCartesian(x, y, radius, endAngle);
+        var end = this.polarToCartesian(x, y, radius, startAngle);
+        var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+        var d = [
+            "M", start.x, start.y,
+            "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+        ].join(" ");
+        return d;
+    };
+    /**
+     * Updates the arc
+     * @param startAngle Start angle angle
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.updateAngle = function (startAngle, endAngle) {
+        this.options.endAngle = endAngle;
+        this.options.startAngle = startAngle;
+        this.checkAngle();
+        this.projector.scheduleRender();
+    };
+    /**
+     * Updates the arc
+     * @param startAngle Start angle angle
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.updateOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+        this.projector.scheduleRender();
+    };
+    return Doughnut;
+}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
+
+/**
+ * Component default option. These options can be overridden from constructor
+ */
+Doughnut.defaultOptions = {
+    stroke: 10,
+    startAngle: 0,
+    endAngle: 0,
+    sectorColor: '#789',
+    circleColor: '#DDD',
+    image: null,
+    values: [],
+    title: ''
+};
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Dropdown; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_maquette__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+/**
+ * --------------------------------------------------------------------------
+ * Dropdown Component
+ * Licensed under MIT
+ * --------------------------------------------------------------------------
+ */
+
+
+var Dropdown = (function (_super) {
+    __extends(Dropdown, _super);
+    function Dropdown(element, options, data) {
+        var _this = _super.call(this, 'Dropdown') || this;
+        _this.element = element;
+        //this.context = context;
+        _this.options = __assign({}, Dropdown.defaultOptions, options);
+        _this.logger.log('Dropdown loaded');
+        _this.display = false;
+        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
+        return _this;
+    }
+    Dropdown.prototype.renderMaquette = function () {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { style: 'height:200px; position:absolute; width:200px; background:orange; display: ' + (this.display == true ? 'block' : 'none'), "class": this.options["class"] }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'saucer', value: 'Greetings' })
+        ]);
+    };
+    Dropdown.prototype.show = function () {
+        this.display = true;
+        this.projector.scheduleRender();
+    };
+    Dropdown.prototype.hide = function () {
+        this.display = false;
+        this.projector.scheduleRender();
+    };
+    return Dropdown;
+}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
+
+Dropdown.defaultOptions = {
+    "class": '.dropdown'
+};
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__ = __webpack_require__(2);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__ = __webpack_require__(3);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__["a"]; });
+// Comment that is displayed in the API documentation for the Doughnut module:
+/**
+ * Welcome to the API documentation of the **batman** library.
+ * @preferred
+ */
+// export all components
+
+
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(6);
+
+var Global = (function () {
+    function Global() {
+    }
+    return Global;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (Global);
+Global.Name = 'Batman';
+Global.Version = '1.0.0.alpha.1';
+Global.AnimationDuration = 150;
+//   public static Logger :ILogger = Logger.getInstance(new ProfilerWriter()); 
+Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export ConsoleWriter */
+/* unused harmony export Message */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
+var ConsoleWriter = (function () {
+    function ConsoleWriter() {
+    }
+    ConsoleWriter.prototype.write = function (message) {
+        if (message.type === 'error')
+            console.error(message.format());
+        else
+            console.log(message.format());
+    };
+    ConsoleWriter.prototype.clear = function () {
+        console.clear();
+    };
+    return ConsoleWriter;
+}());
+
+var Message = (function () {
+    function Message(text, type) {
+        this.text = text;
+        this.dateTime = new Date();
+        this.type = type || 'log';
+    }
+    Message.prototype.time = function () {
+        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds();
+    };
+    Message.prototype.format = function () {
+        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds() + ': ' + this.text;
+    };
+    return Message;
+}());
+
+var Logger = (function () {
+    function Logger(writer) {
+        if (writer === undefined)
+            this._writer = new ConsoleWriter();
+        else
+            this._writer = writer;
+        this._stack = [];
+        Logger._instance = this;
+    }
+    Logger.getInstance = function (writer) {
+        if (this._instance === undefined) {
+            this._instance = new Logger(writer);
+        }
+        return this._instance;
+    };
+    Logger.prototype.clear = function () {
+        this._stack.length = 0;
+    };
+    Logger.prototype.log = function (value) {
+        var message = new Message(value);
+        this._stack.push(message);
+        this._writer.write(message);
+    };
+    Logger.prototype.error = function (value) {
+        var message = new Message(value, 'error');
+        this._stack.push(message);
+        this._writer.write(message);
+    };
+    return Logger;
+}());
+
 
 
 /***/ })

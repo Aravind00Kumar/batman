@@ -164,24 +164,6 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * Generates H template for single arc
      */
     private singleArc() {
-        // return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-        //     h('circle', {
-        //         class: 'doughnut-circle',
-        //         'stroke-width': this.options.stroke,
-        //         fill: 'none',
-        //         stroke: this.options.circleColor,
-        //         cx: this.options.center,
-        //         cy: this.options.center,
-        //         r: this.options.radius
-        //     }),
-        //     h('path', {
-        //         class: 'doughnut-sector',
-        //         'stroke-width': this.options.stroke,
-        //         fill: 'none',
-        //         stroke: this.options.sectorColor,
-        //         d: this.getAcr(this.options.startAngle, this.options.endAngle)
-        //     })
-        // ]);
         return h('div', { class: 'parent' }, [
             h('div', {
                 class: 'child',
