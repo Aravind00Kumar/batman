@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 { percentage: 20, color: '#00bcd4' },
                 { percentage: 30, color: '#9c27b0' }
             ],
+            title:'Tasks',
             sectorColor: '#03a9f4',
         });
 
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             values: [
                 { percentage: 20, color: '#e91e63' },
                 { percentage: 10, color: '#009688' },
-                { percentage: 70, color: '#00bcd4' }
+                { percentage: 70, color: '#585858' }
             ],
             sectorColor: '#03a9f4',
             image:'./img/FwG8UYtj.jpg', 

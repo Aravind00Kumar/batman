@@ -176,13 +176,17 @@ var Doughnut = (function (_super) {
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
                 "class": 'child',
-                'style': "border-radius: 100%; overflow: hidden; transition:transform linear 100ms;  transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
             }, [
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
                     src: this.options.image,
                     height: '100%',
-                    width: '100%'
-                })
+                    width: '100%',
+                    style: this.options.image ? 'display:block' : 'display:none'
+                }),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
+                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
+                }, [this.options.title])
             ]),
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
                 key: this.options.title,
@@ -227,23 +231,64 @@ var Doughnut = (function (_super) {
      * Generates H template for single arc
      */
     Doughnut.prototype.singleArc = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
-                "class": 'doughnut-circle',
-                'stroke-width': this.options.stroke,
-                fill: 'none',
-                stroke: this.options.circleColor,
-                cx: this.options.center,
-                cy: this.options.center,
-                r: this.options.radius
-            }),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
-                "class": 'doughnut-sector',
-                'stroke-width': this.options.stroke,
-                fill: 'none',
-                stroke: this.options.sectorColor,
-                d: this.getAcr(this.options.startAngle, this.options.endAngle)
-            })
+        // return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
+        //     h('circle', {
+        //         class: 'doughnut-circle',
+        //         'stroke-width': this.options.stroke,
+        //         fill: 'none',
+        //         stroke: this.options.circleColor,
+        //         cx: this.options.center,
+        //         cy: this.options.center,
+        //         r: this.options.radius
+        //     }),
+        //     h('path', {
+        //         class: 'doughnut-sector',
+        //         'stroke-width': this.options.stroke,
+        //         fill: 'none',
+        //         stroke: this.options.sectorColor,
+        //         d: this.getAcr(this.options.startAngle, this.options.endAngle)
+        //     })
+        // ]);
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'parent' }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                "class": 'child',
+                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
+                    src: this.options.image,
+                    height: '100%',
+                    width: '100%',
+                    style: this.options.image ? 'display:block' : 'display:none'
+                }),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
+                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
+                }, [this.options.title])
+            ]),
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+                key: this.options.title,
+                "class": 'child', title: this.options.title,
+                onmouseenter: this.imageHover.bind(this),
+                onmouseleave: this.imageExit.bind(this)
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
+                        "class": 'doughnut-circle',
+                        'stroke-width': this.options.stroke,
+                        fill: 'none',
+                        stroke: this.options.circleColor,
+                        cx: this.options.center,
+                        cy: this.options.center,
+                        r: this.options.radius
+                    }),
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
+                        "class": 'doughnut-sector',
+                        'stroke-width': this.options.stroke,
+                        fill: 'none',
+                        stroke: this.options.sectorColor,
+                        d: this.getAcr(this.options.startAngle, this.options.endAngle)
+                    })
+                ])
+            ])
         ]);
     };
     /**
@@ -289,23 +334,6 @@ var Doughnut = (function (_super) {
         ].join(" ");
         return d;
     };
-    Doughnut.prototype.step = function (startAngleOffset, angleOffset, startAngle, endAngle, time, endTime) {
-        var _this = this;
-        var now = new Date().valueOf();
-        var timeOffset = endTime - now;
-        var eAngle = endAngle - angleOffset * timeOffset / time;
-        var sAngle = startAngle - startAngleOffset * timeOffset / time;
-        if (timeOffset <= 0) {
-            this.logger.log(sAngle + ": " + eAngle);
-            this.updateAngle(sAngle, eAngle);
-        }
-        else {
-            this.updateAngle(sAngle, eAngle);
-            requestAnimationFrame(function () {
-                return _this.step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime);
-            });
-        }
-    };
     /**
      * Updates the arc
      * @param startAngle Start angle angle
@@ -325,24 +353,6 @@ var Doughnut = (function (_super) {
     Doughnut.prototype.updateOptions = function (options) {
         this.options = __assign({}, this.options, options);
         this.projector.scheduleRender();
-    };
-    Doughnut.prototype.animateTo = function (startAngle, angle, time) {
-        var _this = this;
-        if (time === void 0) { time = 0; }
-        if (angle > 360) {
-            angle = angle % 360;
-        }
-        var startTime = new Date().valueOf();
-        var endTime = startTime + time;
-        if (startAngleOffset > angleOffset) {
-            startAngleOffset = 0;
-        }
-        var startAngleOffset = startAngle - this.options.startAngle;
-        var angleOffset = angle - this.options.endAngle;
-        this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
-        requestAnimationFrame(function () {
-            return _this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
-        });
     };
     return Doughnut;
 }(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));

@@ -6,6 +6,7 @@ import { IBaseComponent, BaseComponent } from '../base-component'
  */
 export interface IDoughnutComponent {
     updateAngle(startAngle, angle): void;
+    updateOptions(IDoughnutOptions): void
 }
 
 /**
@@ -101,13 +102,19 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         return h('div', { class: 'parent' }, [
             h('div', {
                 class: 'child',
-                'style': `border-radius: 100%; overflow: hidden; transition:transform linear 100ms;  transform:scale(${1 - (this.options.stroke) / this.scale})`
+                'style': `border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  
+                            transform:scale(${1 - (this.options.stroke) / this.scale})`
             }, [
                     h('img', {
                         src: this.options.image,
                         height: '100%',
-                        width: '100%'
-                    })
+                        width: '100%',
+                        style: this.options.image ? 'display:block' : 'display:none'
+                    }),
+                    h('div.head', {
+                        style: `align-items: center; font-size:20px; font-weight:bold;
+                            justify-content: center;
+                            display: flex; height:100%`}, [this.options.title])
                 ]),
             h('div', {
                 key: this.options.title,
@@ -157,23 +164,66 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * Generates H template for single arc
      */
     private singleArc() {
-        return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-            h('circle', {
-                class: 'doughnut-circle',
-                'stroke-width': this.options.stroke,
-                fill: 'none',
-                stroke: this.options.circleColor,
-                cx: this.options.center,
-                cy: this.options.center,
-                r: this.options.radius
-            }),
-            h('path', {
-                class: 'doughnut-sector',
-                'stroke-width': this.options.stroke,
-                fill: 'none',
-                stroke: this.options.sectorColor,
-                d: this.getAcr(this.options.startAngle, this.options.endAngle)
-            })
+        // return h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
+        //     h('circle', {
+        //         class: 'doughnut-circle',
+        //         'stroke-width': this.options.stroke,
+        //         fill: 'none',
+        //         stroke: this.options.circleColor,
+        //         cx: this.options.center,
+        //         cy: this.options.center,
+        //         r: this.options.radius
+        //     }),
+        //     h('path', {
+        //         class: 'doughnut-sector',
+        //         'stroke-width': this.options.stroke,
+        //         fill: 'none',
+        //         stroke: this.options.sectorColor,
+        //         d: this.getAcr(this.options.startAngle, this.options.endAngle)
+        //     })
+        // ]);
+        return h('div', { class: 'parent' }, [
+            h('div', {
+                class: 'child',
+                'style': `border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  
+                            transform:scale(${1 - (this.options.stroke) / this.scale})`
+            }, [
+                    h('img', {
+                        src: this.options.image,
+                        height: '100%',
+                        width: '100%',
+                        style: this.options.image ? 'display:block' : 'display:none'
+                    }),
+                    h('div.head', {
+                        style: `align-items: center; font-size:20px; font-weight:bold;
+                            justify-content: center;
+                            display: flex; height:100%`}, [this.options.title])
+                ]),
+            h('div', {
+                key: this.options.title,
+                class: 'child', title: this.options.title,
+                onmouseenter: this.imageHover.bind(this),
+                onmouseleave: this.imageExit.bind(this)
+            }, [
+                    h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
+                        h('circle', {
+                            class: 'doughnut-circle',
+                            'stroke-width': this.options.stroke,
+                            fill: 'none',
+                            stroke: this.options.circleColor,
+                            cx: this.options.center,
+                            cy: this.options.center,
+                            r: this.options.radius
+                        }),
+                        h('path', {
+                            class: 'doughnut-sector',
+                            'stroke-width': this.options.stroke,
+                            fill: 'none',
+                            stroke: this.options.sectorColor,
+                            d: this.getAcr(this.options.startAngle, this.options.endAngle)
+                        })
+                    ])
+                ])
         ]);
     }
 
@@ -229,22 +279,6 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         return d;
     }
 
-    private step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime) {
-        var now = new Date().valueOf();
-        var timeOffset = endTime - now;
-        var eAngle = endAngle - angleOffset * timeOffset / time;
-        var sAngle = startAngle - startAngleOffset * timeOffset / time;
-        if (timeOffset <= 0) {
-            this.logger.log(`${sAngle}: ${eAngle}`)
-            this.updateAngle(sAngle, eAngle);
-        } else {
-            this.updateAngle(sAngle, eAngle);
-            requestAnimationFrame(() => {
-                return this.step(startAngleOffset, angleOffset, startAngle, endAngle, time, endTime);
-            });
-        }
-    }
-
     /**
      * Updates the arc
      * @param startAngle Start angle angle 
@@ -262,28 +296,9 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * @param startAngle Start angle angle 
      * @param endAngle End angle value
      */
-    public updateOptions(options: any) {
+    public updateOptions(options: IDoughnutOptions) {
         this.options = <IDoughnutOptions>{ ...this.options, ...options };
         this.projector.scheduleRender();
-    }
-
-
-    public animateTo(startAngle, angle, time: number = 0) {
-        if (angle > 360) {
-            angle = angle % 360;
-        }
-        var startTime = new Date().valueOf();
-        var endTime = startTime + time;
-        if (startAngleOffset > angleOffset) {
-            startAngleOffset = 0;
-        }
-        var startAngleOffset = startAngle - this.options.startAngle;
-        var angleOffset = angle - this.options.endAngle;
-
-        this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
-        requestAnimationFrame(() => {
-            return this.step(startAngleOffset, angleOffset, startAngle, angle, time, endTime);
-        });
     }
 
 }
