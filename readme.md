@@ -36,9 +36,9 @@ http://localhost:8000/documentation/index.html
 * TypeScript
 
 ## Developer environment setup 
-* (Git-SCM)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#git-scm-installation]
-* (Node.js)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-nodejs-and-configuring-proxy]
-* (Ruby)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-ruby-and-configure-proxy]
-* (SASS)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-sass]
-* (Python)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python]
-* (VS Code)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-visual-studio-code]
+* [Git-SCM](https://code.siemens.com/ui-developers/git/blob/master/readme.md#git-scm-installation)
+* [Node.js](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-nodejs-and-configuring-proxy)
+* [Ruby](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-ruby-and-configure-proxy)
+* [SASS](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-sass)
+* [Python](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python)
+* [VS Code](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-visual-studio-code)
