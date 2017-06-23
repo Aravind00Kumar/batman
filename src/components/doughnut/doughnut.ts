@@ -63,6 +63,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
 
         if (!this.validateValues()) return;
         this.projector.append(this.element, this.renderMaquette.bind(this));
+        this.logger.log('sa')
     }
 
     /**
