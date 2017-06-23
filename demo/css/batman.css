@@ -55,10 +55,12 @@
   display: flex; }
 
 .flex.column {
-  flex-direction: column; }
+  flex-direction: column;
+  flex-wrap: wrap; }
 
 .flex.row {
-  flex-direction: row; }
+  flex-direction: row;
+  flex-wrap: wrap; }
 
 .flex.container {
   align-items: stretch; }
@@ -75,6 +77,12 @@
 
 .show-silent {
   opacity: 1; }
+
+.parent {
+  position: relative; }
+
+.child {
+  position: absolute; }
 
 .h1 {
   font-size: 2em;
@@ -106,8 +114,6 @@
 /* Components */
 .doughnut-component {
   background-color: transparent;
-  width: 200px;
-  height: 200px;
-  margin-bottom: 10px; }
+  height: 100%; }
 
 /*# sourceMappingURL=batman.css.map */
