@@ -35,7 +35,10 @@ http://localhost:8000/documentation/index.html
 * SASS
 * TypeScript
 
-## Pre-requisites 
-* [node.js V8.0.0](https://nodejs.org/en/)
-* ruby (for sass compiler)
-* vs code
+## Developer environment setup 
+* From [Environment Setup](https://code.siemens.com/ui-developers/git/blob/master/readme.md) install the following 
+* Git-SCM
+* Node.js
+* Ruby
+* VS Code
+* Python
