@@ -36,9 +36,9 @@ http://localhost:8000/documentation/index.html
 * TypeScript
 
 ## Developer environment setup 
-* From [Environment Setup](https://code.siemens.com/ui-developers/git/blob/master/readme.md) install the following 
-* Git-SCM
-* Node.js
-* Ruby
-* VS Code
-* Python
+* (Git-SCM)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#git-scm-installation]
+* (Node.js)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-nodejs-and-configuring-proxy]
+* (Ruby)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-ruby-and-configure-proxy]
+* (SASS)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-sass]
+* (Python)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python]
+* (VS Code)[https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-visual-studio-code]
