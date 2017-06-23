@@ -160,3 +160,56 @@ This change simplifies the terminology as well as
 number of choices available to the developer. It
 also supports local name aliasing from the parent.
  
+## git cz command to commit
+
+use command line git add . to stage the changes and git cz to commit
+When you commit with git cz, 
+
+Step 1: You will be prompted with commit message <type>
+
+feat : A new feature 
+fix : A bug fix
+docs: Documentation only 
+style: Change that do not affect the meaning of the code (white-spaces, formatting, missing semicolor etc)
+refactor: A coed change that neither fixes a bug nor a feature.
+pref: A code change that improves performance
+test: Adding missing or additional tests
+chor: Changes to the build process or auxiliary tools and library such as documentation generation
+
+select the appropriate option 
+Step 2: <scope>
+ Select the type of change that you're committing: docs:     Documentation only changes
+? Denote the scope of this change ($location, $browser, $compile, etc.):
+ Readme
+Give a title for the change 
+ex: Readme, Build, Setup, Documentation, Toolbox Component etc
+
+Step 2: <subject>
+? Write a short, imperative tense description of the change:
+ Updated Read me
+
+Step 3: <Message Body>
+? Provide a longer description of the change:
+ Updated Read me with developer environment setup which includes nodejs installation, SASS setup | Removed use used commented code
+
+Use '|' pipe for separating 
+
+Step 4: <Message Footer>
+? List any breaking changes or issues closed by this change:
+
+Breaking Changes should start with the word BREAKING CHANGE: with a space or two newlines. The rest of the commit message is then used for this.
+
+Examples:
+BREAKING CHANGE: common modules dom replaced with maquettejs
+    
+    To migrate the code follow the example below:
+    
+    Before:
+    
+import { h, createProjector, Projector, ProjectorOptions } from '../common/dom';
+    
+    After:
+    
+import { h, createProjector, Projector, ProjectorOptions } from '../common/maquette';
+    
+    
