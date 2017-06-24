@@ -1,8 +1,35 @@
 .doughnut-component {
     background-color: transparent;
     display: inline-block;
-    .child{
-        height:100%;
-        width:100%;
+
+    .child:first-child {
+        border-radius: 100%;
+        overflow: hidden;
+        transition-property: transform;
+        transition-timing-function: linear;
+    }
+
+    .child {
+        height: 100%;
+        width: 100%;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .head {
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            justify-content: center;
+            height: 100%;
+        }
+
+        svg {
+            circle, path {
+                fill: none;
+            }
+        }
     }
 }

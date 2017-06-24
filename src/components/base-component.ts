@@ -17,11 +17,12 @@ export class BaseComponent implements IBaseComponent{
     public context: HTMLElement;
     public options: any;
     public projector: Projector
-
+    public animationSpeed : string;
     constructor(name, projectorOptions?: ProjectorOptions){
         BaseComponent.Name = name;
         BaseComponent.Version = Global.Version
         this.logger = Global.Logger;
         this.projector = createProjector();
+        this.animationSpeed = Global.AnimationDuration + 'ms';
     } 
 } 

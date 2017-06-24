@@ -92,8 +92,8 @@
     align-items: stretch;
 }
 
-.flex.full > * {
-    flex: 1;
+.flex.grow > * {
+    flex-grow: 1;
 }
 
 /* Visibility*/
