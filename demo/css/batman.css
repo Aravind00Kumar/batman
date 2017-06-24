@@ -112,6 +112,22 @@
   margin: 0.6em 0; }
 
 /* Components */
+div#global-profiler {
+  position: fixed;
+  height: 100vh;
+  width: 30%;
+  top: 0;
+  right: 0;
+  background: #000;
+  opacity: .7; }
+  div#global-profiler .content .log {
+    color: #4CAF50; }
+  div#global-profiler .content .error {
+    color: #F44336; }
+  div#global-profiler .content div > span:first-child {
+    width: 100px;
+    display: inline-block; }
+
 .doughnut-component {
   background-color: transparent;
   height: 100%; }
