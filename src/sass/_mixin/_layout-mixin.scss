@@ -3,7 +3,7 @@
 }
 
 @mixin margin($val: 0) {
-    padding: $val;
+    margin: $val;
 }
 
 @mixin padding-margin($pad: 0, $mar: 0) {
