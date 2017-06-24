@@ -62,11 +62,14 @@
   flex-direction: row;
   flex-wrap: wrap; }
 
+.flex.nowrap {
+  flex-wrap: nowrap; }
+
 .flex.container {
   align-items: stretch; }
 
-.flex.full > * {
-  flex: 1; }
+.flex.grow > * {
+  flex-grow: 1; }
 
 /* Visibility*/
 .hide {
@@ -130,9 +133,25 @@ div#global-profiler {
 
 .doughnut-component {
   background-color: transparent;
-  height: 100%; }
+  display: inline-block; }
+  .doughnut-component .child:first-child {
+    border-radius: 100%;
+    overflow: hidden;
+    transition-property: transform;
+    transition-timing-function: linear; }
   .doughnut-component .child {
     height: 100%;
     width: 100%; }
+    .doughnut-component .child img {
+      height: 100%;
+      width: 100%; }
+    .doughnut-component .child .head {
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+      justify-content: center;
+      height: 100%; }
+    .doughnut-component .child svg circle, .doughnut-component .child svg path {
+      fill: none; }
 
 /*# sourceMappingURL=batman.css.map */

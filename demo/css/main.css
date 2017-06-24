@@ -6,8 +6,7 @@ html, body {
 .panel {
   padding: 10px;
   margin: 10px;
-  border: 1px solid #f1f1f1;
-  flex: 1; }
+  border: 1px solid #f1f1f1; }
   .panel ul li {
     text-align: left; }
   .panel b {
@@ -16,12 +15,7 @@ html, body {
     display: inline-block; }
 
 input, label {
-  display: inline-block;
   width: 120px;
   margin: 2px; }
-
-.dc {
-  height: 150px;
-  width: 150px; }
 
 /*# sourceMappingURL=main.css.map */
