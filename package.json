@@ -10,7 +10,9 @@
     "start": "webpack && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
     "lite": "lite-server",
     "docs": "typedoc --out documentation/ src/ --name batman --readme readme.md --hideGenerator",
-    "commit": "git cz"
+    "commit": "git cz",
+    "release": "semantic-release-gitlab",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "keywords": [
     "Batman"
