@@ -914,6 +914,7 @@ var BaseComponent = (function () {
         BaseComponent.Version = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Version;
         this.logger = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Logger;
         this.projector = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["b" /* createProjector */])();
+        this.animationSpeed = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].AnimationDuration + 'ms';
     }
     return BaseComponent;
 }());
@@ -973,9 +974,7 @@ var Doughnut = (function (_super) {
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
      */
     Doughnut.prototype.renderMaquette = function () {
-        if (this.options.values.length > 0)
-            return this.multiArc();
-        return this.singleArc();
+        return this.arcTemplate();
     };
     /**
      * Validation method for values; values will be invalid when  values property in the options together should not exceed 100
@@ -998,109 +997,61 @@ var Doughnut = (function (_super) {
         return true;
     };
     /**
-     * Generates H template for multiple arcs
+     * Generates H template for arc
      */
-    Doughnut.prototype.multiArc = function () {
-        var _this = this;
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                "class": 'child',
-                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
-                    src: this.options.image,
-                    height: '100%',
-                    width: '100%',
-                    style: this.options.image ? 'display:block' : 'display:none'
-                }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
-                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
-                }, [this.options.title])
-            ]),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
+    Doughnut.prototype.arcTemplate = function () {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', { style: "min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.child.flex.center.grow', {
+                'style': "transition: " + this.animationSpeed + "; transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+            }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head.flex.h3', [this.options.title])]),
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.child', {
                 key: this.options.title,
-                "class": 'child', title: this.options.title,
-                onmouseenter: this.imageHover.bind(this),
-                onmouseleave: this.imageExit.bind(this)
+                title: this.options.title,
+                onmouseenter: this.mouseEnter.bind(this),
+                onmouseleave: this.mouseExit.bind(this)
             }, [
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
-                        "class": 'doughnut-circle',
                         'stroke-width': this.options.stroke,
-                        fill: 'none',
                         stroke: this.options.circleColor,
                         cx: this.options.center,
                         cy: this.options.center,
                         r: this.options.radius
-                    }),
-                    this.options.values.map(function (item, index) {
-                        _this.options.startAngle = _this.options.endAngle;
-                        var p = (item.percentage * 360) / 100;
-                        _this.options.endAngle = p + _this.options.startAngle;
-                        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
-                            kay: 'p_' + index,
-                            'class': "doughnut-sector",
-                            'stroke-width': _this.options.stroke,
-                            'fill': "none",
-                            'stroke': item.color,
-                            'd': _this.getAcr(_this.options.startAngle, _this.options.endAngle)
-                        });
-                    })
+                    }), this.valuesTemplate()
                 ])
             ])
         ]);
-    };
-    Doughnut.prototype.imageHover = function (ev) {
-        this.scale = 90;
-    };
-    Doughnut.prototype.imageExit = function (ev) {
-        this.scale = 70;
     };
     /**
-     * Generates H template for single arc
+     * Generates H template from values or angles
      */
-    Doughnut.prototype.singleArc = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                "class": 'child',
-                'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', {
-                    src: this.options.image,
-                    height: '100%',
-                    width: '100%',
-                    style: this.options.image ? 'display:block' : 'display:none'
-                }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head', {
-                    style: "align-items: center; font-size:20px; font-weight:bold;\n                            justify-content: center;\n                            display: flex; height:100%"
-                }, [this.options.title])
-            ]),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
-                key: this.options.title,
-                "class": 'child', title: this.options.title,
-                onmouseenter: this.imageHover.bind(this),
-                onmouseleave: this.imageExit.bind(this)
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('circle', {
-                        "class": 'doughnut-circle',
-                        'stroke-width': this.options.stroke,
-                        fill: 'none',
-                        stroke: this.options.circleColor,
-                        cx: this.options.center,
-                        cy: this.options.center,
-                        r: this.options.radius
-                    }),
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
-                        "class": 'doughnut-sector',
-                        'stroke-width': this.options.stroke,
-                        fill: 'none',
-                        stroke: this.options.sectorColor,
-                        d: this.getAcr(this.options.startAngle, this.options.endAngle)
-                    })
-                ])
-            ])
-        ]);
+    Doughnut.prototype.valuesTemplate = function () {
+        var _this = this;
+        if (this.options.values.length > 0)
+            return this.options.values.map(function (item, index) {
+                _this.options.startAngle = _this.options.endAngle;
+                var p = (item.percentage * 360) / 100;
+                _this.options.endAngle = p + _this.options.startAngle;
+                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
+                    kay: index,
+                    'stroke-width': _this.options.stroke,
+                    'stroke': item.color,
+                    'd': _this.getAcr(_this.options.startAngle, _this.options.endAngle)
+                });
+            });
+        else
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('path', {
+                'stroke-width': this.options.stroke,
+                stroke: this.options.sectorColor,
+                d: this.getAcr(this.options.startAngle, this.options.endAngle)
+            });
+    };
+    Doughnut.prototype.mouseEnter = function () {
+        this.scale = 90;
+    };
+    Doughnut.prototype.mouseExit = function (ev) {
+        this.scale = 70;
     };
     /**
      * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350)
@@ -1133,17 +1084,10 @@ var Doughnut = (function (_super) {
      * @param endAngle End angle value
      */
     Doughnut.prototype.getAcr = function (startAngle, endAngle) {
-        var x = this.options.center;
-        var y = this.options.center;
-        var radius = this.options.radius;
-        var start = this.polarToCartesian(x, y, radius, endAngle);
-        var end = this.polarToCartesian(x, y, radius, startAngle);
+        var start = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, endAngle);
+        var end = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, startAngle);
         var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-        var d = [
-            "M", start.x, start.y,
-            "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-        ].join(" ");
-        return d;
+        return "M" + start.x + " " + start.y + " A" + this.options.radius + " " + this.options.radius + " 0 " + largeArcFlag + " 0 " + end.x + " " + end.y;
     };
     /**
      * Updates the arc
@@ -1179,7 +1123,8 @@ Doughnut.defaultOptions = {
     circleColor: '#DDD',
     image: null,
     values: [],
-    title: ''
+    title: '',
+    size: 200
 };
 
 
@@ -1276,12 +1221,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__ = __webpack_require__(3);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_list_list__ = __webpack_require__(9);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "List", function() { return __WEBPACK_IMPORTED_MODULE_2__components_list_list__["a"]; });
 // Comment that is displayed in the API documentation for the Doughnut module:
 /**
  * Welcome to the API documentation of the **batman** library.
  * @preferred
  */
 // export all components
+
 
 
 
@@ -1492,6 +1440,112 @@ var Message = (function () {
     return Message;
 }());
 
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return List; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_maquette__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var List = (function (_super) {
+    __extends(List, _super);
+    /**
+     * Constructor to initiate the doughnut component
+     * @param element Context of the component
+     * @param options Component options
+     */
+    function List(element, options) {
+        var _this = _super.call(this, 'List') || this;
+        _this.element = element;
+        _this.options = __assign({}, List.defaultOptions, options);
+        var elementOffset = element.clientHeight;
+        var borderHeight = parseInt(window.getComputedStyle(element).getPropertyValue('border-width'), 10) * 2;
+        _this.logger.log(elementOffset.toString());
+        if (_this.options.pageSize === 0) {
+            _this.options.pageSize = Math.ceil(elementOffset / _this.options.height);
+            _this.containerHeight = elementOffset - borderHeight;
+        }
+        else {
+            _this.containerHeight = (_this.options.height * _this.options.pageSize) - borderHeight;
+        }
+        _this.start = 0;
+        _this.end = _this.options.pageSize;
+        _this.activeData = _this.options.data.slice(_this.start, _this.end);
+        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
+        return _this;
+    }
+    /**
+     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
+     */
+    List.prototype.renderMaquette = function () {
+        var _this = this;
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.list.parent.no-mar-collapse', {
+            style: "height: " + this.containerHeight + "px;"
+        }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.container', { style: "height: " + this.containerHeight + "px;", onscroll: this.listScroll.bind(this) }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.child.data', [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('ul.no-mar', [this.activeData.map(function (item, index) {
+                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('li', { key: _this.start + index, style: "height:" + _this.options.height + "px" }, [item.text]);
+                        })])
+                ]),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.ghost', { style: "height:" + this.options.data.length * this.options.height + "px" })
+            ])
+        ]);
+    };
+    List.prototype.listScroll = function (event) {
+        var start = Math.floor(event.target.scrollTop / this.options.height);
+        if (start < 0)
+            start = 0;
+        var end = start + this.options.pageSize;
+        if (end >= this.options.data.length)
+            end = this.options.data.length;
+        this.start = start;
+        this.end = end;
+        this.activeData = this.options.data.slice(this.start, this.end);
+        event.stopPropagation();
+    };
+    /**
+     * Updates the arc
+     * @param startAngle Start angle angle
+     * @param endAngle End angle value
+     */
+    List.prototype.refresh = function () {
+        this.projector.scheduleRender();
+    };
+    return List;
+}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
+
+/**
+ * Component default option. These options can be overridden from constructor
+ */
+List.defaultOptions = {
+    height: 40,
+    pageSize: 0,
+    data: []
+};
 
 
 /***/ })

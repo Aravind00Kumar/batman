@@ -1,59 +1,68 @@
 @import "../_variables/_layout-variables";
 @import "../_mixin/_layout-mixin";
 
-*{
+* {
     box-sizing: border-box;
 }
 
 /* Padding Margin Border*/
 
-.no-pad{
+.no-pad {
     @include padding(0);
 }
-.no-mar{
+
+.no-mar {
     @include margin(0);
 }
-.no-pad-mar, .no-mar-pad{
-    @include padding-margin(0,0);
+
+.no-pad-mar, .no-mar-pad {
+    @include padding-margin(0, 0);
 }
 
-.pad-1x{
+.pad-1x {
     @include padding($PX2);
 }
-.mar-1x{
+
+.mar-1x {
     @include margin($PX2);
 }
-.pad-mar-1x, .mar-pad-1x{
-    @include padding-margin($PX2,$PX2);
+
+.pad-mar-1x, .mar-pad-1x {
+    @include padding-margin($PX2, $PX2);
 }
 
-.pad-2x{
+.pad-2x {
     @include padding($PX5);
 }
-.mar-2x{
+
+.mar-2x {
     @include margin($PX5);
 }
-.pad-mar-2x, .mar-pad-2x{
-    @include padding-margin($PX5,$PX5);
+
+.pad-mar-2x, .mar-pad-2x {
+    @include padding-margin($PX5, $PX5);
 }
-.no-mar-collapse{
+
+.no-mar-collapse {
     border: 1px solid transparent;
 }
 
 /* Borders */
-.border{
+.border {
     @include solid-border;
+
     border-width: $PX1;
 }
 
-.border-2x{
+.border-2x {
     @include solid-border;
+
     border-width: $PX2;
 }
 
 /* Clear Floats */
 
-.clear::after{
+.clear::after {
     display: table;
     content: '';
     clear: both;
@@ -61,26 +70,57 @@
 
 /* Flex*/
 
-.flex { display: flex; }
-.flex.column { flex-direction: column;flex-wrap: wrap;}
-.flex.row { flex-direction: row; flex-wrap: wrap;}
-.flex.container { align-items: stretch;}
-.flex.full > * {  flex: 1;}
+.flex {
+    display: flex;
+}
+
+.flex.column {
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.flex.row {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.flex.center {
+    align-items: center;
+}
+
+.flex.nowrap {
+    flex-wrap: nowrap;
+}
+
+.flex.container {
+    align-items: stretch;
+}
+
+.flex.grow > * {
+    flex-grow: 1;
+}
+
+.full {
+    flex: 1;
+}
 
 /* Visibility*/
-.hide{
+.hide {
     display: none;
 }
-.hide-silent{
+
+.hide-silent {
     opacity: 0;
 }
-.show-silent{
+
+.show-silent {
     opacity: 1;
 }
 
-.parent{
+.parent {
     position: relative;
 }
-.child{
+
+.child {
     position: absolute;
 }

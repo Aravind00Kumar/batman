@@ -19,23 +19,30 @@
 
     <h1 class="h2"> Doughnut Component </h1>
 
-    <div class="flex row">
+
+    <div class="flex row grow">
         <div class="panel">
             <h2> Single mono color </h2>
-            <div class="flex row">
-                <div class='flex full parent pad-mar-2x example1' style="min-height:200px; min-width:200px;">
+            <div class="flex column nowrap">
+                <div class='pad-mar-2x example1'>
                 </div>
-                <div>
-                    <label> Start Angle</label>
-                    <label> End Angle</label>
-                    <label> Stroke </label>
-                    <input id="startAngle" placeholder="Start angle" value="0" />
-                    <input id="endAngle" placeholder="End angle" value="200" />
-                    <input id="strokeValue" readonly value="10">
-                    <button id="apply"> Apply</button><br>
-                    <input id="start" type="range" min="0" max="360" step="1">
-                    <input id="end" type="range" min="0" max="360" step="1">
-                    <input id="stroke" type="range" min="2" max="10" step="1">
+                <div class="flex column">
+                    <div class="flex row nowrap">
+                        <label> Start Angle</label>
+                        <label> End Angle</label>
+                        <label> Stroke </label>
+                    </div>
+                    <div class="flex row nowrap">
+                        <input id="startAngle" placeholder="Start angle" value="0" />
+                        <input id="endAngle" placeholder="End angle" value="200" />
+                        <input id="strokeValue" readonly value="10">
+                        <button id="apply"> Apply</button><br>
+                    </div>
+                    <div class="flex row nowrap">
+                        <input id="start" type="range" min="0" max="360" step="1">
+                        <input id="end" type="range" min="0" max="360" step="1">
+                        <input id="stroke" type="range" min="2" max="10" step="1">
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,14 +50,14 @@
         <div class="panel">
             <h2> Multi color </h2>
             <div class="flex row">
-                <div class='flex full parent pad-mar-2x m1' style="min-height:200px; min-width:200px;">
+                <div class='pad-mar-2x m1'>
                 </div>
                 <ul>
-                    <li><b style="background:#e91e63"></b> Task 1</li>
-                    <li><b style="background:#009688"></b> Task 2</li>
-                    <li><b style="background:#ff5722"></b> Task 3</li>
-                    <li><b style="background:#00bcd4"></b> Task 4</li>
-                    <li><b style="background:#9c27b0"></b> Task 5</li>
+                    <li><b style="background:#e91e63"></b> Task 1 - 20%</li>
+                    <li><b style="background:#009688"></b> Task 2 - 15%</li>
+                    <li><b style="background:#ff5722"></b> Task 3 - 10%</li>
+                    <li><b style="background:#00bcd4"></b> Task 4 - 25%</li>
+                    <li><b style="background:#9c27b0"></b> Task 5 - 30%</li>
                 </ul>
             </div>
         </div>
@@ -58,7 +65,7 @@
         <div class="panel">
             <h2> Justice League episodes</h2>
             <div class="flex row">
-                <div class='flex full parent pad-mar-2x m2' style="min-height:200px; min-width:200px;">
+                <div class="pad-mar-2x m2">
                 </div>
                 <ul>
                     <li><b style="background:#e91e63"></b> Secret Origins</li>
@@ -74,13 +81,13 @@
     <div class="panel">
         <h2> Justice League Superheros Strength </h2>
         <div class="flex row">
-            <div id="d1" class='flex full parent pad-mar-2x dc'></div>
-            <div id="d2" class='flex full parent pad-mar-2x dc'></div>
-            <div id="d3" class='flex full parent pad-mar-2x dc'></div>
-            <div id="d4" class='flex full parent pad-mar-2x dc'></div>
-            <div id="d5" class='flex full parent pad-mar-2x dc'></div>
-            <div id="d6" class='flex full parent pad-mar-2x dc'></div>
-            <div id="d7" class='flex full parent pad-mar-2x dc'></div>
+            <div id="d1" class='pad-mar-2x'></div>
+            <div id="d2" class='pad-mar-2x'></div>
+            <div id="d3" class='pad-mar-2x'></div>
+            <div id="d4" class='pad-mar-2x'></div>
+            <div id="d5" class='pad-mar-2x'></div>
+            <div id="d6" class='pad-mar-2x'></div>
+            <div id="d7" class='pad-mar-2x'></div>
         </div>
     </div>
 

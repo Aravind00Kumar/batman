@@ -6,31 +6,31 @@
   padding: 0; }
 
 .no-mar {
-  padding: 0; }
+  margin: 0; }
 
 .no-pad-mar, .no-mar-pad {
   padding: 0;
-  padding: 0; }
+  margin: 0; }
 
 .pad-1x {
   padding: 2px; }
 
 .mar-1x {
-  padding: 2px; }
+  margin: 2px; }
 
 .pad-mar-1x, .mar-pad-1x {
   padding: 2px;
-  padding: 2px; }
+  margin: 2px; }
 
 .pad-2x {
   padding: 5px; }
 
 .mar-2x {
-  padding: 5px; }
+  margin: 5px; }
 
 .pad-mar-2x, .mar-pad-2x {
   padding: 5px;
-  padding: 5px; }
+  margin: 5px; }
 
 .no-mar-collapse {
   border: 1px solid transparent; }
@@ -62,10 +62,19 @@
   flex-direction: row;
   flex-wrap: wrap; }
 
+.flex.center {
+  align-items: center; }
+
+.flex.nowrap {
+  flex-wrap: nowrap; }
+
 .flex.container {
   align-items: stretch; }
 
-.flex.full > * {
+.flex.grow > * {
+  flex-grow: 1; }
+
+.full {
   flex: 1; }
 
 /* Visibility*/
@@ -130,9 +139,39 @@ div#global-profiler {
 
 .doughnut-component {
   background-color: transparent;
-  height: 100%; }
+  display: inline-block; }
+  .doughnut-component .child:first-child {
+    border-radius: 100%;
+    overflow: hidden;
+    transition-property: transform;
+    transition-timing-function: linear; }
   .doughnut-component .child {
     height: 100%;
     width: 100%; }
+    .doughnut-component .child img {
+      height: 100%;
+      width: 100%; }
+    .doughnut-component .child .head {
+      align-items: center;
+      justify-content: center;
+      height: 100%; }
+    .doughnut-component .child svg circle, .doughnut-component .child svg path {
+      fill: none; }
+
+.list {
+  border: 1px solid orange;
+  overflow: hidden;
+  width: 100%; }
+  .list .data {
+    width: 100%; }
+  .list .container {
+    overflow-y: scroll;
+    width: 100%; }
+    .list .container .ghost {
+      width: 100%; }
+  .list ul li {
+    background-color: aquamarine; }
+  .list ul li:hover {
+    background-color: coral; }
 
 /*# sourceMappingURL=batman.css.map */

@@ -1,8 +1,33 @@
 .doughnut-component {
     background-color: transparent;
-    height: 100%;
-    .child{
-        height:100%;
-        width:100%;
+    display: inline-block;
+
+    .child:first-child {
+        border-radius: 100%;
+        overflow: hidden;
+        transition-property: transform;
+        transition-timing-function: linear;
+    }
+
+    .child {
+        height: 100%;
+        width: 100%;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .head {
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        svg {
+            circle, path {
+                fill: none;
+            }
+        }
     }
 }

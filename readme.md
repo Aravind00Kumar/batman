@@ -94,5 +94,5 @@ http://localhost:8000/documentation/index.html
 ## Technology Stack
 * SASS
 * TypeScript
-* [Maquettejs](maquettejs.org) for Virtual DOM
+* [Maquettejs](http://maquettejs.org) for Virtual DOM
 

@@ -27,9 +27,10 @@ export interface IDoughnutOptions {
     endAngle?: number,
     sectorColor?: string,
     circleColor?: string
-    image: URL,
+    image?: URL,
     values?: Array<IDoughnutValue>,
-    title?: string
+    title?: string,
+    size?: number
 }
 
 export class Doughnut extends BaseComponent implements IDoughnutComponent {
@@ -44,7 +45,8 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
         circleColor: '#DDD',
         image: null,
         values: <Array<IDoughnutValue>>[],
-        title: ''
+        title: '',
+        size: 200
     }
 
     private scale: number = 70;
@@ -69,15 +71,13 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
     /**
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template  
      */
-    private renderMaquette() {
-        if (this.options.values.length > 0)
-            return this.multiArc();
-        return this.singleArc();
+    private renderMaquette():VNode {
+        return this.arcTemplate();
     }
     /**
      * Validation method for values; values will be invalid when  values property in the options together should not exceed 100 
      */
-    private validateValues() {
+    private validateValues():boolean {
         if (this.options.values.length > 0) {
             let sum = 0;
             for (let index = 0; index < this.options.values.length; index++) {
@@ -95,119 +95,64 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
     }
 
     /**
-     * Generates H template for multiple arcs
+     * Generates H template for arc
      */
-    private multiArc() {
-        return h('div.doughnut-component.parent', [
-            h('div', {
-                class: 'child',
-                'style': `border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  
-                            transform:scale(${1 - (this.options.stroke) / this.scale})`
-            }, [
-                    h('img', {
-                        src: this.options.image,
-                        height: '100%',
-                        width: '100%',
-                        style: this.options.image ? 'display:block' : 'display:none'
-                    }),
-                    h('div.head', {
-                        style: `align-items: center; font-size:20px; font-weight:bold;
-                            justify-content: center;
-                            display: flex; height:100%`}, [this.options.title])
-                ]),
-            h('div', {
-                key: this.options.title,
-                class: 'child', title: this.options.title,
-                onmouseenter: this.imageHover.bind(this),
-                onmouseleave: this.imageExit.bind(this)
-            }, [
-                    h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-                        h('circle', {
-                            class: 'doughnut-circle',
-                            'stroke-width': this.options.stroke,
-                            fill: 'none',
-                            stroke: this.options.circleColor,
-                            cx: this.options.center,
-                            cy: this.options.center,
-                            r: this.options.radius
-                        }),
-                        this.options.values.map((item, index) => {
-
-                            this.options.startAngle = this.options.endAngle;
-                            var p = (item.percentage * 360) / 100;
-                            this.options.endAngle = p + this.options.startAngle;
-
-                            return h('path', {
-                                kay: 'p_' + index,
-                                'class': "doughnut-sector",
+    private arcTemplate():VNode {
+        return h('div.doughnut-component.parent',
+            { style: `min-height:${this.options.size}px; min-width:${this.options.size}px` }, [
+                h('div.child.flex.center.grow', {
+                    'style': `transition: ${this.animationSpeed}; transform:scale(${1 - (this.options.stroke) / this.scale})`
+                }, [h('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
+                    h('div.head.flex.h3', [this.options.title])]),
+                h('div.child', {
+                    key: this.options.title,
+                    title: this.options.title,
+                    onmouseenter: this.mouseEnter.bind(this),
+                    onmouseleave: this.mouseExit.bind(this)
+                }, [
+                        h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
+                            h('circle', {
                                 'stroke-width': this.options.stroke,
-                                'fill': "none",
-                                'stroke': item.color,
-                                'd': this.getAcr(this.options.startAngle, this.options.endAngle)
-                            })
-                        })
+                                stroke: this.options.circleColor,
+                                cx: this.options.center,
+                                cy: this.options.center,
+                                r: this.options.radius
+                            }), this.valuesTemplate()
+                        ])
                     ])
-                ])
-        ]);
-    }
-
-    private imageHover(ev) {
-        this.scale = 90;
-    }
-
-    private imageExit(ev) {
-        this.scale = 70;
+            ]);
     }
 
     /**
-     * Generates H template for single arc
+     * Generates H template from values or angles
      */
-    private singleArc() {
-        return h('div.doughnut-component.parent', [
-            h('div', {
-                class: 'child',
-                'style': `border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  
-                            transform:scale(${1 - (this.options.stroke) / this.scale})`
-            }, [
-                    h('img', {
-                        src: this.options.image,
-                        height: '100%',
-                        width: '100%',
-                        style: this.options.image ? 'display:block' : 'display:none'
-                    }),
-                    h('div.head', {
-                        style: `align-items: center; font-size:20px; font-weight:bold;
-                            justify-content: center;
-                            display: flex; height:100%`}, [this.options.title])
-                ]),
-            h('div', {
-                key: this.options.title,
-                class: 'child', title: this.options.title,
-                onmouseenter: this.imageHover.bind(this),
-                onmouseleave: this.imageExit.bind(this)
-            }, [
-                    h('svg', { class: 'doughnut-component', viewBox: '0 0 100 100' }, [
-                        h('circle', {
-                            class: 'doughnut-circle',
-                            'stroke-width': this.options.stroke,
-                            fill: 'none',
-                            stroke: this.options.circleColor,
-                            cx: this.options.center,
-                            cy: this.options.center,
-                            r: this.options.radius
-                        }),
-                        h('path', {
-                            class: 'doughnut-sector',
-                            'stroke-width': this.options.stroke,
-                            fill: 'none',
-                            stroke: this.options.sectorColor,
-                            d: this.getAcr(this.options.startAngle, this.options.endAngle)
-                        })
-                    ])
-                ])
-        ]);
+    private valuesTemplate():VNode {
+        if (this.options.values.length > 0)
+            return this.options.values.map((item, index) => {
+                this.options.startAngle = this.options.endAngle;
+                var p = (item.percentage * 360) / 100;
+                this.options.endAngle = p + this.options.startAngle;
+                return h('path', {
+                    kay: index,
+                    'stroke-width': this.options.stroke,
+                    'stroke': item.color,
+                    'd': this.getAcr(this.options.startAngle, this.options.endAngle)
+                });
+            });
+        else return h('path', {
+            'stroke-width': this.options.stroke,
+            stroke: this.options.sectorColor,
+            d: this.getAcr(this.options.startAngle, this.options.endAngle)
+        });
     }
 
+    private mouseEnter() {
+        this.scale = 90;
+    }
+
+    private mouseExit(ev) {
+        this.scale = 70;
+    }
 
     /**
      * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350) 
@@ -228,7 +173,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * @param radius radius of the circle
      * @param angleInDegrees arc angle value
      */
-    private polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    private polarToCartesian(centerX: number, centerY: number, radius: number, angleInDegrees: number) {
         var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
         return {
             x: (centerX + (radius * Math.cos(angleInRadians))),
@@ -241,23 +186,13 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * @param startAngle Start angle value
      * @param endAngle End angle value
      */
-    public getAcr(startAngle, endAngle) {
-
-        var x = this.options.center;
-        var y = this.options.center;
-        var radius = this.options.radius;
-
-        var start = this.polarToCartesian(x, y, radius, endAngle);
-        var end = this.polarToCartesian(x, y, radius, startAngle);
+    public getAcr(startAngle: number, endAngle: number) {
+        var start = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, endAngle);
+        var end = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, startAngle);
 
         var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
-        var d = [
-            "M", start.x, start.y,
-            "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-        ].join(" ");
-
-        return d;
+        return `M${start.x} ${start.y} A${this.options.radius} ${this.options.radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
     }
 
     /**
