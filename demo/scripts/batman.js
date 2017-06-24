@@ -1001,10 +1001,10 @@ var Doughnut = (function (_super) {
      */
     Doughnut.prototype.arcTemplate = function () {
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', { style: "min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.child', {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.child.flex.center.grow', {
                 'style': "transition: " + this.animationSpeed + "; transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
             }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head.flex', [this.options.title])]),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head.flex.h3', [this.options.title])]),
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.child', {
                 key: this.options.title,
                 title: this.options.title,

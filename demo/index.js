@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
         {
             startAngle: parseInt(window.startAngle.value, 10),
             endAngle: parseInt(window.endAngle.value, 10),
-            sectorColor: '#03a9f4',
-            image: './img/FwG8UYtj.jpg'
+            sectorColor: '#03a9f4'
         });
     function mapper(reverse) {
         if (reverse) {
@@ -48,10 +47,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var m1 = new window.Batman.Doughnut(document.querySelector('.m1'),
         {
             values: [
-                { percentage: 10, color: '#e91e63' },
-                { percentage: 30, color: '#009688' },
+                { percentage: 20, color: '#e91e63' },
+                { percentage: 15, color: '#009688' },
                 { percentage: 10, color: '#ff5722' },
-                { percentage: 20, color: '#00bcd4' },
+                { percentage: 25, color: '#00bcd4' },
                 { percentage: 30, color: '#9c27b0' }
             ],
             title: 'Tasks',

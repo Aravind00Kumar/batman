@@ -84,6 +84,10 @@
     flex-wrap: wrap;
 }
 
+.flex.center{
+    align-items:center;
+}
+
 .flex.nowrap {
     flex-wrap: nowrap;
 }
