@@ -23,19 +23,42 @@ export class Dropdown extends BaseComponent implements IDropdown {
     }
 
     public display: boolean;
+    public x: any;
+    public y: any;
+
     constructor(private element: HTMLElement, options?: IDropdownOptions, data?: object) {
         super('Dropdown');
-        //this.context = context;
         this.options = <IDropdownOptions>{ ...Dropdown.defaultOptions, ...options };
         this.logger.log('Dropdown loaded');
         this.display = false;
         this.projector.append(this.element, this.renderMaquette.bind(this));
+        this.x = 0;
+        this.y = 0;
     }
 
     public renderMaquette() {
-        return h('div', { style: 'height:200px; position:absolute; width:200px; background:orange; display: ' + (this.display == true ? 'block' : 'none'), class: this.options.class }, [
-            h('div', { class: 'saucer', value: 'Greetings' })
-        ]);
+        return h('div.context', {
+            style: 'height:600px; width:600px; border:1px solid orange',
+            onmousemove: this.moveMouse.bind(this),
+            onclick:this.print.bind(this),
+        }, [h('div.dropdown', {
+            style: `height:20px; position:absolute; width:20px; background:orange; display: ${this.getDisplay()}; left:${this.x}; top:${this.y}`
+        })]);
+
+    }
+
+    public moveMouse(event) {
+        event.stopPropagation()
+        this.x = event.x + 'px';
+        this.y = event.y + 'px';
+    }
+
+    public print(event) {
+        this.logger.log(this.x +', '+ this.y)
+    }
+
+    public getDisplay() {
+        return this.display ? 'block' : 'none';
     }
 
     public show() {

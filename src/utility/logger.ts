@@ -1,127 +1,123 @@
 
+import { IMessage, Message, MessageType } from './message';
+import { IWriter } from './writer';
+import { ConsoleWriter } from './console-writer';
+
+/**
+ * Logger options interface
+ */
+export interface ILoggerOptions {
+    /**
+     * Enable or disable state of the logger
+     * `true` to enable logger 
+     * `false` to disable logger
+     */
+    enable?: boolean;
+}
+
+/**
+ * Logger interface to log messages in the framework
+ */
 export interface ILogger {
-    log(message): void;
-    error(message): void;
-}
-
-export interface IWriter {
-    write(message: IMessage): void;
-    clear(): void;
-}
-
-export class ConsoleWriter implements IWriter {
-    public write(message: IMessage): void {
-        if (message.type === 'error')
-            console.error(message.format());
-        else
-            console.log(message.format());
-    }
-    public clear() {
-        console.clear();
-    }
-
-}
-
-// export class ProfileWriter implements IWriter {
-
-//     public element: HTMLElement;
-//     public logElement: HTMLElement;
-
-//     constructor(profilerId?: string) {
-//         var elm = document.getElementById('global-profiler');
-//         if (elm == null)
-//             this.element = this.createProfileElement();
-//         else
-//             this.element = elm;
-//     }
-
-//     private createProfileElement() {
-//         var div = document.createElement("div");
-//         div.setAttribute('id', 'global-profiler');
-//         div.setAttribute('style', 'width: 500px; height: 100vh; position:fixed; background-color:#000; opacity:0.6; top:0; right:20px; overflow-y:auto');
-//         var button = document.createElement("button");
-//         button.innerHTML = "Clear"
-//         button.setAttribute('style','position:absolute; right:10px; top :10px; border: 1px solid #6c8490; background:#607D8B; opacity:.7; color:#FFF')
-//         button.addEventListener('click', this.clear.bind(this));
-//         this.logElement = document.createElement('div');
-//         this.logElement.setAttribute('class','log-context');
-//         div.appendChild(this.logElement);
-//         div.appendChild(button)
-//         document.body.appendChild(div);
-//         return div;
-//     }
-
-//     private createElement(message: IMessage) {
-//         var div = document.createElement('div');
-//         div.innerHTML = `<span style="padding:5px">${message.time()}</span><span>${message.text}</span>`;
-//         div.setAttribute('style', `color:${message.type === 'log' ? 'green' : 'orange'}`);
-//         div.setAttribute('class', `${message.type === 'log' ? 'log' : 'error'}`);
-//         return div;
-//     }
-
-//     public write(message: IMessage): void {
-//         this.logElement.appendChild(this.createElement(message));
-//     }
-//     public clear(): void {
-//         this.logElement.innerText = '';
-//     }
-// }
-
-type MessageType = 'log' | 'error';
-export interface IMessage {
-    text: string;
-    dateTime: Date;
-    type: MessageType;
-    format(): string;
-    time():string;
-}
-
-export class Message {
-    public dateTime: Date;
-    public type: MessageType;
-    constructor(public text: string, type?: MessageType) {
-        this.dateTime = new Date();
-        this.type = type || 'log';
-    }
-    public time(){
-        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() +  ":" + this.dateTime.getMilliseconds();
-    }
-    public format() {
-        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds() + ': ' + this.text;
-    }
+    /**
+     * This message logs the message as `log`
+     */
+    log(message: string): void;
+    /**
+     * This message logs the message as `error`
+     */
+    error(message: string): void;
+    /**
+     * This method disables the logger 
+     */
+    disable(): void;
+    /**
+     * This method enables the logger
+     */
+    enable(): void;
 }
 
 export class Logger implements ILogger {
+    /**
+     * Logger default options
+     */
+    public static defaultOptions = <ILoggerOptions>{
+        enable: true
+    }
+
     private static _instance;
     private _stack: Array<Message>;
     private _writer: IWriter;
-    private constructor(writer?: IWriter) {
+    private options: ILoggerOptions;
+
+    /**
+     * Initiate the logger class with writer and options
+     * @param writer Instance of writer to write messages
+     * @param options A set of logger options 
+     */
+    private constructor(writer?: IWriter, options?: ILoggerOptions) {
+        this.options = <ILoggerOptions>{ ...Logger.defaultOptions, ...options };
         if (writer === undefined) this._writer = new ConsoleWriter();
         else this._writer = writer;
         this._stack = [];
         Logger._instance = this;
     }
-
-    public static getInstance(writer?: IWriter) {
+    /**
+     * This method give return singleton instance of the logger class 
+     * @param writer Instance of writer to write messages
+     * @param options A set of logger options 
+     */
+    public static getInstance(writer?: IWriter, options?: ILoggerOptions) {
         if (this._instance === undefined) {
-            this._instance = new Logger(writer);
+            this._instance = new Logger(writer, options);
         }
         return this._instance;
     }
+    /**
+     * 
+     * @param value text message to be logged
+     * @param type Type of the message `log` or `error`
+     */
+    private writeLog(value: string, type?: MessageType) {
+        if (this.options.enable) {
+            var message: IMessage = new Message(value, type);
+            this._stack.push(message);
+            this._writer.write(message);
+        }
 
+    }
+    /**
+     * This method delete all log and sets the log stack to empty
+     */
     public clear() {
         this._stack.length = 0;
     }
-
-    public log(value) {
-        var message: IMessage = new Message(value);
-        this._stack.push(message);
-        this._writer.write(message);
+    /**
+     * This message logs the message as `log` 
+     * @param value text message
+     */
+    public log(value: string) {
+        this.writeLog(value)
     }
+    /**
+     * This message logs the message as `error` 
+     * @param value text message
+     */
 
-    public error(value) {
-        var message = new Message(value, 'error');
-        this._stack.push(message);
-        this._writer.write(message);
+    public error(value: string) {
+        this.writeLog(value, 'error')
+    }
+    /**
+     * This method enables the logger
+     */
+    public enable() {
+        this.options.enable = true;
+    }
+    /**
+     * This method disables the logger
+     */
+
+    public disable() {
+        this.options.enable = false;
     }
 }

@@ -1223,17 +1223,33 @@ var Dropdown = (function (_super) {
     function Dropdown(element, options, data) {
         var _this = _super.call(this, 'Dropdown') || this;
         _this.element = element;
-        //this.context = context;
         _this.options = __assign({}, Dropdown.defaultOptions, options);
         _this.logger.log('Dropdown loaded');
         _this.display = false;
         _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
+        _this.x = 0;
+        _this.y = 0;
         return _this;
     }
     Dropdown.prototype.renderMaquette = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { style: 'height:200px; position:absolute; width:200px; background:orange; display: ' + (this.display == true ? 'block' : 'none'), "class": this.options["class"] }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', { "class": 'saucer', value: 'Greetings' })
-        ]);
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.context', {
+            style: 'height:600px; width:600px; border:1px solid orange',
+            onmousemove: this.moveMouse.bind(this),
+            onclick: this.print.bind(this)
+        }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.dropdown', {
+                style: "height:20px; position:absolute; width:20px; background:orange; display: " + this.getDisplay() + "; left:" + this.x + "; top:" + this.y
+            })]);
+    };
+    Dropdown.prototype.moveMouse = function (event) {
+        event.stopPropagation();
+        this.x = event.x + 'px';
+        this.y = event.y + 'px';
+    };
+    Dropdown.prototype.print = function (event) {
+        this.logger.log(this.x + ', ' + this.y);
+    };
+    Dropdown.prototype.getDisplay = function () {
+        return this.display ? 'block' : 'none';
     };
     Dropdown.prototype.show = function () {
         this.display = true;
@@ -1277,18 +1293,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_profiler_profiler__ = __webpack_require__(7);
 
+
+/**
+ * Global services and configuration for library
+ */
 var Global = (function () {
+    /**
+     * Constructor instantiates all global services and instances
+     */
     function Global() {
+        Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
+        Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance(new __WEBPACK_IMPORTED_MODULE_1__components_profiler_profiler__["a" /* ProfilerWriter */]());
     }
     return Global;
 }());
 /* harmony default export */ __webpack_exports__["a"] = (Global);
+/**
+ * Name of the library
+ */
 Global.Name = 'Batman';
+/**
+ * Library version
+ */
 Global.Version = '1.0.0.alpha.1';
+/**
+ * Default animation duration in milliseconds
+ */
 Global.AnimationDuration = 150;
-//   public static Logger :ILogger = Logger.getInstance(new ProfilerWriter()); 
-Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
 
 
 /***/ }),
@@ -1296,68 +1329,237 @@ Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export ConsoleWriter */
-/* unused harmony export Message */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__message__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__console_writer__ = __webpack_require__(8);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var Logger = (function () {
+    /**
+     * Initiate the logger class with writer and options
+     * @param writer Instance of writer to write messages
+     * @param options A set of logger options
+     */
+    function Logger(writer, options) {
+        this.options = __assign({}, Logger.defaultOptions, options);
+        if (writer === undefined)
+            this._writer = new __WEBPACK_IMPORTED_MODULE_1__console_writer__["a" /* ConsoleWriter */]();
+        else
+            this._writer = writer;
+        this._stack = [];
+        Logger._instance = this;
+    }
+    /**
+     * This method give return singleton instance of the logger class
+     * @param writer Instance of writer to write messages
+     * @param options A set of logger options
+     */
+    Logger.getInstance = function (writer, options) {
+        if (this._instance === undefined) {
+            this._instance = new Logger(writer, options);
+        }
+        return this._instance;
+    };
+    /**
+     *
+     * @param value text message to be logged
+     * @param type Type of the message `log` or `error`
+     */
+    Logger.prototype.writeLog = function (value, type) {
+        if (this.options.enable) {
+            var message = new __WEBPACK_IMPORTED_MODULE_0__message__["a" /* Message */](value, type);
+            this._stack.push(message);
+            this._writer.write(message);
+        }
+    };
+    /**
+     * This method delete all log and sets the log stack to empty
+     */
+    Logger.prototype.clear = function () {
+        this._stack.length = 0;
+    };
+    /**
+     * This message logs the message as `log`
+     * @param value text message
+     */
+    Logger.prototype.log = function (value) {
+        this.writeLog(value);
+    };
+    /**
+     * This message logs the message as `error`
+     * @param value text message
+     */
+    Logger.prototype.error = function (value) {
+        this.writeLog(value, 'error');
+    };
+    /**
+     * This method enables the logger
+     */
+    Logger.prototype.enable = function () {
+        this.options.enable = true;
+    };
+    /**
+     * This method disables the logger
+     */
+    Logger.prototype.disable = function () {
+        this.options.enable = false;
+    };
+    return Logger;
+}());
+
+/**
+ * Logger default options
+ */
+Logger.defaultOptions = {
+    enable: true
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfilerWriter; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_maquette__ = __webpack_require__(0);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+/**
+ * This is a component which allow developer to write messages in DOM
+ */
+var ProfilerWriter = (function () {
+    /**
+     * Constructor to initiate the ProfilerWriter component
+     * @param element Context of the component
+     * @param options Component options
+     */
+    function ProfilerWriter(options) {
+        this.element = document.body,
+            this.options = __assign({}, ProfilerWriter.defaultOptions, options);
+        this.log = [];
+        this.projector = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["b" /* createProjector */])();
+        this.projector.append(this.element, this.renderMaquette.bind(this));
+    }
+    /**
+     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
+     */
+    ProfilerWriter.prototype.renderMaquette = function () {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])("div#global-profiler.flex.column", {}, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.head.pad-mar-2x', [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])("button", { onclick: this.clear.bind(this) }, ["Clear"])]),
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])("div.content.pad-mar-2x", [
+                this.log.map(function (item, index) {
+                    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])("div", { key: index, "class": item.type }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])("span", [item.time()]), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])("span", [item.text])]);
+                })
+            ])
+        ]);
+    };
+    /**
+     * Writes the message into the DOM
+     * @param message Messages that need to be written in DOM
+     */
+    ProfilerWriter.prototype.write = function (message) {
+        this.log.push(message);
+        this.projector.scheduleRender();
+    };
+    /**
+     * This method delete all messages written inside the DOM
+     */
+    ProfilerWriter.prototype.clear = function () {
+        this.log.length = 0;
+    };
+    return ProfilerWriter;
+}());
+
+/**
+ * Component default option. These options can be overridden from constructor
+ */
+ProfilerWriter.defaultOptions = {
+    width: 10
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConsoleWriter; });
+/**
+ * This class writes all messages into console
+ */
 var ConsoleWriter = (function () {
     function ConsoleWriter() {
     }
+    /**
+     * Writes the message into colsole
+     * @param message Messages that need to be written in console
+     */
     ConsoleWriter.prototype.write = function (message) {
         if (message.type === 'error')
             console.error(message.format());
         else
             console.log(message.format());
     };
+    /**
+     * This method clears all messages in the console
+     */
     ConsoleWriter.prototype.clear = function () {
         console.clear();
     };
     return ConsoleWriter;
 }());
 
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Message; });
+/**
+ * Message class
+ */
 var Message = (function () {
+    /**
+     *
+     * @param text Text string
+     * @param type Type of the message `log` or `error`
+     * If type not provided default type is `log`
+     */
     function Message(text, type) {
         this.text = text;
         this.dateTime = new Date();
         this.type = type || 'log';
     }
+    /**
+     * This method will format message created date time to a string
+     */
     Message.prototype.time = function () {
         return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds();
     };
+    /**
+     * This method will format message content to a string
+     */
     Message.prototype.format = function () {
         return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds() + ': ' + this.text;
     };
     return Message;
-}());
-
-var Logger = (function () {
-    function Logger(writer) {
-        if (writer === undefined)
-            this._writer = new ConsoleWriter();
-        else
-            this._writer = writer;
-        this._stack = [];
-        Logger._instance = this;
-    }
-    Logger.getInstance = function (writer) {
-        if (this._instance === undefined) {
-            this._instance = new Logger(writer);
-        }
-        return this._instance;
-    };
-    Logger.prototype.clear = function () {
-        this._stack.length = 0;
-    };
-    Logger.prototype.log = function (value) {
-        var message = new Message(value);
-        this._stack.push(message);
-        this._writer.write(message);
-    };
-    Logger.prototype.error = function (value) {
-        var message = new Message(value, 'error');
-        this._stack.push(message);
-        this._writer.write(message);
-    };
-    return Logger;
 }());
 
 
