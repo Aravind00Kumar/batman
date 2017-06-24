@@ -1,17 +1,18 @@
-@mixin padding($val:0){
+@mixin padding($val: 0) {
     padding: $val;
 }
 
-@mixin margin($val:0){
+@mixin margin($val: 0) {
     padding: $val;
 }
 
-@mixin padding-margin($pad:0, $mar:0){
+@mixin padding-margin($pad: 0, $mar: 0) {
     @include padding($pad);
+
     @include margin($mar);
 }
 
-@mixin solid-border(){
+@mixin solid-border {
     border-style: solid;
 }
 
@@ -21,30 +22,3 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
