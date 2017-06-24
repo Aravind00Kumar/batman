@@ -130,7 +130,7 @@ div#global-profiler {
 
 .doughnut-component {
   background-color: transparent;
-  height: 100%; }
+  display: inline-block; }
   .doughnut-component .child {
     height: 100%;
     width: 100%; }

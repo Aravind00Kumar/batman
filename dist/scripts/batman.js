@@ -1002,7 +1002,7 @@ var Doughnut = (function (_super) {
      */
     Doughnut.prototype.multiArc = function () {
         var _this = this;
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', [
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', { style: "max-height:" + this.options.size + "px; max-width:" + this.options.size + "px; min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
                 "class": 'child',
                 'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
@@ -1060,7 +1060,7 @@ var Doughnut = (function (_super) {
      * Generates H template for single arc
      */
     Doughnut.prototype.singleArc = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', [
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.doughnut-component.parent', { style: "max-height:" + this.options.size + "px; max-width:" + this.options.size + "px; min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div', {
                 "class": 'child',
                 'style': "border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  \n                            transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
@@ -1179,7 +1179,8 @@ Doughnut.defaultOptions = {
     circleColor: '#DDD',
     image: null,
     values: [],
-    title: ''
+    title: '',
+    size: 200
 };
 
 
