@@ -20,12 +20,10 @@ export default class Global {
     /**
      * global logger instance  
      */
-    public static Logger: ILogger;
+    public static Logger: ILogger = Logger.getInstance();
+    //public static Logger: ILogger = Logger.getInstance(new ProfilerWriter());
     /**
      * Constructor instantiates all global services and instances 
      */
-    private constructor() {
-        Global.Logger = Logger.getInstance();
-        Global.Logger = Logger.getInstance(new ProfilerWriter());
-    }
+    constructor() { }
 } 

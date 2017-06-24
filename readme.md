@@ -1,8 +1,51 @@
 ![alt](./logo_64.png) 
 # Batman
-UI Components in vanilla js (TypeScript)
+Batman is a native JavaScript UI components library developed using TypeScript, SASS and virtual DOM concept. Easy to use, include following files in the html file.
 
-## Environment setup 
+```
+<!-- include only to support IE browsers -->
+<script src="../dist/maquette-polifills.js"></script>
+
+<script src="../dist/batman.js"></script>
+<link href="../dist/css/batman.css" rel="stylesheet" />
+```
+
+## How to use
+
+In the `index.html`
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo</title>
+    <link rel="stylesheet" href="./css/batman.css">
+</head>
+<body>
+    <div class="flex">
+        <div id="demo" style="height:200px; width:200px"></div>
+    </div>
+    <script src="./scripts/maquette-polifills.js"></script>
+    <script src="./scripts/batman.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+```
+
+In `main.js`
+
+```
+document.addEventListener('DOMContentLoaded', function () {
+    new Batman.Doughnut(document.getElementById('demo'), {
+        values: [ { percentage: 30, color: '#a52a22'} ], 
+        sectorColor: '#03a9f4',
+        title:'Batman'
+    });
+});
+
+```
+
+## Development Environment setup 
 Install the following applications 
 * [Git-SCM](https://code.siemens.com/ui-developers/git/blob/master/readme.md#git-scm-installation)
 * [Node.js](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-nodejs-and-configuring-proxy)
@@ -14,11 +57,15 @@ Install the following applications
 ## Install node modules
 
 ```
-npm install typescript typedoc commitizen cz-conventional-changelog -g
+npm install typescript typedoc -g
 npm link typescript
 npm install
 ```
-> Note: optional global packages `semantic-release-gitlab conventional-changelog-cli`
+> Install these global packages to contribute
+> 
+> `npm install commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g`
+> 
+> Have a look on [contribution guidelines](https://code.siemens.com/aravind.pampana/batman/blob/master/CONTRIBUTING.md)  
 
 ### Start `lite-server` 
 
@@ -36,7 +83,7 @@ http://localhost:8000/demo/index.html
 ```
 npm docs
 ```
-> Note: Generating documentation is options; to access documentation page generate it before staring the `lite-server` using `npm start`   
+> Note: Generating documentation is optional; to access documentation page generate it before staring the `lite-server` using `npm start`   
 
 ### Documentation page 
 
@@ -47,4 +94,5 @@ http://localhost:8000/documentation/index.html
 ## Technology Stack
 * SASS
 * TypeScript
+* [Maquettejs](maquettejs.org) for Virtual DOM
 

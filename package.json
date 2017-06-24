@@ -10,7 +10,7 @@
     "start": "webpack && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
     "lite": "lite-server",
     "docs": "typedoc --out documentation/ src/ --name batman --readme readme.md --hideGenerator",
-    "commit" : "git cz"
+    "commit": "git cz"
   },
   "keywords": [
     "Batman"
@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^3.4.0",
+    "copy-webpack-plugin": "^4.0.1",
     "lite-server": "^2.3.0",
     "ts-loader": "^2.1.0",
     "webpack": "^2.6.1"
