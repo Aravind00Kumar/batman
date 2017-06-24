@@ -64,7 +64,6 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
 
         if (!this.validateValues()) return;
         this.projector.append(this.element, this.renderMaquette.bind(this));
-        this.logger.log('sa')
     }
 
     /**
@@ -99,7 +98,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * Generates H template for multiple arcs
      */
     private multiArc() {
-        return h('div', { class: 'parent' }, [
+        return h('div.doughnut-component.parent', [
             h('div', {
                 class: 'child',
                 'style': `border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  
@@ -164,7 +163,7 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
      * Generates H template for single arc
      */
     private singleArc() {
-        return h('div', { class: 'parent' }, [
+        return h('div.doughnut-component.parent', [
             h('div', {
                 class: 'child',
                 'style': `border-radius: 100%;  overflow: hidden; transition:transform linear 100ms;  

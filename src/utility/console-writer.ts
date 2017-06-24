@@ -7,7 +7,7 @@ import {IWriter} from './writer';
  */
 export class ConsoleWriter implements IWriter {
     /**
-     * Writes the message into colsole
+     * Writes the message into console
      * @param message Messages that need to be written in console
      */
     public write(message: IMessage): void {
