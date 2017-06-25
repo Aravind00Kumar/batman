@@ -25,6 +25,7 @@ export interface IListOptions {
     data?: Array<any>;
     pageSize?: number;
     autoPage?: boolean;
+    template?: string;
 }
 
 export class List extends BaseComponent implements UIComponent, IListComponent {
@@ -35,7 +36,8 @@ export class List extends BaseComponent implements UIComponent, IListComponent {
         height: 40,
         pageSize: 0,
         data: [],
-        autoPage: true
+        autoPage: true,
+        template: ''
     }
 
     private start: number;
@@ -52,8 +54,10 @@ export class List extends BaseComponent implements UIComponent, IListComponent {
     constructor(private element: HTMLElement, options?: IListOptions) {
         super('List');
         this.options = <IListOptions>{ ...List.defaultOptions, ...options };
-        if(this.options.pageSize !== 0) this.options.autoPage = false;
+        if (this.options.pageSize !== 0) this.options.autoPage = false;
+
         this.init();
+
         this.projector.append(this.element, this.render.bind(this));
     }
 
@@ -71,6 +75,13 @@ export class List extends BaseComponent implements UIComponent, IListComponent {
         this.activeData = this.options.data.slice(this.start, this.end);
     }
 
+    private itemTemplate(item) {
+        var template = document.createElement('template');
+        template.innerHTML = this.options.template;
+        var hTemplate = this.toH((template.content && template.content.firstChild) || template.children[0], item);
+        return hTemplate;
+    }
+
     /**
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template  
      */
@@ -85,10 +96,10 @@ export class List extends BaseComponent implements UIComponent, IListComponent {
                             style: `top:${this.containerScrollTop}px;`
                         }, [
                                 h('ul.no-pad-mar', [this.activeData.map((item, index) => {
-                                    return h('li', {
+                                    return h('li.flex', {
                                         style: `height:${this.options.height}px`,
                                         key: this.start + index
-                                    }, [item.text]);
+                                    }, this.itemTemplate(item));
                                 })])
                             ]),
                         h('div.ghost', { style: `height:${this.options.data.length * this.options.height}px` }),

@@ -177,9 +177,6 @@ div#global-profiler {
     .list .container .ghost {
       width: 100%; }
   .list ul li {
-    background-color: aquamarine;
     overflow: hidden; }
-  .list ul li:hover {
-    background-color: coral; }
 
 /*# sourceMappingURL=batman.css.map */
