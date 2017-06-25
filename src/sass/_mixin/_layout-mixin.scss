@@ -8,7 +8,6 @@
 
 @mixin padding-margin($pad: 0, $mar: 0) {
     @include padding($pad);
-
     @include margin($mar);
 }
 

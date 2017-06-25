@@ -1,5 +1,5 @@
 import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
-import { IBaseComponent, BaseComponent } from '../base-component'
+import { IBaseComponent, BaseComponent, UIComponent } from '../base-component'
 
 /**
  * List component interface
@@ -23,17 +23,19 @@ export interface IListValue {
 export interface IListOptions {
     height?: number;
     data?: Array<any>;
-    pageSize?: number
+    pageSize?: number;
+    autoPage?: boolean;
 }
 
-export class List extends BaseComponent implements IListComponent {
+export class List extends BaseComponent implements UIComponent, IListComponent {
     /**
      * Component default option. These options can be overridden from constructor
      */
     public static defaultOptions: IListOptions = {
         height: 40,
         pageSize: 0,
-        data: []
+        data: [],
+        autoPage: true
     }
 
     private start: number;
@@ -41,6 +43,7 @@ export class List extends BaseComponent implements IListComponent {
     private activeData: Array<any>;
     private counter: number;
     private containerHeight: number;
+    private containerScrollTop: number;
     /**
      * Constructor to initiate the doughnut component 
      * @param element Context of the component 
@@ -49,55 +52,65 @@ export class List extends BaseComponent implements IListComponent {
     constructor(private element: HTMLElement, options?: IListOptions) {
         super('List');
         this.options = <IListOptions>{ ...List.defaultOptions, ...options };
-        var elementOffset = element.clientHeight;
-        var borderHeight = parseInt(window.getComputedStyle(element).getPropertyValue('border-width'), 10) * 2;
-        this.logger.log(elementOffset.toString());
-        if (this.options.pageSize === 0) {
+        if(this.options.pageSize !== 0) this.options.autoPage = false;
+        this.init();
+        this.projector.append(this.element, this.render.bind(this));
+    }
+
+    private init() {
+        var elementOffset = this.element.clientHeight;
+        if (this.options.pageSize === 0 || this.options.autoPage) {
             this.options.pageSize = Math.ceil(elementOffset / this.options.height);
-            this.containerHeight = elementOffset - borderHeight;
+            this.containerHeight = elementOffset;
         } else {
-            this.containerHeight = (this.options.height * this.options.pageSize) - borderHeight;
+            this.containerHeight = (this.options.height * this.options.pageSize);
         }
+        this.containerScrollTop = 0;
         this.start = 0;
         this.end = this.options.pageSize;
         this.activeData = this.options.data.slice(this.start, this.end);
-        this.projector.append(this.element, this.renderMaquette.bind(this));
     }
 
     /**
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template  
      */
-    private renderMaquette(): VNode {
-        return h('div.list.parent.no-mar-collapse', {
+    public render(): VNode {
+        return h('div.list.parent', {
             style: `height: ${this.containerHeight}px;`
         }, [
-                h('div.child.data', [
-                    h('ul.no-mar', [this.activeData.map((item, index) => {
-                        return h('li', { key: this.start + index, style: `height:${this.options.height}px` }, [item.text]);
-                    })])
-                ]),
-                h('div.child.container', { style: `height: ${this.containerHeight}px;`, onscroll: this.listScroll.bind(this) },
-                    [h('div.ghost', { style: `height:${this.options.data.length * this.options.height}px` })
+                h('div.child.container',
+                    { style: `height: ${this.containerHeight}px;`, onscroll: this.scrollEvent.bind(this) },
+                    [
+                        h('div.child.data', {
+                            style: `top:${this.containerScrollTop}px;`
+                        }, [
+                                h('ul.no-pad-mar', [this.activeData.map((item, index) => {
+                                    return h('li', {
+                                        style: `height:${this.options.height}px`,
+                                        key: this.start + index
+                                    }, [item.text]);
+                                })])
+                            ]),
+                        h('div.ghost', { style: `height:${this.options.data.length * this.options.height}px` }),
                     ])
             ])
     }
 
-    private listScroll(event) {
+    private scrollEvent(event) {
         var start = Math.floor(event.currentTarget.scrollTop / this.options.height);
-        if (start < 0) start = 0;
-        var end = start + this.options.pageSize;
+        if (start <= 0) { start = 0; this.containerScrollTop = 0 };
+        var end = start + this.options.pageSize + 1;
         if (end >= this.options.data.length) end = this.options.data.length;
-        this.start = start;
-        this.end = end;
-        this.activeData = this.options.data.slice(this.start, this.end);
+        if (start !== this.start && end !== this.end) {
+            this.containerScrollTop = (start * this.options.height)//event.target.scrollTop;
+            this.start = start;
+            this.end = end;
+            this.activeData = this.options.data.slice(this.start, this.end);
+        }
     }
 
-    /**
-     * Updates the arc
-     * @param startAngle Start angle angle 
-     * @param endAngle End angle value
-     */
     public refresh() {
+        this.init();
         this.projector.scheduleRender();
     }
 
