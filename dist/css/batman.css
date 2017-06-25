@@ -65,6 +65,10 @@
 .flex.center {
   align-items: center; }
 
+.flex .vcenter {
+  justify-content: center;
+  align-self: center; }
+
 .flex.nowrap {
   flex-wrap: nowrap; }
 
