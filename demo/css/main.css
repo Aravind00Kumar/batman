@@ -16,33 +16,31 @@ input, label {
   width: 120px;
   margin: 2px; }
 
-.list {
-  width: 500px; }
-  .list div, .list img {
-    justify-content: center;
-    align-self: center; }
-  .list img {
-    padding: 0 10px; }
-  .list .head {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: .01em;
-    margin: 0;
-    line-height: 1.2em;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #333; }
-  .list span {
-    padding: 1px; }
-  .list .desc {
-    color: #555;
-    font-size: medium; }
-  .list ul li {
-    background: #fff;
-    transition: background 200ms linear;
-    cursor: pointer; }
-  .list ul li:hover {
-    background: #ddd; }
+.list div, .list img {
+  justify-content: center;
+  align-self: center; }
+.list img {
+  padding: 0 10px; }
+.list .head {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  margin: 0;
+  line-height: 1.2em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #333; }
+.list span {
+  padding: 1px; }
+.list .desc {
+  color: #555;
+  font-size: medium; }
+.list ul li {
+  background: #fff;
+  transition: background 200ms linear;
+  cursor: pointer; }
+.list ul li:hover {
+  background: #ddd; }
 
 /*# sourceMappingURL=main.css.map */
