@@ -93,6 +93,11 @@
 .child {
   position: absolute; }
 
+/* lists */
+ul.empty {
+  padding: 0;
+  margin: 0; }
+
 .h1 {
   font-size: 2em;
   margin: 1em 0; }
@@ -129,13 +134,15 @@ div#global-profiler {
   right: 0;
   background: #000;
   opacity: .7; }
-  div#global-profiler .content .log {
-    color: #4CAF50; }
-  div#global-profiler .content .error {
-    color: #F44336; }
-  div#global-profiler .content div > span:first-child {
-    width: 100px;
-    display: inline-block; }
+  div#global-profiler .content {
+    overflow: auto; }
+    div#global-profiler .content .log {
+      color: #4CAF50; }
+    div#global-profiler .content .error {
+      color: #F44336; }
+    div#global-profiler .content div > span:first-child {
+      width: 100px;
+      display: inline-block; }
 
 .doughnut-component {
   background-color: transparent;
@@ -159,18 +166,19 @@ div#global-profiler {
       fill: none; }
 
 .list {
-  border: 1px solid orange;
   overflow: hidden;
   width: 100%; }
   .list .data {
-    width: 100%; }
+    width: 100%;
+    height: 100%; }
   .list .container {
     overflow-y: scroll;
     width: 100%; }
     .list .container .ghost {
       width: 100%; }
   .list ul li {
-    background-color: aquamarine; }
+    background-color: aquamarine;
+    overflow: hidden; }
   .list ul li:hover {
     background-color: coral; }
 
