@@ -1,28 +1,32 @@
 import Global from '../global'
-import {ILogger} from '../utility/logger'
-import { h, createProjector, Projector, ProjectorOptions } from '../common/maquette';
+import { ILogger } from '../utility/logger'
+import { h, VNode, createProjector, Projector, ProjectorOptions } from '../common/maquette';
 
-export interface IBaseComponent{
+export interface IBaseComponent {
     elements: Array<string>;
-    options: any; 
+    options: any;
     projector: Projector
 }
 
-export class BaseComponent implements IBaseComponent{
-    public static Name : string;
-    public static Version : string;
+export interface UIComponent {
+    render(): VNode
+}
 
-    public logger : ILogger;
+export class BaseComponent implements IBaseComponent {
+    public static Name: string;
+    public static Version: string;
+
+    public logger: ILogger;
     public elements: Array<string>;
     public context: HTMLElement;
     public options: any;
     public projector: Projector
-    public animationSpeed : string;
-    constructor(name, projectorOptions?: ProjectorOptions){
+    public animationSpeed: string;
+    constructor(name, projectorOptions?: ProjectorOptions) {
         BaseComponent.Name = name;
         BaseComponent.Version = Global.Version
         this.logger = Global.Logger;
         this.projector = createProjector();
         this.animationSpeed = Global.AnimationDuration + 'ms';
-    } 
+    }
 } 

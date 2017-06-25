@@ -46,7 +46,7 @@ export class ProfilerWriter implements IWriter {
     private renderMaquette() {
         return h("div#global-profiler.flex.column", {}, [
             h('div.head.pad-mar-2x', [h("button", { onclick: this.clear.bind(this) }, ["Clear"])]),
-            h("div.content.pad-mar-2x", [
+            h("div.content.pad-mar-2x.full", [
                 this.log.map((item: IMessage, index) => {
                     return h("div", { key: index, class: item.type }, [h("span", [item.time()]), h("span", [item.text])])
                 })
