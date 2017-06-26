@@ -938,15 +938,6 @@ var BaseComponent = (function () {
                 children.push(this.toH(child, item));
             }
         }
-        if (element.id) {
-            selector = selector + "#" + element.id;
-        }
-        if (classes[0]) {
-            selector = selector + "." + classes.join('.');
-        }
-        if (!element.id) {
-            properties['key'] = ++this.lastKey;
-        }
         for (var index = 0; index < element.attributes.length; index++) {
             var elm = element.attributes[index];
             var elementName = elm.name.trim();
@@ -960,7 +951,10 @@ var BaseComponent = (function () {
                 }
                 else if ((/[\[].*?[\]]/ig).test(elementName)) {
                     if (item.hasOwnProperty(elm.value))
-                        properties[elementName.slice(1, -1)] = item[elm.value];
+                        if (elementName === '[class]')
+                            classes.push(item[elm.value]);
+                        else
+                            properties[elementName.slice(1, -1)] = item[elm.value];
                     else
                         this.logger.error("'" + elm.value + "' is not a valid value or not available in the component data");
                 }
@@ -975,6 +969,15 @@ var BaseComponent = (function () {
                 else {
                     properties[elementName] = elm.value;
                 }
+        }
+        if (element.id) {
+            selector = selector + "#" + element.id;
+        }
+        if (!element.id) {
+            properties['key'] = ++this.lastKey;
+        }
+        if (classes[0]) {
+            selector = selector + "." + classes.join('.');
         }
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["a" /* h */])(selector, properties, [children.filter(function (c) { return !!c; })]);
     };
