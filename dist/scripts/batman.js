@@ -1336,10 +1336,15 @@ var List = (function (_super) {
         this.activeData = this.options.data.slice(this.start, this.end);
     };
     List.prototype.itemTemplate = function (item) {
-        var template = document.createElement('template');
-        template.innerHTML = this.options.template;
-        var hTemplate = this.toH((template.content && template.content.firstElementChild) || template.children[0], item);
-        return hTemplate;
+        if (this.options.template !== '') {
+            var template = document.createElement('template');
+            template.innerHTML = this.options.template;
+            var hTemplate = this.toH((template.content && template.content.firstElementChild) || template.children[0], item);
+            return hTemplate;
+        }
+        else {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('span', [item.text]);
+        }
     };
     /**
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template

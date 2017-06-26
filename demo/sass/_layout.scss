@@ -1,7 +1,15 @@
 body {
     background: url(../img/dark-night.png);
 }
+i{
+    font-size: 50px;
+    color: #ffeb3b;
+    //border: 1px solid #ffeb3b;
+    height: 60px;
+    width: 60px;
+    text-align: center;
 
+}
 header.main {
     height: 28.2%;
     color: #fff;
@@ -19,7 +27,7 @@ header.second {
         top: 0;
         margin-left: 10px; 
     }
-    height: 48px;
+    height: 70px;
     color: #fff;
     a {
         color: inherit;
@@ -48,7 +56,7 @@ article.second {
             li, li a{
                 height: 35px;
                 display: block;
-                color: #aaa;
+                color: #ccc;
             }
             li{
                 line-height: 35px;
@@ -64,7 +72,7 @@ article.second {
             a.selected{
                 font-size: 1.1em;
                 border-right: 3px solid #0e2430;
-                color: #eee;
+                color: #fff;
             }
         }
     }
@@ -97,8 +105,7 @@ article.main {
         background: #0e2430;
         margin: 5px;
         border: 2px solid transparent;
-        color: #DDD;
-
+        color: #eee;
         p {
             text-align: center;
             color: darkgray;
