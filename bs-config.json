@@ -4,5 +4,5 @@
             "./demo/**/*.{html,htm,css,js}",
             "./docs/**/*.{png}",
             "./documentation/**/*.{html,htm,css,js}"],
-  "server": { "baseDir": "./" }
+  "server": { "baseDir": "./", "index":"demo/index.html" }
 }
