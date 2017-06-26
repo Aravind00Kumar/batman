@@ -28,12 +28,24 @@ input, label {
 // List Examples
 
 .list {
-//    width: 500px;
-    div, img{
-        justify-content: center;
+    //    width: 500px;
+    div {
+        height: initial;
+    }
+
+    div.true {
+        background: #f2f2f2;
+    }
+
+    div, img {
+        //        justify-content: center;
         align-self: center;
     }
-    img{padding:0 10px;}
+
+    img {
+        padding: 0 10px;
+    }
+
     .head {
         font-size: 20px;
         font-weight: 500;
@@ -45,19 +57,23 @@ input, label {
         text-overflow: ellipsis;
         color: #333;
     }
-    span{
+
+    span {
         padding: 1px;
     }
+
     .desc {
         color: #555;
         font-size: medium;
     }
-    ul li{
+
+    ul li {
         background: #fff;
         transition: background 200ms linear;
         cursor: pointer;
     }
-    ul li:hover{
+
+    ul li:hover {
         background: #ddd;
     }
 }
