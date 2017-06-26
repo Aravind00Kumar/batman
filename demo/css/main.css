@@ -16,8 +16,11 @@ input, label {
   width: 120px;
   margin: 2px; }
 
+.list div {
+  height: initial; }
+.list div.true {
+  background: #f2f2f2; }
 .list div, .list img {
-  justify-content: center;
   align-self: center; }
 .list img {
   padding: 0 10px; }

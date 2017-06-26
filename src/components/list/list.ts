@@ -78,7 +78,7 @@ export class List extends BaseComponent implements UIComponent, IListComponent {
     private itemTemplate(item) {
         var template = document.createElement('template');
         template.innerHTML = this.options.template;
-        var hTemplate = this.toH((template.content && template.content.firstChild) || template.children[0], item);
+        var hTemplate = this.toH((template.content && <HTMLElement>template.content.firstElementChild) || <HTMLElement>template.children[0], item);
         return hTemplate;
     }
 
