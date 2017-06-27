@@ -922,9 +922,9 @@ var BaseComponent = (function () {
             if (element.nodeType !== 3 || element.nodeValue.indexOf("\"") > 0 || element.nodeValue.trim().length === 0) {
                 return null;
             }
-            return element.nodeValue.trim();
+            return null; //element.nodeValue.trim();
         }
-        if (!element.tagName || element.style.display === "none") {
+        if (!element.tagName) {
             return null;
         }
         var properties = {};
@@ -938,36 +938,46 @@ var BaseComponent = (function () {
                 children.push(this.toH(child, item));
             }
         }
+        for (var index = 0; index < element.attributes.length; index++) {
+            var elm = element.attributes[index];
+            var elementName = elm.name.trim();
+            if (elementName !== 'class' && elementName !== 'id')
+                if (elm.name === '[value]') {
+                    if (element.tagName.toUpperCase() === 'INPUT') {
+                        properties["value"] = item[elm.value];
+                    }
+                    else
+                        properties["innerHTML"] = item[elm.value];
+                }
+                else if ((/[\[].*?[\]]/ig).test(elementName)) {
+                    if (item.hasOwnProperty(elm.value))
+                        if (elementName === '[class]')
+                            classes.push(item[elm.value]);
+                        else
+                            properties[elementName.slice(1, -1)] = item[elm.value];
+                    else
+                        this.logger.error("'" + elm.value + "' is not a valid value or not available in the component data");
+                }
+                else if ((/[\(].*?[\)]/ig).test(elementName)) {
+                    if (typeof this.options[elm.value] === 'function') {
+                        properties[elementName.slice(1, -1)] = this.options[elm.value].bind(item);
+                    }
+                    else {
+                        this.logger.error("'" + elm.value + "' is not a valid function or not implemented in the component options");
+                    }
+                }
+                else {
+                    properties[elementName] = elm.value;
+                }
+        }
         if (element.id) {
             selector = selector + "#" + element.id;
-        }
-        if (classes[0]) {
-            selector = selector + "." + classes.join('.');
-            // classes.shift();
-            // if (classes.length > 0) {
-            //     properties['classes'] = classes.map((c)=> { return "\"" + c + "\":true"; }).join();
-            // }
         }
         if (!element.id) {
             properties['key'] = ++this.lastKey;
         }
-        if (element.href) {
-            properties["href"] = element.href;
-        }
-        if (element.src) {
-            properties["src"] = element.src;
-        }
-        if (element.value) {
-            properties["value"] = element.value;
-        }
-        if (element.height) {
-            properties["height"] = element.height;
-        }
-        if (element.getAttribute('(value)')) {
-            properties["innerHTML"] = item[element.getAttribute('(value)')];
-        }
-        if (element.getAttribute('(src)')) {
-            properties["src"] = item[element.getAttribute('(src)')];
+        if (classes[0]) {
+            selector = selector + "." + classes.join('.');
         }
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["a" /* h */])(selector, properties, [children.filter(function (c) { return !!c; })]);
     };
@@ -1326,10 +1336,15 @@ var List = (function (_super) {
         this.activeData = this.options.data.slice(this.start, this.end);
     };
     List.prototype.itemTemplate = function (item) {
-        var template = document.createElement('template');
-        template.innerHTML = this.options.template;
-        var hTemplate = this.toH((template.content && template.content.firstChild) || template.children[0], item);
-        return hTemplate;
+        if (this.options.template !== '') {
+            var template = document.createElement('template');
+            template.innerHTML = this.options.template;
+            var hTemplate = this.toH((template.content && template.content.firstElementChild) || template.children[0], item);
+            return hTemplate;
+        }
+        else {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('span', [item.text]);
+        }
     };
     /**
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template

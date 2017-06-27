@@ -1,4 +1,4 @@
-![alt](./logo_64.png) 
+![alt](https://github.com/Aravind00Kumar/batman/blob/master/logo_64.png) 
 # Batman
 Batman is a native JavaScript UI components library developed using TypeScript, SASS and virtual DOM concept. Easy to use, include following files in the html file.
 
@@ -54,18 +54,18 @@ Install the following applications
 * [Python](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python)
 * [VS Code](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-visual-studio-code)
 
-## Install node modules
+## Setup
 
 ```
-npm install typescript typedoc -g
-npm link typescript
-npm install
+npm run setup 
 ```
-> Install these global packages to contribute
+> Setup installs the following global modules 
+>
+> `typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli`
 > 
-> `npm install commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g`
-> 
-> Have a look on [contribution guidelines](https://code.siemens.com/aravind.pampana/batman/blob/master/CONTRIBUTING.md)  
+> Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command 'npm start'
+>   
+> Have a look on [contribution guidelines](https://code.siemens.com/aravind.pampana/batman/blob/master/CONTRIBUTING.md)
 
 ### Start `lite-server` 
 
@@ -83,7 +83,9 @@ http://localhost:8000/demo/index.html
 ```
 npm docs
 ```
-> Note: Generating documentation is optional; to access documentation page generate it before staring the `lite-server` using `npm start`   
+> Note: Generating documentation is optional; to access documentation page generate it before staring the `lite-server` using `npm start`. 
+>
+> If you use `npm run setup` it auto generates documentation as well.
 
 ### Documentation page 
 
@@ -94,5 +96,5 @@ http://localhost:8000/documentation/index.html
 ## Technology Stack
 * SASS
 * TypeScript
-* [Maquettejs](http://maquettejs.org) for Virtual DOM
+* Virtual DOM
 

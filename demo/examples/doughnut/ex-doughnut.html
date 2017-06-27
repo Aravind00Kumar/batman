@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://file.myfontastic.com/XHcDAQxEChjYzE2z9DGiWh/icons.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <link rel="stylesheet" href="../../css/batman.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+</head>
+
+<body class="flex column">
+
+    <header class="second flex vcenter center">
+        <h3 class="back">
+            <a href="../../index.html"> <i class="icon-ios-arrow-back"></i> </a>
+
+        </h3>
+
+        <img src="../../../logo_64.png" height="48" alt="">
+        <h2>
+            <a href="../"> Batman </a>
+        </h2>
+
+    </header>
+
+    <article class="second flex full row">
+        <nav class="flex full">
+            <ul class="no-pad-mar">
+                <li class="flex">
+                    <a href="#" class=""> Basic Example </a>
+                </li>
+                <li class="flex">
+                    <a class="selected" href="#" class=""> Basic Example </a>
+                </li>
+                <li class="flex">
+                    <a href="#" class=""> Basic Example </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="flex full row">
+
+            <div class="panel">
+                <h2> Single mono color </h2>
+                <div class="flex column nowrap">
+                    <div class='pad-mar-2x example1'>
+                    </div>
+                    <div class="flex column">
+                        <div class="flex row nowrap">
+                            <label> Start Angle</label>
+                            <label> End Angle</label>
+                            <label> Stroke </label>
+                        </div>
+                        <div class="flex row nowrap">
+                            <input id="startAngle" placeholder="Start angle" value="0" />
+                            <input id="endAngle" placeholder="End angle" value="200" />
+                            <input id="strokeValue" readonly value="10">
+                            <button id="apply"> Apply</button><br>
+                        </div>
+                        <div class="flex row nowrap">
+                            <input id="start" type="range" min="0" max="360" step="1">
+                            <input id="end" type="range" min="0" max="360" step="1">
+                            <input id="stroke" type="range" min="2" max="10" step="1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2> Multi color </h2>
+                <div class="flex row">
+                    <div class='pad-mar-2x m1'>
+                    </div>
+                    <ul>
+                        <li><b style="background:#e91e63"></b> Task 1 - 20%</li>
+                        <li><b style="background:#009688"></b> Task 2 - 15%</li>
+                        <li><b style="background:#ff5722"></b> Task 3 - 10%</li>
+                        <li><b style="background:#00bcd4"></b> Task 4 - 25%</li>
+                        <li><b style="background:#9c27b0"></b> Task 5 - 30%</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2> Justice League episodes</h2>
+                <div class="flex row">
+                    <div class="pad-mar-2x m2">
+                    </div>
+                    <ul>
+                        <li><b style="background:#e91e63"></b> Secret Origins</li>
+                        <li><b style="background:#009688"></b> In Blackest Night</li>
+                        <li><b style="background:#585858"></b> The Enemy Below</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2> Justice League Superheros Strength </h2>
+                <div class="flex row">
+                    <div id="d1" class='pad-mar-2x'></div>
+                    <div id="d2" class='pad-mar-2x'></div>
+                    <div id="d3" class='pad-mar-2x'></div>
+                    <div id="d4" class='pad-mar-2x'></div>
+                    <div id="d5" class='pad-mar-2x'></div>
+                    <div id="d6" class='pad-mar-2x'></div>
+                    <div id="d7" class='pad-mar-2x'></div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+    </article>
+
+
+    <script src="../../scripts/batman-polifills.js"></script>
+    <script src="../../scripts/batman.js"></script>
+    <script src="./ex-doughnut.js"></script>
+</body>
+
+</html>
