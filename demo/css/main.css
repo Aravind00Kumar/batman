@@ -1,9 +1,20 @@
 body {
-  background: url(../img/dark-night.png); }
+  background: url(../img/dark-night.png) no-repeat center center fixed #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
 
 i {
   font-size: 50px;
   color: #ffeb3b;
+  height: 60px;
+  width: 60px;
+  text-align: center; }
+
+i.disable {
+  font-size: 50px;
+  color: gray;
   height: 60px;
   width: 60px;
   text-align: center; }
@@ -78,13 +89,21 @@ article.main {
     width: 180px;
     background: #0e2430;
     margin: 5px;
-    border: 2px solid transparent;
+    border: 2px solid #345d61;
     color: #eee; }
     article.main .tile.large p {
       text-align: center;
-      color: darkgray; }
+      color: darkgray;
+      width: 100%; }
   article.main .tile:hover {
-    border-color: #294c5f; }
+    border-color: #82928a; }
+  article.main .tile.disable {
+    color: gray; }
+    article.main .tile.disable i {
+      color: gray; }
+  article.main .tile.disable:hover {
+    border-color: #345d61;
+    cursor: default; }
 
 html, body {
   margin: 0;
