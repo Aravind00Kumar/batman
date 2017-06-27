@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data: l6data,
         height: 88,
         imageClick: function () {
-            this.name = this.name + '??';
+            this.name = this.name + ' !!';
         },
         toggle: function () {
             if(typeof this.selected === 'string'){

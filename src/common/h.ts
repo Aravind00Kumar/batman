@@ -107,7 +107,7 @@ export let hParser = function (element: HTMLElement, context: object): VNode {
     classes = element.className.split(" ");
     for (let i = 0; i < element.childNodes.length; i++) {
       let child = <HTMLElement>element.childNodes[i];
-      children.push(this.toH(child, context));
+      children.push(hParser(child, context));
     }
   }
   for (let index = 0; index < element.attributes.length; index++) {
@@ -141,7 +141,7 @@ export let hParser = function (element: HTMLElement, context: object): VNode {
     selector = selector + "#" + element.id;
   }
   if (!element.id) {
-    properties['key'] = ++this.lastKey;
+    properties['key'] = Math.random().toString();// ++ this.lastKey;
   }
   if (classes[0]) {
     selector = selector + "." + classes.join('.');

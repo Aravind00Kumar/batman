@@ -64,688 +64,11 @@ var Batman =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_factory__ = __webpack_require__(12);
-
-//import { h, VNode, createProjector, Projector, ProjectorOptions } from '../common/maquette';
-
-var BaseComponent = (function () {
-    function BaseComponent(name, projectorOptions) {
-        this.lastKey = 0;
-        BaseComponent.Name = name;
-        BaseComponent.Version = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Version;
-        this.logger = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Logger;
-        this.projector = __WEBPACK_IMPORTED_MODULE_1__common_factory__["a" /* ProjectorFactory */].createProjector();
-        this.animationSpeed = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].AnimationDuration + 'ms';
-    }
-    return BaseComponent;
-}());
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Doughnut; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_component__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_h__ = __webpack_require__(10);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-//import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
-
-
-var Doughnut = (function (_super) {
-    __extends(Doughnut, _super);
-    /**
-     * Constructor to initiate the doughnut component
-     * @param element Context of the component
-     * @param options Component options
-     */
-    function Doughnut(element, options) {
-        var _this = _super.call(this, 'Doughnut', { namespace: 'NAMESPACE_SVG' }) || this;
-        _this.element = element;
-        _this.scale = 70;
-        _this.strokeScale = 0;
-        _this.options = __assign({}, Doughnut.defaultOptions, options);
-        // Circle dimensions
-        _this.options.center = 50; //this.options.size / 2;
-        _this.options.radius = _this.options.stroke ? _this.options.center - _this.options.stroke / 2 : _this.options.center;
-        if (!_this.validateValues())
-            return _this;
-        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
-        return _this;
-    }
-    /**
-     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
-     */
-    Doughnut.prototype.renderMaquette = function () {
-        return this.arcTemplate();
-    };
-    /**
-     * Validation method for values; values will be invalid when  values property in the options together should not exceed 100
-     */
-    Doughnut.prototype.validateValues = function () {
-        if (this.options.values.length > 0) {
-            var sum = 0;
-            for (var index = 0; index < this.options.values.length; index++) {
-                var element = this.options.values[index];
-                sum += element.percentage;
-            }
-            if (sum > 100) {
-                this.logger.error('Doughnut sum of percentages values should be less than or equal to 100%');
-                return false;
-            }
-            else if (sum < 100) {
-                this.options.values.push({ percentage: 100 - sum, color: this.options.circleColor });
-            }
-        }
-        return true;
-    };
-    /**
-     * Generates H template for arc
-     */
-    Doughnut.prototype.arcTemplate = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.doughnut-component.parent', { style: "min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.child.flex.center.grow', {
-                'style': "transition: " + this.animationSpeed + "; transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
-            }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.head.flex.h3', [this.options.title])]),
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.child', {
-                key: this.options.title,
-                title: this.options.title,
-                onmouseenter: this.mouseEnter.bind(this),
-                onmouseleave: this.mouseExit.bind(this)
-            }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('circle', {
-                        'stroke-width': this.options.stroke,
-                        stroke: this.options.circleColor,
-                        cx: this.options.center,
-                        cy: this.options.center,
-                        r: this.options.radius
-                    }), this.valuesTemplate()
-                ])
-            ])
-        ]);
-    };
-    /**
-     * Generates H template from values or angles
-     */
-    Doughnut.prototype.valuesTemplate = function () {
-        var _this = this;
-        if (this.options.values.length > 0)
-            return this.options.values.map(function (item, index) {
-                _this.options.startAngle = _this.options.endAngle;
-                var p = (item.percentage * 360) / 100;
-                _this.options.endAngle = p + _this.options.startAngle;
-                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('path', {
-                    kay: index,
-                    'stroke-width': _this.options.stroke,
-                    'stroke': item.color,
-                    'd': _this.getAcr(_this.options.startAngle, _this.options.endAngle)
-                });
-            });
-        else
-            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('path', {
-                'stroke-width': this.options.stroke,
-                stroke: this.options.sectorColor,
-                d: this.getAcr(this.options.startAngle, this.options.endAngle)
-            });
-    };
-    Doughnut.prototype.mouseEnter = function () {
-        this.scale = 90;
-    };
-    Doughnut.prototype.mouseExit = function (ev) {
-        this.scale = 70;
-    };
-    /**
-     * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350)
-     */
-    Doughnut.prototype.checkAngle = function () {
-        if (this.options.endAngle > 360) {
-            this.options.endAngle = this.options.endAngle % 360;
-        }
-        if (this.options.startAngle > this.options.endAngle) {
-            this.options.startAngle = 0;
-        }
-    };
-    /**
-     * Converts polar values to cartesian
-     * @param centerX X center value
-     * @param centerY Y center value
-     * @param radius radius of the circle
-     * @param angleInDegrees arc angle value
-     */
-    Doughnut.prototype.polarToCartesian = function (centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-        return {
-            x: (centerX + (radius * Math.cos(angleInRadians))),
-            y: (centerY + (radius * Math.sin(angleInRadians)))
-        };
-    };
-    /**
-     * Generated 'd' value for the arc
-     * @param startAngle Start angle value
-     * @param endAngle End angle value
-     */
-    Doughnut.prototype.getAcr = function (startAngle, endAngle) {
-        var start = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, endAngle);
-        var end = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, startAngle);
-        var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-        return "M" + start.x + " " + start.y + " A" + this.options.radius + " " + this.options.radius + " 0 " + largeArcFlag + " 0 " + end.x + " " + end.y;
-    };
-    /**
-     * Updates the arc
-     * @param startAngle Start angle angle
-     * @param endAngle End angle value
-     */
-    Doughnut.prototype.updateAngle = function (startAngle, endAngle) {
-        this.options.endAngle = endAngle;
-        this.options.startAngle = startAngle;
-        this.checkAngle();
-        this.projector.scheduleRender();
-    };
-    /**
-     * Updates the arc
-     * @param startAngle Start angle angle
-     * @param endAngle End angle value
-     */
-    Doughnut.prototype.updateOptions = function (options) {
-        this.options = __assign({}, this.options, options);
-        this.projector.scheduleRender();
-    };
-    return Doughnut;
-}(__WEBPACK_IMPORTED_MODULE_0__base_component__["a" /* BaseComponent */]));
-
-/**
- * Component default option. These options can be overridden from constructor
- */
-Doughnut.defaultOptions = {
-    stroke: 10,
-    startAngle: 0,
-    endAngle: 0,
-    sectorColor: '#789',
-    circleColor: '#DDD',
-    image: null,
-    values: [],
-    title: '',
-    size: 200
-};
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Dropdown; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_h__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-/**
- * --------------------------------------------------------------------------
- * Dropdown Component
- * Licensed under MIT
- * --------------------------------------------------------------------------
- */
-
-
-var Dropdown = (function (_super) {
-    __extends(Dropdown, _super);
-    function Dropdown(element, options, data) {
-        var _this = _super.call(this, 'Dropdown') || this;
-        _this.element = element;
-        _this.options = __assign({}, Dropdown.defaultOptions, options);
-        _this.logger.log('Dropdown loaded');
-        _this.display = false;
-        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
-        _this.x = 0;
-        _this.y = 0;
-        return _this;
-    }
-    Dropdown.prototype.renderMaquette = function () {
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.context', {
-            style: 'height:600px; width:600px; border:1px solid orange',
-            onmousemove: this.moveMouse.bind(this),
-            onclick: this.print.bind(this)
-        }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.dropdown', {
-                style: "height:20px; position:absolute; width:20px; background:orange; display: " + this.getDisplay() + "; left:" + this.x + "; top:" + this.y
-            })]);
-    };
-    Dropdown.prototype.moveMouse = function (event) {
-        event.stopPropagation();
-        this.x = event.x + 'px';
-        this.y = event.y + 'px';
-    };
-    Dropdown.prototype.print = function (event) {
-        this.logger.log(this.x + ', ' + this.y);
-    };
-    Dropdown.prototype.getDisplay = function () {
-        return this.display ? 'block' : 'none';
-    };
-    Dropdown.prototype.show = function () {
-        this.display = true;
-        this.projector.scheduleRender();
-    };
-    Dropdown.prototype.hide = function () {
-        this.display = false;
-        this.projector.scheduleRender();
-    };
-    return Dropdown;
-}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
-
-Dropdown.defaultOptions = {
-    "class": '.dropdown'
-};
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return List; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_h__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-
-
-var List = (function (_super) {
-    __extends(List, _super);
-    /**
-     * Constructor to initiate the doughnut component
-     * @param element Context of the component
-     * @param options Component options
-     */
-    function List(element, options) {
-        var _this = _super.call(this, 'List') || this;
-        _this.element = element;
-        _this.options = __assign({}, List.defaultOptions, options);
-        if (_this.options.pageSize !== 0)
-            _this.options.autoPage = false;
-        _this.init();
-        _this.projector.append(_this.element, _this.render.bind(_this));
-        return _this;
-    }
-    List.prototype.init = function () {
-        var elementOffset = this.element.clientHeight;
-        if (this.options.pageSize === 0 || this.options.autoPage) {
-            this.options.pageSize = Math.ceil(elementOffset / this.options.height);
-            this.containerHeight = elementOffset;
-        }
-        else {
-            this.containerHeight = (this.options.height * this.options.pageSize);
-        }
-        this.containerScrollTop = 0;
-        this.start = 0;
-        this.end = this.options.pageSize;
-        this.activeData = this.options.data.slice(this.start, this.end);
-    };
-    List.prototype.itemTemplate = function (item) {
-        if (this.options.template !== '') {
-            var template = document.createElement('template');
-            template.innerHTML = this.options.template;
-            var hTemplate = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* hParser */])((template.content && template.content.firstElementChild) || template.children[0], item);
-            return hTemplate;
-        }
-        else {
-            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('span', [item.text]);
-        }
-    };
-    /**
-     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
-     */
-    List.prototype.render = function () {
-        var _this = this;
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.list.parent', {
-            style: "height: " + this.containerHeight + "px;"
-        }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.child.container', { style: "height: " + this.containerHeight + "px;", onscroll: this.scrollEvent.bind(this) }, [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.child.data', {
-                    style: "top:" + this.containerScrollTop + "px;"
-                }, [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('ul.no-pad-mar', [this.activeData.map(function (item, index) {
-                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('li.flex', {
-                                style: "height:" + _this.options.height + "px",
-                                key: _this.start + index
-                            }, _this.itemTemplate(item));
-                        })])
-                ]),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.ghost', { style: "height:" + this.options.data.length * this.options.height + "px" }),
-            ])
-        ]);
-    };
-    List.prototype.scrollEvent = function (event) {
-        var start = Math.floor(event.currentTarget.scrollTop / this.options.height);
-        if (start <= 0) {
-            start = 0;
-            this.containerScrollTop = 0;
-        }
-        ;
-        var end = start + this.options.pageSize + 1;
-        if (end >= this.options.data.length)
-            end = this.options.data.length;
-        if (start !== this.start && end !== this.end) {
-            this.containerScrollTop = (start * this.options.height); //event.target.scrollTop;
-            this.start = start;
-            this.end = end;
-            this.activeData = this.options.data.slice(this.start, this.end);
-        }
-    };
-    List.prototype.refresh = function () {
-        this.init();
-        this.projector.scheduleRender();
-    };
-    return List;
-}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
-
-/**
- * Component default option. These options can be overridden from constructor
- */
-List.defaultOptions = {
-    height: 40,
-    pageSize: 0,
-    data: [],
-    autoPage: true,
-    template: ''
-};
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__ = __webpack_require__(2);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__ = __webpack_require__(3);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_list_list__ = __webpack_require__(4);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "List", function() { return __WEBPACK_IMPORTED_MODULE_2__components_list_list__["a"]; });
-// Comment that is displayed in the API documentation for the Doughnut module:
-/**
- * Welcome to the API documentation of the **batman** library.
- * @preferred
- */
-// export all components
-
-
-
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(8);
-
-/**
- * Global services and configuration for library
- */
-var Global = (function () {
-    //    public static Logger: ILogger = Logger.getInstance(new ProfilerWriter());
-    /**
-     * Constructor instantiates all global services and instances
-     */
-    function Global() {
-    }
-    return Global;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (Global);
-/**
- * Name of the library
- */
-Global.Name = 'Batman';
-/**
- * Library version
- */
-Global.Version = '1.0.0.alpha.1';
-/**
- * Default animation duration in milliseconds
- */
-Global.AnimationDuration = 150;
-/**
- * global logger instance
- */
-Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConsoleWriter; });
-/**
- * This class writes all messages into console
- */
-var ConsoleWriter = (function () {
-    function ConsoleWriter() {
-    }
-    /**
-     * Writes the message into console
-     * @param message Messages that need to be written in console
-     */
-    ConsoleWriter.prototype.write = function (message) {
-        if (message.type === 'error')
-            console.error(message.format());
-        else
-            console.log(message.format());
-    };
-    /**
-     * This method clears all messages in the console
-     */
-    ConsoleWriter.prototype.clear = function () {
-        console.clear();
-    };
-    return ConsoleWriter;
-}());
-
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__message__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__console_writer__ = __webpack_require__(7);
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-
-
-var Logger = (function () {
-    /**
-     * Initiate the logger class with writer and options
-     * @param writer Instance of writer to write messages
-     * @param options A set of logger options
-     */
-    function Logger(writer, options) {
-        this.options = __assign({}, Logger.defaultOptions, options);
-        if (writer === undefined)
-            this._writer = new __WEBPACK_IMPORTED_MODULE_1__console_writer__["a" /* ConsoleWriter */]();
-        else
-            this._writer = writer;
-        this._stack = [];
-        Logger._instance = this;
-    }
-    /**
-     * This method give return singleton instance of the logger class
-     * @param writer Instance of writer to write messages
-     * @param options A set of logger options
-     */
-    Logger.getInstance = function (writer, options) {
-        if (this._instance === undefined) {
-            this._instance = new Logger(writer, options);
-        }
-        return this._instance;
-    };
-    /**
-     *
-     * @param value text message to be logged
-     * @param type Type of the message `log` or `error`
-     */
-    Logger.prototype.writeLog = function (value, type) {
-        if (this.options.enable) {
-            var message = new __WEBPACK_IMPORTED_MODULE_0__message__["a" /* Message */](value, type);
-            this._stack.push(message);
-            this._writer.write(message);
-        }
-    };
-    /**
-     * This method delete all log and sets the log stack to empty
-     */
-    Logger.prototype.clear = function () {
-        this._stack.length = 0;
-    };
-    /**
-     * This message logs the message as `log`
-     * @param value text message
-     */
-    Logger.prototype.log = function (value) {
-        this.writeLog(value);
-    };
-    /**
-     * This message logs the message as `error`
-     * @param value text message
-     */
-    Logger.prototype.error = function (value) {
-        this.writeLog(value, 'error');
-    };
-    /**
-     * This method enables the logger
-     */
-    Logger.prototype.enable = function () {
-        this.options.enable = true;
-    };
-    /**
-     * This method disables the logger
-     */
-    Logger.prototype.disable = function () {
-        this.options.enable = false;
-    };
-    return Logger;
-}());
-
-/**
- * Logger default options
- */
-Logger.defaultOptions = {
-    enable: true
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Message; });
-/**
- * Message class
- */
-var Message = (function () {
-    /**
-     *
-     * @param text Text string
-     * @param type Type of the message `log` or `error`
-     * If type not provided default type is `log`
-     */
-    function Message(text, type) {
-        this.text = text;
-        this.dateTime = new Date();
-        this.type = type || 'log';
-    }
-    /**
-     * This method will format message created date time to a string
-     */
-    Message.prototype.time = function () {
-        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds();
-    };
-    /**
-     * This method will format message content to a string
-     */
-    Message.prototype.format = function () {
-        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds() + ': ' + this.text;
-    };
-    return Message;
-}());
-
-
-
-/***/ }),
-/* 10 */
+/* 0 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -860,7 +183,7 @@ var hParser = function (element, context) {
         classes = element.className.split(" ");
         for (var i = 0; i < element.childNodes.length; i++) {
             var child = element.childNodes[i];
-            children.push(this.toH(child, context));
+            children.push(hParser(child, context));
         }
     }
     for (var index = 0; index < element.attributes.length; index++) {
@@ -899,7 +222,7 @@ var hParser = function (element, context) {
         selector = selector + "#" + element.id;
     }
     if (!element.id) {
-        properties['key'] = ++this.lastKey;
+        properties['key'] = Math.random().toString(); // ++ this.lastKey;
     }
     if (classes[0]) {
         selector = selector + "." + classes.join('.');
@@ -909,12 +232,104 @@ var hParser = function (element, context) {
 
 
 /***/ }),
-/* 11 */
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_factory__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_h__ = __webpack_require__(0);
+
+//import { h, VNode, createProjector, Projector, ProjectorOptions } from '../common/maquette';
+
+
+var BaseComponent = (function () {
+    function BaseComponent(name, projectorOptions) {
+        this.lastKey = 0;
+        BaseComponent.Name = name;
+        BaseComponent.Version = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Version;
+        this.logger = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Logger;
+        this.projector = __WEBPACK_IMPORTED_MODULE_1__common_factory__["a" /* ProjectorFactory */].createProjector();
+        this.animationSpeed = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].AnimationDuration + 'ms';
+    }
+    BaseComponent.prototype.hParser = function (element, context) {
+        if (element.nodeValue) {
+            if (element.nodeType !== 3 || element.nodeValue.indexOf("\"") > 0 || element.nodeValue.trim().length === 0) {
+                return null;
+            }
+            return null; //element.nodeValue.trim();
+        }
+        if (!element.tagName) {
+            return null;
+        }
+        var properties = {};
+        var children = [];
+        var classes = [];
+        var selector = element.tagName.toLowerCase();
+        if (selector !== "svg") {
+            classes = element.className.split(" ");
+            for (var i = 0; i < element.childNodes.length; i++) {
+                var child = element.childNodes[i];
+                children.push(this.hParser(child, context));
+            }
+        }
+        for (var index = 0; index < element.attributes.length; index++) {
+            var elm = element.attributes[index];
+            var elementName = elm.name.trim();
+            if (elementName !== 'class' && elementName !== 'id')
+                if (elm.name === '[value]') {
+                    if (element.tagName.toUpperCase() === 'INPUT') {
+                        properties["value"] = context[elm.value];
+                    }
+                    else
+                        properties["innerHTML"] = context[elm.value];
+                }
+                else if ((/[\[].*?[\]]/ig).test(elementName)) {
+                    if (context.hasOwnProperty(elm.value))
+                        if (elementName === '[class]')
+                            classes.push(context[elm.value]);
+                        else
+                            properties[elementName.slice(1, -1)] = context[elm.value];
+                    else
+                        this.logger.error("'" + elm.value + "' is not a valid value or not available in the component data");
+                }
+                else if ((/[\(].*?[\)]/ig).test(elementName)) {
+                    if (typeof this.options[elm.value] === 'function') {
+                        properties[elementName.slice(1, -1)] = this.options[elm.value].bind(context);
+                    }
+                    else {
+                        this.logger.error("'" + elm.value + "' is not a valid function or not implemented in the component options");
+                    }
+                }
+                else {
+                    properties[elementName] = elm.value;
+                }
+        }
+        if (element.id) {
+            selector = selector + "#" + element.id;
+        }
+        if (!element.id) {
+            properties['key'] = Math.random().toString(); // ++ this.lastKey;
+        }
+        if (classes[0]) {
+            selector = selector + "." + classes.join('.');
+        }
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__common_h__["b" /* h */])(selector, properties, [children.filter(function (c) { return !!c; })]);
+    };
+    ;
+    return BaseComponent;
+}());
+
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return dom; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__factory__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__factory__ = __webpack_require__(3);
 
 var NAMESPACE_W3 = 'http://www.w3.org/';
 var NAMESPACE_SVG = NAMESPACE_W3 + '2000/svg';
@@ -1479,14 +894,14 @@ dom.applyDefaultProjectionOptions = function (projectorOptions) {
 
 
 /***/ }),
-/* 12 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ProjectionFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectorFactory; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Projection__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Projector__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Projection__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Projector__ = __webpack_require__(8);
 
 
 var ProjectionFactory = (function () {
@@ -1510,12 +925,432 @@ var ProjectorFactory = (function () {
 
 
 /***/ }),
-/* 13 */
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Doughnut; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__base_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_h__ = __webpack_require__(0);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+//import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
+
+
+var Doughnut = (function (_super) {
+    __extends(Doughnut, _super);
+    /**
+     * Constructor to initiate the doughnut component
+     * @param element Context of the component
+     * @param options Component options
+     */
+    function Doughnut(element, options) {
+        var _this = _super.call(this, 'Doughnut', { namespace: 'NAMESPACE_SVG' }) || this;
+        _this.element = element;
+        _this.scale = 70;
+        _this.strokeScale = 0;
+        _this.options = __assign({}, Doughnut.defaultOptions, options);
+        // Circle dimensions
+        _this.options.center = 50; //this.options.size / 2;
+        _this.options.radius = _this.options.stroke ? _this.options.center - _this.options.stroke / 2 : _this.options.center;
+        if (!_this.validateValues())
+            return _this;
+        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
+        return _this;
+    }
+    /**
+     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
+     */
+    Doughnut.prototype.renderMaquette = function () {
+        return this.arcTemplate();
+    };
+    /**
+     * Validation method for values; values will be invalid when  values property in the options together should not exceed 100
+     */
+    Doughnut.prototype.validateValues = function () {
+        if (this.options.values.length > 0) {
+            var sum = 0;
+            for (var index = 0; index < this.options.values.length; index++) {
+                var element = this.options.values[index];
+                sum += element.percentage;
+            }
+            if (sum > 100) {
+                this.logger.error('Doughnut sum of percentages values should be less than or equal to 100%');
+                return false;
+            }
+            else if (sum < 100) {
+                this.options.values.push({ percentage: 100 - sum, color: this.options.circleColor });
+            }
+        }
+        return true;
+    };
+    /**
+     * Generates H template for arc
+     */
+    Doughnut.prototype.arcTemplate = function () {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.doughnut-component.parent', { style: "min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.child.flex.center.grow', {
+                'style': "transition: " + this.animationSpeed + "; transform:scale(" + (1 - (this.options.stroke) / this.scale) + ")"
+            }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.head.flex.h3', [this.options.title])]),
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('div.child', {
+                key: this.options.title,
+                title: this.options.title,
+                onmouseenter: this.mouseEnter.bind(this),
+                onmouseleave: this.mouseExit.bind(this)
+            }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('svg', { "class": 'doughnut-component', viewBox: '0 0 100 100' }, [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('circle', {
+                        'stroke-width': this.options.stroke,
+                        stroke: this.options.circleColor,
+                        cx: this.options.center,
+                        cy: this.options.center,
+                        r: this.options.radius
+                    }), this.valuesTemplate()
+                ])
+            ])
+        ]);
+    };
+    /**
+     * Generates H template from values or angles
+     */
+    Doughnut.prototype.valuesTemplate = function () {
+        var _this = this;
+        if (this.options.values.length > 0)
+            return this.options.values.map(function (item, index) {
+                _this.options.startAngle = _this.options.endAngle;
+                var p = (item.percentage * 360) / 100;
+                _this.options.endAngle = p + _this.options.startAngle;
+                return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('path', {
+                    kay: index,
+                    'stroke-width': _this.options.stroke,
+                    'stroke': item.color,
+                    'd': _this.getAcr(_this.options.startAngle, _this.options.endAngle)
+                });
+            });
+        else
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["b" /* h */])('path', {
+                'stroke-width': this.options.stroke,
+                stroke: this.options.sectorColor,
+                d: this.getAcr(this.options.startAngle, this.options.endAngle)
+            });
+    };
+    Doughnut.prototype.mouseEnter = function () {
+        this.scale = 90;
+    };
+    Doughnut.prototype.mouseExit = function (ev) {
+        this.scale = 70;
+    };
+    /**
+     * Verifies if angle is more than 360 degree, if angle is more than calculates angle value as (angle % 350)
+     */
+    Doughnut.prototype.checkAngle = function () {
+        if (this.options.endAngle > 360) {
+            this.options.endAngle = this.options.endAngle % 360;
+        }
+        if (this.options.startAngle > this.options.endAngle) {
+            this.options.startAngle = 0;
+        }
+    };
+    /**
+     * Converts polar values to cartesian
+     * @param centerX X center value
+     * @param centerY Y center value
+     * @param radius radius of the circle
+     * @param angleInDegrees arc angle value
+     */
+    Doughnut.prototype.polarToCartesian = function (centerX, centerY, radius, angleInDegrees) {
+        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+        return {
+            x: (centerX + (radius * Math.cos(angleInRadians))),
+            y: (centerY + (radius * Math.sin(angleInRadians)))
+        };
+    };
+    /**
+     * Generated 'd' value for the arc
+     * @param startAngle Start angle value
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.getAcr = function (startAngle, endAngle) {
+        var start = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, endAngle);
+        var end = this.polarToCartesian(this.options.center, this.options.center, this.options.radius, startAngle);
+        var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+        return "M" + start.x + " " + start.y + " A" + this.options.radius + " " + this.options.radius + " 0 " + largeArcFlag + " 0 " + end.x + " " + end.y;
+    };
+    /**
+     * Updates the arc
+     * @param startAngle Start angle angle
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.updateAngle = function (startAngle, endAngle) {
+        this.options.endAngle = endAngle;
+        this.options.startAngle = startAngle;
+        this.checkAngle();
+        this.projector.scheduleRender();
+    };
+    /**
+     * Updates the arc
+     * @param startAngle Start angle angle
+     * @param endAngle End angle value
+     */
+    Doughnut.prototype.updateOptions = function (options) {
+        this.options = __assign({}, this.options, options);
+        this.projector.scheduleRender();
+    };
+    return Doughnut;
+}(__WEBPACK_IMPORTED_MODULE_0__base_component__["a" /* BaseComponent */]));
+
+/**
+ * Component default option. These options can be overridden from constructor
+ */
+Doughnut.defaultOptions = {
+    stroke: 10,
+    startAngle: 0,
+    endAngle: 0,
+    sectorColor: '#789',
+    circleColor: '#DDD',
+    image: null,
+    values: [],
+    title: '',
+    size: 200
+};
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Dropdown; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_h__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+/**
+ * --------------------------------------------------------------------------
+ * Dropdown Component
+ * Licensed under MIT
+ * --------------------------------------------------------------------------
+ */
+
+
+var Dropdown = (function (_super) {
+    __extends(Dropdown, _super);
+    function Dropdown(element, options, data) {
+        var _this = _super.call(this, 'Dropdown') || this;
+        _this.element = element;
+        _this.options = __assign({}, Dropdown.defaultOptions, options);
+        _this.logger.log('Dropdown loaded');
+        _this.display = false;
+        _this.projector.append(_this.element, _this.renderMaquette.bind(_this));
+        _this.x = 0;
+        _this.y = 0;
+        return _this;
+    }
+    Dropdown.prototype.renderMaquette = function () {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.context', {
+            style: 'height:600px; width:600px; border:1px solid orange',
+            onmousemove: this.moveMouse.bind(this),
+            onclick: this.print.bind(this)
+        }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.dropdown', {
+                style: "height:20px; position:absolute; width:20px; background:orange; display: " + this.getDisplay() + "; left:" + this.x + "; top:" + this.y
+            })]);
+    };
+    Dropdown.prototype.moveMouse = function (event) {
+        event.stopPropagation();
+        this.x = event.x + 'px';
+        this.y = event.y + 'px';
+    };
+    Dropdown.prototype.print = function (event) {
+        this.logger.log(this.x + ', ' + this.y);
+    };
+    Dropdown.prototype.getDisplay = function () {
+        return this.display ? 'block' : 'none';
+    };
+    Dropdown.prototype.show = function () {
+        this.display = true;
+        this.projector.scheduleRender();
+    };
+    Dropdown.prototype.hide = function () {
+        this.display = false;
+        this.projector.scheduleRender();
+    };
+    return Dropdown;
+}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
+
+Dropdown.defaultOptions = {
+    "class": '.dropdown'
+};
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return List; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_h__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var List = (function (_super) {
+    __extends(List, _super);
+    /**
+     * Constructor to initiate the doughnut component
+     * @param element Context of the component
+     * @param options Component options
+     */
+    function List(element, options) {
+        var _this = _super.call(this, 'List') || this;
+        _this.element = element;
+        _this.options = __assign({}, List.defaultOptions, options);
+        if (_this.options.pageSize !== 0)
+            _this.options.autoPage = false;
+        _this.init();
+        _this.projector.append(_this.element, _this.render.bind(_this));
+        return _this;
+    }
+    List.prototype.init = function () {
+        var elementOffset = this.element.clientHeight;
+        if (this.options.pageSize === 0 || this.options.autoPage) {
+            this.options.pageSize = Math.ceil(elementOffset / this.options.height);
+            this.containerHeight = elementOffset;
+        }
+        else {
+            this.containerHeight = (this.options.height * this.options.pageSize);
+        }
+        this.containerScrollTop = 0;
+        this.start = 0;
+        this.end = this.options.pageSize;
+        this.activeData = this.options.data.slice(this.start, this.end);
+    };
+    List.prototype.itemTemplate = function (item) {
+        if (this.options.template !== '') {
+            var template = document.createElement('template');
+            template.innerHTML = this.options.template;
+            var hTemplate = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* hParser */])((template.content && template.content.firstElementChild) || template.children[0], item);
+            return hTemplate;
+        }
+        else {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('span', [item.text]);
+        }
+    };
+    /**
+     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
+     */
+    List.prototype.render = function () {
+        var _this = this;
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.list.parent', {
+            style: "height: " + this.containerHeight + "px;"
+        }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.child.container', { style: "height: " + this.containerHeight + "px;", onscroll: this.scrollEvent.bind(this) }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.child.data', {
+                    style: "top:" + this.containerScrollTop + "px;"
+                }, [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('ul.no-pad-mar', [this.activeData.map(function (item, index) {
+                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('li.flex', {
+                                style: "height:" + _this.options.height + "px",
+                                key: _this.start + index
+                            }, _this.itemTemplate(item));
+                        })])
+                ]),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["b" /* h */])('div.ghost', { style: "height:" + this.options.data.length * this.options.height + "px" }),
+            ])
+        ]);
+    };
+    List.prototype.scrollEvent = function (event) {
+        var start = Math.floor(event.currentTarget.scrollTop / this.options.height);
+        if (start <= 0) {
+            start = 0;
+            this.containerScrollTop = 0;
+        }
+        ;
+        var end = start + this.options.pageSize + 1;
+        if (end >= this.options.data.length)
+            end = this.options.data.length;
+        if (start !== this.start && end !== this.end) {
+            this.containerScrollTop = (start * this.options.height); //event.target.scrollTop;
+            this.start = start;
+            this.end = end;
+            this.activeData = this.options.data.slice(this.start, this.end);
+        }
+    };
+    List.prototype.refresh = function () {
+        this.init();
+        this.projector.scheduleRender();
+    };
+    return List;
+}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
+
+/**
+ * Component default option. These options can be overridden from constructor
+ */
+List.defaultOptions = {
+    height: 40,
+    pageSize: 0,
+    data: [],
+    autoPage: true,
+    template: ''
+};
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return XProjection; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dom__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dom__ = __webpack_require__(2);
 
 var XProjection = (function () {
     function XProjection(vnode, projectionOptions) {
@@ -1536,12 +1371,12 @@ var XProjection = (function () {
 
 
 /***/ }),
-/* 14 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return XProjector; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dom__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dom__ = __webpack_require__(2);
 
 /**
  * Creates a [[Projector]] instance using the provided projectionOptions.
@@ -1658,6 +1493,237 @@ var XProjector = (function () {
         throw new Error('renderMaquetteFunction was not found');
     };
     return XProjector;
+}());
+
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__ = __webpack_require__(4);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Doughnut", function() { return __WEBPACK_IMPORTED_MODULE_0__components_doughnut_doughnut__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__ = __webpack_require__(5);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_list_list__ = __webpack_require__(6);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "List", function() { return __WEBPACK_IMPORTED_MODULE_2__components_list_list__["a"]; });
+// Comment that is displayed in the API documentation for the Doughnut module:
+/**
+ * Welcome to the API documentation of the **batman** library.
+ * @preferred
+ */
+// export all components
+
+
+
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(12);
+
+/**
+ * Global services and configuration for library
+ */
+var Global = (function () {
+    //    public static Logger: ILogger = Logger.getInstance(new ProfilerWriter());
+    /**
+     * Constructor instantiates all global services and instances
+     */
+    function Global() {
+    }
+    return Global;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (Global);
+/**
+ * Name of the library
+ */
+Global.Name = 'Batman';
+/**
+ * Library version
+ */
+Global.Version = '1.0.0.alpha.1';
+/**
+ * Default animation duration in milliseconds
+ */
+Global.AnimationDuration = 150;
+/**
+ * global logger instance
+ */
+Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].getInstance();
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConsoleWriter; });
+/**
+ * This class writes all messages into console
+ */
+var ConsoleWriter = (function () {
+    function ConsoleWriter() {
+    }
+    /**
+     * Writes the message into console
+     * @param message Messages that need to be written in console
+     */
+    ConsoleWriter.prototype.write = function (message) {
+        if (message.type === 'error')
+            console.error(message.format());
+        else
+            console.log(message.format());
+    };
+    /**
+     * This method clears all messages in the console
+     */
+    ConsoleWriter.prototype.clear = function () {
+        console.clear();
+    };
+    return ConsoleWriter;
+}());
+
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__message__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__console_writer__ = __webpack_require__(11);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var Logger = (function () {
+    /**
+     * Initiate the logger class with writer and options
+     * @param writer Instance of writer to write messages
+     * @param options A set of logger options
+     */
+    function Logger(writer, options) {
+        this.options = __assign({}, Logger.defaultOptions, options);
+        if (writer === undefined)
+            this._writer = new __WEBPACK_IMPORTED_MODULE_1__console_writer__["a" /* ConsoleWriter */]();
+        else
+            this._writer = writer;
+        this._stack = [];
+        Logger._instance = this;
+    }
+    /**
+     * This method give return singleton instance of the logger class
+     * @param writer Instance of writer to write messages
+     * @param options A set of logger options
+     */
+    Logger.getInstance = function (writer, options) {
+        if (this._instance === undefined) {
+            this._instance = new Logger(writer, options);
+        }
+        return this._instance;
+    };
+    /**
+     *
+     * @param value text message to be logged
+     * @param type Type of the message `log` or `error`
+     */
+    Logger.prototype.writeLog = function (value, type) {
+        if (this.options.enable) {
+            var message = new __WEBPACK_IMPORTED_MODULE_0__message__["a" /* Message */](value, type);
+            this._stack.push(message);
+            this._writer.write(message);
+        }
+    };
+    /**
+     * This method delete all log and sets the log stack to empty
+     */
+    Logger.prototype.clear = function () {
+        this._stack.length = 0;
+    };
+    /**
+     * This message logs the message as `log`
+     * @param value text message
+     */
+    Logger.prototype.log = function (value) {
+        this.writeLog(value);
+    };
+    /**
+     * This message logs the message as `error`
+     * @param value text message
+     */
+    Logger.prototype.error = function (value) {
+        this.writeLog(value, 'error');
+    };
+    /**
+     * This method enables the logger
+     */
+    Logger.prototype.enable = function () {
+        this.options.enable = true;
+    };
+    /**
+     * This method disables the logger
+     */
+    Logger.prototype.disable = function () {
+        this.options.enable = false;
+    };
+    return Logger;
+}());
+
+/**
+ * Logger default options
+ */
+Logger.defaultOptions = {
+    enable: true
+};
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Message; });
+/**
+ * Message class
+ */
+var Message = (function () {
+    /**
+     *
+     * @param text Text string
+     * @param type Type of the message `log` or `error`
+     * If type not provided default type is `log`
+     */
+    function Message(text, type) {
+        this.text = text;
+        this.dateTime = new Date();
+        this.type = type || 'log';
+    }
+    /**
+     * This method will format message created date time to a string
+     */
+    Message.prototype.time = function () {
+        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds();
+    };
+    /**
+     * This method will format message content to a string
+     */
+    Message.prototype.format = function () {
+        return this.dateTime.getHours() + ":" + this.dateTime.getMinutes() + ":" + this.dateTime.getSeconds() + ":" + this.dateTime.getMilliseconds() + ': ' + this.text;
+    };
+    return Message;
 }());
 
 
