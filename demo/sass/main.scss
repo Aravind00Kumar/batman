@@ -1,6 +1,6 @@
 @import "_layout";
 
-html, body{
+html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -8,16 +8,73 @@ html, body{
     border: 1px solid transparent;
 }
 
-.panel{
-    ul li{
+.panel {
+    min-width: 100%;
+    ul li {
         text-align: left;
     }
-    b{
+
+    b {
         height: 10px;
         width: 15px;
         display: inline-block;
     }
 }
-input, label{
-    width: 120px; margin: 2px;
+
+input, label {
+    width: 120px;
+    margin: 2px;
+}
+
+// List Examples
+
+.list {
+    //    width: 500px;
+    div {
+        height: initial;
+    }
+
+    div.true {
+        background: #f2f2f2;
+    }
+
+    div, img {
+        //        justify-content: center;
+        align-self: center;
+    }
+
+    img {
+        padding: 0 10px;
+    }
+
+    .head {
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: .01em;
+        margin: 0;
+        line-height: 1.2em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #333;
+    }
+
+    span {
+        padding: 1px;
+    }
+
+    .desc {
+        color: #555;
+        font-size: medium;
+    }
+
+    ul li {
+        background: #fff;
+        transition: background 200ms linear;
+        cursor: pointer;
+    }
+
+    ul li:hover {
+        background: #ddd;
+    }
 }

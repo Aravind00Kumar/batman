@@ -12,7 +12,9 @@
     "docs": "typedoc --out documentation/ src/ --name batman --readme readme.md --hideGenerator",
     "commit": "git cz",
     "release": "semantic-release-gitlab changelog",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "installglobalmodules": "npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g",
+    "setup":" npm run installglobalmodules & npm install & npm link typescript & npm run docs & npm link typescript & npm start"
   },
   "keywords": [
     "Batman"

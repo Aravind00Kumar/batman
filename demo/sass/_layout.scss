@@ -1,0 +1,118 @@
+body {
+    background: url(../img/dark-night.png);
+}
+i{
+    font-size: 50px;
+    color: #ffeb3b;
+    //border: 1px solid #ffeb3b;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+
+}
+header.main {
+    height: 28.2%;
+    color: #fff;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+header.second {
+    .back{
+        position: absolute; 
+        left:0; 
+        top: 0;
+        margin-left: 10px; 
+    }
+    height: 70px;
+    color: #fff;
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+article.second {
+    padding-right:20px;
+    nav, section{
+        height:100%;
+        padding-bottom: 20px;
+    }
+    nav {
+        a{
+            text-decoration: none;
+        }
+        display: flex;
+        align-items: 'stretch';
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 10px 0 10px;
+        max-width: 250px;
+        ul{
+            width: 100%;
+            li, li a{
+                height: 35px;
+                display: block;
+                color: #ccc;
+            }
+            li{
+                line-height: 35px;
+            }
+            a{
+                text-align: right;
+                border-right: 3px solid transparent;
+                padding-right: 5px;
+            }
+            a:hover{
+                color: #eee;
+            }
+            a.selected{
+                font-size: 1.1em;
+                border-right: 3px solid #0e2430;
+                color: #fff;
+            }
+        }
+    }
+
+    section{
+        //background: rgba(0, 0, 0, 0.4);
+        background: rgba(256, 256, 256, 0.9);
+        overflow: auto;
+        padding-left: 20px;
+    }
+
+}
+
+
+article.main {
+    > div {
+        justify-content: center;
+    }
+
+    height: 71.8%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    align-items: flex-start;
+
+    .tile.large {
+        text-decoration: none;
+        height: 180px;
+        width: 180px;
+        background: #0e2430;
+        margin: 5px;
+        border: 2px solid transparent;
+        color: #eee;
+        p {
+            text-align: center;
+            color: darkgray;
+        }
+    }
+
+    .tile:hover {
+        border-color: #294c5f;
+    }
+}

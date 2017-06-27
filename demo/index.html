@@ -4,6 +4,7 @@
 <head>
     <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://file.myfontastic.com/XHcDAQxEChjYzE2z9DGiWh/icons.css" rel="stylesheet">
     <link rel="shortcut icon" href="./img/favicon.ico" />
     <link rel="stylesheet" href="./css/batman.css">
     <link rel="stylesheet" href="./css/main.css">
@@ -12,88 +13,44 @@
 
 <body>
 
-    <h1 style="text-align:center" class="clear">
-        <img style="float:left" src="../logo_64.png" alt="">
-        <span style="float:left;padding-top: 15px;"> Batman</span>
-    </h1>
+    <header class="main flex center vcenter">
+        <img src="../logo_64.png" alt="">
+        <h1>
+            <a href="../"> Batman </a>
+        </h1>
 
-    <h1 class="h2"> Doughnut Component </h1>
+    </header>
 
-
-    <div class="flex row grow">
-        <div class="panel">
-            <h2> Single mono color </h2>
-            <div class="flex column nowrap">
-                <div class='pad-mar-2x example1'>
-                </div>
-                <div class="flex column">
-                    <div class="flex row nowrap">
-                        <label> Start Angle</label>
-                        <label> End Angle</label>
-                        <label> Stroke </label>
-                    </div>
-                    <div class="flex row nowrap">
-                        <input id="startAngle" placeholder="Start angle" value="0" />
-                        <input id="endAngle" placeholder="End angle" value="200" />
-                        <input id="strokeValue" readonly value="10">
-                        <button id="apply"> Apply</button><br>
-                    </div>
-                    <div class="flex row nowrap">
-                        <input id="start" type="range" min="0" max="360" step="1">
-                        <input id="end" type="range" min="0" max="360" step="1">
-                        <input id="stroke" type="range" min="2" max="10" step="1">
-                    </div>
-                </div>
-            </div>
+    <article class="main flex full">
+        <div class="flex row full center">
+            <a href="./examples/doughnut/ex-doughnut.html" class="tile large flex column vcenter center">
+                <!--<img src="./img/png/linkedin.png" height="52">-->
+                <i class="icon-load-c"></i>
+                <h5 class="mar-2x">Doughnut</h5>
+                <p class="pad-1x no-mar small">Displays data in a doughnut component</p>
+            </a>
+            <a href="./examples/list/ex-list.html" class="tile large flex column vcenter center">
+                <!--<img src="./img/png/facebook.png" height="52">-->
+                <i class="icon-navicon"></i>
+                <h5 class="mar-2x">List</h5>
+                <p class="pad-1x no-mar small">List component provides dymanic list to display data</p>
+            </a>
+            <a href="#" class="tile large flex column vcenter center">
+                <!--<img src="./img/png/google-plus.png" height="52">-->
+                <i class="icon-ios-grid-view-outline"></i>
+                <h5 class="mar-2x">Table</h5>
+                <p class="pad-1x no-mar small">Table component provides dymanic table to display data</p>
+            </a>
+            <a href="#" class="tile large flex column vcenter center">
+                <!--<img src="./img/png/flickr.png" height="52">-->
+                <i class="icon-down-open-big"></i>
+                <h5 class="mar-2x">Dropdown</h5>
+                <p class="pad-1x no-mar small">Displays data in dropdown box</p>
+            </a>
         </div>
-
-        <div class="panel">
-            <h2> Multi color </h2>
-            <div class="flex row">
-                <div class='pad-mar-2x m1'>
-                </div>
-                <ul>
-                    <li><b style="background:#e91e63"></b> Task 1 - 20%</li>
-                    <li><b style="background:#009688"></b> Task 2 - 15%</li>
-                    <li><b style="background:#ff5722"></b> Task 3 - 10%</li>
-                    <li><b style="background:#00bcd4"></b> Task 4 - 25%</li>
-                    <li><b style="background:#9c27b0"></b> Task 5 - 30%</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel">
-            <h2> Justice League episodes</h2>
-            <div class="flex row">
-                <div class="pad-mar-2x m2">
-                </div>
-                <ul>
-                    <li><b style="background:#e91e63"></b> Secret Origins</li>
-                    <li><b style="background:#009688"></b> In Blackest Night</li>
-                    <li><b style="background:#585858"></b> The Enemy Below</li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="panel">
-        <h2> Justice League Superheros Strength </h2>
-        <div class="flex row">
-            <div id="d1" class='pad-mar-2x'></div>
-            <div id="d2" class='pad-mar-2x'></div>
-            <div id="d3" class='pad-mar-2x'></div>
-            <div id="d4" class='pad-mar-2x'></div>
-            <div id="d5" class='pad-mar-2x'></div>
-            <div id="d6" class='pad-mar-2x'></div>
-            <div id="d7" class='pad-mar-2x'></div>
-        </div>
-    </div>
-
+    </article>
     <script src="scripts/batman-polifills.js"></script>
     <script src="scripts/batman.js"></script>
-    <script src="index.js"></script>
 </body>
 
 </html>

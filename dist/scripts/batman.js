@@ -910,12 +910,77 @@ var createProjector = function (projectorOptions) {
 
 var BaseComponent = (function () {
     function BaseComponent(name, projectorOptions) {
+        this.lastKey = 0;
         BaseComponent.Name = name;
         BaseComponent.Version = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Version;
         this.logger = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].Logger;
         this.projector = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["b" /* createProjector */])();
         this.animationSpeed = __WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */].AnimationDuration + 'ms';
     }
+    BaseComponent.prototype.toH = function (element, item) {
+        if (element.nodeValue) {
+            if (element.nodeType !== 3 || element.nodeValue.indexOf("\"") > 0 || element.nodeValue.trim().length === 0) {
+                return null;
+            }
+            return null; //element.nodeValue.trim();
+        }
+        if (!element.tagName) {
+            return null;
+        }
+        var properties = {};
+        var children = [];
+        var classes = [];
+        var selector = element.tagName.toLowerCase();
+        if (selector !== "svg") {
+            classes = element.className.split(" ");
+            for (var i = 0; i < element.childNodes.length; i++) {
+                var child = element.childNodes[i];
+                children.push(this.toH(child, item));
+            }
+        }
+        for (var index = 0; index < element.attributes.length; index++) {
+            var elm = element.attributes[index];
+            var elementName = elm.name.trim();
+            if (elementName !== 'class' && elementName !== 'id')
+                if (elm.name === '[value]') {
+                    if (element.tagName.toUpperCase() === 'INPUT') {
+                        properties["value"] = item[elm.value];
+                    }
+                    else
+                        properties["innerHTML"] = item[elm.value];
+                }
+                else if ((/[\[].*?[\]]/ig).test(elementName)) {
+                    if (item.hasOwnProperty(elm.value))
+                        if (elementName === '[class]')
+                            classes.push(item[elm.value]);
+                        else
+                            properties[elementName.slice(1, -1)] = item[elm.value];
+                    else
+                        this.logger.error("'" + elm.value + "' is not a valid value or not available in the component data");
+                }
+                else if ((/[\(].*?[\)]/ig).test(elementName)) {
+                    if (typeof this.options[elm.value] === 'function') {
+                        properties[elementName.slice(1, -1)] = this.options[elm.value].bind(item);
+                    }
+                    else {
+                        this.logger.error("'" + elm.value + "' is not a valid function or not implemented in the component options");
+                    }
+                }
+                else {
+                    properties[elementName] = elm.value;
+                }
+        }
+        if (element.id) {
+            selector = selector + "#" + element.id;
+        }
+        if (!element.id) {
+            properties['key'] = ++this.lastKey;
+        }
+        if (classes[0]) {
+            selector = selector + "." + classes.join('.');
+        }
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_maquette__["a" /* h */])(selector, properties, [children.filter(function (c) { return !!c; })]);
+    };
     return BaseComponent;
 }());
 
@@ -1250,6 +1315,8 @@ var List = (function (_super) {
         var _this = _super.call(this, 'List') || this;
         _this.element = element;
         _this.options = __assign({}, List.defaultOptions, options);
+        if (_this.options.pageSize !== 0)
+            _this.options.autoPage = false;
         _this.init();
         _this.projector.append(_this.element, _this.render.bind(_this));
         return _this;
@@ -1268,6 +1335,17 @@ var List = (function (_super) {
         this.end = this.options.pageSize;
         this.activeData = this.options.data.slice(this.start, this.end);
     };
+    List.prototype.itemTemplate = function (item) {
+        if (this.options.template !== '') {
+            var template = document.createElement('template');
+            template.innerHTML = this.options.template;
+            var hTemplate = this.toH((template.content && template.content.firstElementChild) || template.children[0], item);
+            return hTemplate;
+        }
+        else {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('span', [item.text]);
+        }
+    };
     /**
      * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
      */
@@ -1281,10 +1359,10 @@ var List = (function (_super) {
                     style: "top:" + this.containerScrollTop + "px;"
                 }, [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('ul.no-pad-mar', [this.activeData.map(function (item, index) {
-                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('li', {
+                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('li.flex', {
                                 style: "height:" + _this.options.height + "px",
                                 key: _this.start + index
-                            }, [item.text]);
+                            }, _this.itemTemplate(item));
                         })])
                 ]),
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_maquette__["a" /* h */])('div.ghost', { style: "height:" + this.options.data.length * this.options.height + "px" }),
@@ -1322,7 +1400,8 @@ List.defaultOptions = {
     height: 40,
     pageSize: 0,
     data: [],
-    autoPage: true
+    autoPage: true,
+    template: ''
 };
 
 

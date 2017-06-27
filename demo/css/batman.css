@@ -65,6 +65,10 @@
 .flex.center {
   align-items: center; }
 
+.flex.vcenter {
+  justify-content: center;
+  align-self: center; }
+
 .flex.nowrap {
   flex-wrap: nowrap; }
 
@@ -125,6 +129,9 @@ ul.empty {
 .p {
   margin: 0.6em 0; }
 
+.small {
+  font-size: .7em; }
+
 /* Components */
 div#global-profiler {
   position: fixed;
@@ -177,9 +184,6 @@ div#global-profiler {
     .list .container .ghost {
       width: 100%; }
   .list ul li {
-    background-color: aquamarine;
     overflow: hidden; }
-  .list ul li:hover {
-    background-color: coral; }
 
 /*# sourceMappingURL=batman.css.map */

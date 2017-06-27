@@ -4,6 +4,8 @@
 <head>
     <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://file.myfontastic.com/XHcDAQxEChjYzE2z9DGiWh/icons.css" rel="stylesheet">
+
     <link rel="shortcut icon" href="../../img/favicon.ico" />
     <link rel="stylesheet" href="../../css/batman.css">
     <link rel="stylesheet" href="../../css/main.css">
@@ -12,41 +14,117 @@
 
 <body class="flex column">
 
-    <h1 style="text-align:center">
-        <img src="../../../logo_64.png" height="64" alt="">
-        <span> Batman</span>
-    </h1>
+    <header class="second flex vcenter center">
+        <h3 class="back">
+            <a href="../../index.html"> <i class="icon-ios-arrow-back"></i> </a>
+        </h3>
 
-    <h1 class="h2"> List Component </h1>
+        <img src="../../../logo_64.png" height="48" alt="">
+        <h2>
+            <a href="../"> Batman </a>
+        </h2>
 
-    <!-- Example 1 -->
-    <!--<div class="panel">
+    </header>
+
+    <article class="second flex full row">
+        <nav class="flex full">
+            <ul class="no-pad-mar">
+                <li class="flex">
+                    <a href="#" class=""> Basic Example </a>
+                </li>
+                <li class="flex">
+                    <a class="selected" href="#" class=""> Basic Example </a>
+                </li>
+                <li class="flex">
+                    <a href="#" class=""> Basic Example </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="flex full row">
+
+            <div class="panel">
+                <h2> Example 1 </h2>
+                <div id="l1"></div>
+            </div>
+
+            <div class="panel flex full column" style="min-height:200px;">
+                <h2> Example 2 </h2>
+                <div id="l2" class="flex full"></div>
+            </div>
+
+            <div class="panel flex full column" style="min-height:400px;">
+                <h2> Example 3 </h2>
+                <div id="l3" class="flex full"></div>
+            </div>
+
+            <div class="flex row full">
+                <h2 style="min-width:100%"> Example 4 </h2>
+                <div id="l4" class="flex full mar-2x" style="min-height:400px"></div>
+                <div id="l5" class="flex full mar-2x" style="min-height:400px"></div>
+            </div>
+
+
+            <div class="panel flex full column" style="min-height:400px">
+                <h2> Example 5 </h2>
+                <div id="l6" class="flex full"></div>
+            </div>
+
+        </section>
+
+    </article>
+
+    <script src="../../scripts/batman-polifills.js"></script>
+    <script src="../../scripts/batman.js"></script>
+    <script src="data.js"></script>
+    <script src="ex-list.js"></script>
+</body>
+
+</html>
+
+
+<!-- Example 1 -->
+<!--<div class="panel">
         <div id="l1"></div>
     </div>-->
 
 
-    <!-- Example 2 -->
+<!-- Example 2 -->
 
-    <div class="panel flex full column">
+<!--<div class="panel flex full column">
         <h2> Header  </h2>
         <div id="l1" class="flex full"></div>
-    </div>
+    </div>-->
 
 
-    <!-- Example 3 -->
+<!-- Example 3 -->
 
-    <!--<div class="flex row full">
+<!--<div class="flex row full">
         <div id="l1" class="flex full mar-2x"></div>
         <div id="l2" class="flex full mar-2x"></div>
     </div>-->
 
 
 
-    <h1 class="h2"> List Component </h1>
+<!-- Example 4 -->
 
-    <script src="../../scripts/batman-polifills.js"></script>
-    <script src="../../scripts/batman.js"></script>
-    <script src="ex-list.js"></script>
-</body>
+<!--<div class="panel flex full column">
+        <h2> Header  </h2>
+        <div id="l1" class="flex full"></div>
+    </div>-->
 
-</html>
+
+<!-- Example 5 -->
+
+<!--<div class="flex row full">
+        <div id="l1" class="flex full mar-2x"></div>
+        <div id="l2" class="flex full mar-2x"></div>
+    </div>-->
+
+
+<!-- Example 6 -->
+
+<!--<div class="panel flex full column">
+        <h2> Header  </h2>
+        <div id="l1" class="flex full"></div>
+    </div>-->
