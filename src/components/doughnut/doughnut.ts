@@ -1,5 +1,10 @@
-import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
+//import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
 import { IBaseComponent, BaseComponent } from '../base-component'
+
+import {h} from '../../common/h';
+import {Projector, ProjectorOptions, VNode} from '../../common/interfaces'
+//import {h} from '../../common/h'
+
 
 /**
  * Doughnut component interface

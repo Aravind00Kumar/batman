@@ -4,7 +4,7 @@
  * Licensed under MIT 
  * --------------------------------------------------------------------------
  */
-import { h, createProjector } from '../../common/maquette';
+import { h} from '../../common/h';
 
 import { IBaseComponent, BaseComponent } from '../base-component'
 

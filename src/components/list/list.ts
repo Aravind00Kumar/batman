@@ -1,4 +1,6 @@
-import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
+import { h , hParser} from '../../common/h';
+import { Projector, ProjectorOptions, VNode } from '../../common/interfaces';
+
 import { IBaseComponent, BaseComponent, UIComponent } from '../base-component'
 
 /**
@@ -79,7 +81,7 @@ export class List extends BaseComponent implements UIComponent, IListComponent {
         if (this.options.template !== '') {
             var template = document.createElement('template');
             template.innerHTML = this.options.template;
-            var hTemplate = this.toH((template.content && <HTMLElement>template.content.firstElementChild) || <HTMLElement>template.children[0], item);
+            var hTemplate = hParser((template.content && <HTMLElement>template.content.firstElementChild) || <HTMLElement>template.children[0], item);
             return hTemplate;
         }
         else {
