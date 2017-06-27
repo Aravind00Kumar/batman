@@ -1,4 +1,7 @@
-import { h, createProjector, Projector, ProjectorOptions, VNode } from '../../common/maquette';
+import { h } from '../../common/h';
+import { ProjectorFactory } from '../../common/factory';
+import { Projector, ProjectorOptions, VNode } from '../../common/interfaces';
+
 import { IWriter } from '../../utility/writer'
 import { IMessage } from '../../utility/message'
 import { IBaseComponent, BaseComponent } from '../base-component'
@@ -36,7 +39,7 @@ export class ProfilerWriter implements IWriter {
         this.element = document.body,
             this.options = <IProfilerOptions>{ ...ProfilerWriter.defaultOptions, ...options };
         this.log = [];
-        this.projector = createProjector();
+        this.projector = ProjectorFactory.createProjector();
         this.projector.append(this.element, this.renderMaquette.bind(this));
     }
 
