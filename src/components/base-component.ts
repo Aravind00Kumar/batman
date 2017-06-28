@@ -35,12 +35,13 @@ export class BaseComponent implements IBaseComponent {
         this.projector = ProjectorFactory.createProjector();
         this.animationSpeed = Global.AnimationDuration + 'ms';
     }
-    public hParser(element: HTMLElement, context: object): VNode {
+    public hParser(element: any | HTMLElement, context: object): VNode {
         if (element.nodeValue) {
             if (element.nodeType !== 3 || element.nodeValue.indexOf("\"") > 0 || element.nodeValue.trim().length === 0) {
                 return null;
             }
-            return null;//element.nodeValue.trim();
+            return element.nodeValue;
+            //return null;//element.nodeValue.trim();
         }
         if (!element.tagName) {
             return null;

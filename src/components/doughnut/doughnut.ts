@@ -111,7 +111,8 @@ export class Doughnut extends BaseComponent implements IDoughnutComponent {
                     h('div.head.flex.h3', [this.options.title])]),
                 h('div.child', {
                     key: this.options.title,
-                    title: this.options.title,
+                    'tip' : this.options.title,
+                    'tip-pos':'top',
                     onmouseenter: this.mouseEnter.bind(this),
                     onmouseleave: this.mouseExit.bind(this)
                 }, [

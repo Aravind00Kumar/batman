@@ -258,7 +258,8 @@ var BaseComponent = (function () {
             if (element.nodeType !== 3 || element.nodeValue.indexOf("\"") > 0 || element.nodeValue.trim().length === 0) {
                 return null;
             }
-            return null; //element.nodeValue.trim();
+            return element.nodeValue;
+            //return null;//element.nodeValue.trim();
         }
         if (!element.tagName) {
             return null;
@@ -1011,7 +1012,8 @@ var Doughnut = (function (_super) {
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["a" /* h */])('div.head.flex.h3', [this.options.title])]),
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__common_h__["a" /* h */])('div.child', {
                 key: this.options.title,
-                title: this.options.title,
+                'tip': this.options.title,
+                'tip-pos': 'top',
                 onmouseenter: this.mouseEnter.bind(this),
                 onmouseleave: this.mouseExit.bind(this)
             }, [
