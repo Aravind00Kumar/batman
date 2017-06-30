@@ -4,9 +4,9 @@
  * Licensed under MIT 
  * --------------------------------------------------------------------------
  */
-import { h} from '../../common/h';
+import { h } from '../../common/h';
 
-import { IBaseComponent, BaseComponent } from '../base-component'
+import { BaseComponent } from '../base-component'
 
 export interface IDropdownOptions {
     class?: string
@@ -17,57 +17,55 @@ export interface IDropdown {
     hide(): void;
 }
 
-export class Dropdown extends BaseComponent implements IDropdown {
+export class Dropdown extends BaseComponent<IDropdownOptions> implements IDropdown {
     public static defaultOptions: IDropdownOptions = {
         class: '.dropdown'
     }
 
-    public display: boolean;
-    public x: any;
-    public y: any;
+    private _display: boolean;
+    private _x: any;
+    private _y: any;
 
-    constructor(private element: HTMLElement, options?: IDropdownOptions, data?: object) {
-        super('Dropdown');
-        this.options = <IDropdownOptions>{ ...Dropdown.defaultOptions, ...options };
-        this.logger.log('Dropdown loaded');
-        this.display = false;
-        this.projector.append(this.element, this.renderMaquette.bind(this));
-        this.x = 0;
-        this.y = 0;
+    constructor(element: HTMLElement, options?: IDropdownOptions, data?: object) {
+        super('Dropdown', element, { ...Dropdown.defaultOptions, ...options });
+        this._display = false;
+        this._x = 0;
+        this._y = 0;
+        this.projector.append(this.element, this.render.bind(this));
     }
 
-    public renderMaquette() {
+    public render() {
         return h('div.context', {
             style: 'height:600px; width:600px; border:1px solid orange',
             onmousemove: this.moveMouse.bind(this),
-            onclick:this.print.bind(this),
+            onclick: this.print.bind(this),
         }, [h('div.dropdown', {
-            style: `height:20px; position:absolute; width:20px; background:orange; display: ${this.getDisplay()}; left:${this.x}; top:${this.y}`
+            style: `height:20px; position:absolute; width:20px; background:orange; display: ${this.getDisplay()}; left:${this._x}; top:${this._y}`
         })]);
 
     }
 
     public moveMouse(event) {
         event.stopPropagation()
-        this.x = event.x + 'px';
-        this.y = event.y + 'px';
+        this._x = event.x + 'px';
+        this._y = event.y + 'px';
     }
 
     public print(event) {
-        this.logger.log(this.x +', '+ this.y)
+        this.logger.log(this._x + ', ' + this._y)
     }
 
     public getDisplay() {
-        return this.display ? 'block' : 'none';
+        return this._display ? 'block' : 'none';
     }
 
     public show() {
-        this.display = true;
+        this._display = true;
         this.projector.scheduleRender();
     }
 
     public hide() {
-        this.display = false;
+        this._display = false;
         this.projector.scheduleRender();
     }
 }

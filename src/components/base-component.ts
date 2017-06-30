@@ -1,39 +1,51 @@
 import Global from '../global'
 import { ILogger } from '../utility/logger'
-//import { h, VNode, createProjector, Projector, ProjectorOptions } from '../common/maquette';
 import { ProjectorFactory } from '../common/factory';
 import { VNode, Projector, ProjectorOptions } from '../common/interfaces';
 import { h } from '../common/h';
-
-export interface IBaseComponent {
-    elements: Array<string>;
-    options: any;
-    projector: Projector
-}
 
 export interface UIComponent {
     render(): VNode
 }
 
-export class BaseComponent implements IBaseComponent {
+export class BaseComponent<O> {
+
     public static Name: string;
     public static Version: string;
 
-    public logger: ILogger;
-    public elements: Array<string>;
-    public context: HTMLElement;
-    public options: any;
-    public projector: Projector
-    public animationSpeed: string;
+    protected logger: ILogger;
+    protected element: HTMLElement;
+    protected options: O;
+    protected projector: Projector
+    protected animationSpeed: string;
 
     private lastKey = 0;
 
-    constructor(name, projectorOptions?: ProjectorOptions) {
+    constructor(name, element: HTMLElement, options: O, projectorOptions?: ProjectorOptions) {
         BaseComponent.Name = name;
         BaseComponent.Version = Global.Version
+
         this.logger = Global.Logger;
         this.projector = ProjectorFactory.createProjector();
         this.animationSpeed = Global.AnimationDuration + 'ms';
+
+        this.element = element;
+        this.options = options;
+
+    }
+
+    protected guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+    }
+
+    protected renderElement() {
+
     }
     public hParser(element: any | HTMLElement, context: object): VNode {
         if (element.nodeValue) {
@@ -94,6 +106,6 @@ export class BaseComponent implements IBaseComponent {
             selector = selector + "." + classes.join('.');
         }
         return h(selector, properties, [children.filter(function (c) { return !!c; })]);
-    };
+    }
 
 } 

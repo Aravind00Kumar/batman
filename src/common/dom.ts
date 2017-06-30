@@ -237,8 +237,8 @@ export class dom {
                 // record the evt.target.value, because IE and Edge sometimes do a requestAnimationFrame between changing value and running oninput
                 let oldPropValue = propValue;
                 propValue = function (this: HTMLElement, evt: Event) {
-                  (evt.target as any)['oninput-value'] = (evt.target as HTMLInputElement).value; // may be HTMLTextAreaElement as well
                   oldPropValue.apply(this, [evt]);
+                  (evt.target as any)['oninput-value'] = (evt.target as HTMLInputElement).value; // may be HTMLTextAreaElement as well
                 };
               }());
             }

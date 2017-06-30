@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        html, body, section { height:100%; background: gray; padding:0; margin:0 }
+        div { border: 1px solid black; }
+        
+        div[class^="a1"]{ background: orange; }
+        div[class^="b1"]{ background: orange; border: 1px solid black; }
+
+        .flex{ display: flex; }
+        .flex.row{flex-direction: row}
+        .flex.column{flex-direction: column}
+        .flex.left{ justify-content: flex-start}
+        .flex.right{ justify-content: flex-end}
+        .flex.center{ justify-content: center}
+        .flex.auto{ justify-content: space-around}
+
+        .flex.row { align-items: flex-start }
+        .flex.row.full { align-items: stretch }
+
+        .flex.row > .full-x { flex: 1 1 0; text-align: center; }
+        .flex.vcenter{ align-content: center}
+
+    </style>
+
+<head>
+    <title>Test Page</title>
+</head>
+
+<body>
+
+    <section class="flex row full">
+        <div class="a1 full-x flex row full"> 
+            <div class="b1"> b2 </div>
+            <div class="b1"> b3 </div>
+            <div class="b1"> b4 </div>
+        </div>
+        <div class="a1 full-x row flex full">
+            <div class="full-x full flex vcenter"> a2</div>
+        </div>
+        <div class="a1 full-x"> a3 </div>
+        <div class="a1 full-x"> a4 </div>
+    </section>
+</body>
+
+</html>
