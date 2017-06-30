@@ -4,7 +4,6 @@ import { Projector, ProjectorOptions, VNode } from '../../common/interfaces';
 
 import { IWriter } from '../../utility/writer'
 import { IMessage } from '../../utility/message'
-import { IBaseComponent, BaseComponent } from '../base-component'
 
 /**
  * Interface for profiler options

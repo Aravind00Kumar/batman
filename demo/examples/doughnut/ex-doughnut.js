@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             sectorColor: '#03a9f4',
             image: '../../img/FwG8UYtj.jpg',
+            title: 'Justice League episodes',
 
         });
 

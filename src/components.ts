@@ -8,5 +8,6 @@
 export * from './components/doughnut/doughnut';
 export * from './components/dropdown/dropdown';
 export * from './components/list/list';
+export * from './components/tree/tree';
 
 

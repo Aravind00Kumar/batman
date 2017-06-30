@@ -133,6 +133,82 @@ ul.empty {
   font-size: .7em; }
 
 /* Components */
+[tip]:hover::after, [tip]:hover::before {
+  opacity: 1;
+  transition-delay: 1s;
+  z-index: 1; }
+
+[tip]::after, [tip]::before {
+  position: relative;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.075, 0.82, 0.165, 1); }
+
+[tip]::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px 6px 0 6px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+  z-index: 100; }
+
+[tip]::after {
+  content: attr(tip);
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  transform: translateX(-50%) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  color: #fff;
+  padding: 4px 2px;
+  font-size: 12px;
+  min-width: 80px;
+  border-radius: 5px;
+  pointer-events: none; }
+
+[tip-pos='left']::before {
+  left: 0%;
+  top: 50%;
+  margin-left: -12px;
+  transform: translatey(-50%) rotate(-90deg); }
+
+[tip-pos='top']::before {
+  left: 50%; }
+
+[tip-pos='bottom']::before {
+  top: 100%;
+  margin-top: 8px;
+  transform: translateX(-50%) translatey(-100%) rotate(-180deg); }
+
+[tip-pos='right']::before {
+  left: 100%;
+  top: 50%;
+  margin-left: 1px;
+  transform: translatey(-50%) rotate(90deg); }
+
+[tip-pos='left']::after {
+  left: 0%;
+  top: 50%;
+  margin-left: -8px;
+  transform: translateX(-100%) translateY(-50%); }
+
+[tip-pos='top']::after {
+  left: 50%; }
+
+[tip-pos='bottom']::after {
+  top: 100%;
+  margin-top: 8px;
+  transform: translateX(-50%) translateY(0%); }
+
+[tip-pos='right']::after {
+  left: 100%;
+  top: 50%;
+  margin-left: 8px;
+  transform: translateX(0%) translateY(-50%); }
+
 div#global-profiler {
   position: fixed;
   height: 100vh;
@@ -185,5 +261,46 @@ div#global-profiler {
       width: 100%; }
   .list ul li {
     overflow: hidden; }
+
+.tree {
+  overflow: hidden;
+  width: 100%; }
+  .tree .data {
+    width: 100%;
+    height: 100%; }
+  .tree .container {
+    overflow-y: scroll;
+    width: 100%; }
+    .tree .container .ghost {
+      width: 100%; }
+  .tree div.ul div.li {
+    overflow: hidden; }
+  .tree div[area-level="0"] {
+    margin: 0; }
+  .tree div[area-level="1"] {
+    margin: 0;
+    margin-left: 15px; }
+  .tree div[area-level="2"] {
+    margin: 0;
+    margin-left: 30px; }
+  .tree div[area-level="3"] {
+    margin: 0;
+    margin-left: 45px; }
+  .tree .icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    display: none; }
+  .tree .icon.close {
+    display: initial;
+    margin-top: -3px;
+    border-width: 4px 0 4px 8px;
+    margin-right: 4px;
+    border-color: transparent transparent transparent #007bff; }
+  .tree .icon.open {
+    display: initial;
+    border-width: 0 0 8px 8px;
+    border-color: transparent transparent #007bff transparent; }
 
 /*# sourceMappingURL=batman.css.map */
