@@ -9,11 +9,23 @@ export interface ITreeComponent {
  * Interface for doughnut component values
  */
 export interface ITreeNode {
-    text: string,
-    isOpened?: boolean,
-    icon?: Array<string>,
-    children?: Array<ITreeNode>
+    text: string;
+    isOpened?: boolean;
+    icon?: string[];
+    children?: ITreeNode[];
 }
+
+/**
+ * Interface for doughnut component values
+ */
+export interface IOptimalTreeNode {
+    id: string;
+    text: string;
+    level: number;
+    isOpened?: boolean;
+    icon?: string;
+}
+
 
 /**
  * Interface for doughnut component options
@@ -25,4 +37,14 @@ export interface ITreeOptions {
     pageSize?: number;
     autoPage?: boolean;
     template?: string;
+
+}
+
+export interface IOptimalTreeOptions {
+    height?: number;
+    data?: IOptimalTreeNode[];
+    pageSize?: number;
+    autoPage?: boolean;
+    template?: string;
+    icons?: any
 }
