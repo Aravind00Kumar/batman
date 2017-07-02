@@ -303,4 +303,55 @@ div#global-profiler {
     border-width: 0 0 8px 8px;
     border-color: transparent transparent #007bff transparent; }
 
+.optimal-tree {
+  overflow: hidden;
+  width: 100%; }
+  .optimal-tree .data {
+    width: 100%;
+    height: 100%; }
+  .optimal-tree .container {
+    overflow-y: scroll;
+    width: 100%; }
+    .optimal-tree .container .ghost {
+      width: 100%; }
+  .optimal-tree ul li {
+    overflow: hidden;
+    align-items: center; }
+    .optimal-tree ul li .icon {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent;
+      display: none; }
+    .optimal-tree ul li .icon.close {
+      display: initial;
+      border-width: 4px 0 4px 7px;
+      margin-right: 4px;
+      border-color: transparent transparent transparent #007bff; }
+    .optimal-tree ul li .icon.open {
+      display: initial;
+      border-width: 0 0 8px 7px;
+      margin-right: 4px;
+      margin-top: -3px;
+      border-color: transparent transparent #007bff transparent; }
+    .optimal-tree ul li .icons2 {
+      height: 20px;
+      width: inherit;
+      font-size: 16px;
+      padding: 0 5px; }
+  .optimal-tree ul li[area-level="0"] {
+    padding: 0; }
+  .optimal-tree ul li[area-level="1"] {
+    padding: 0;
+    padding-left: 15px; }
+  .optimal-tree ul li[area-level="2"] {
+    padding: 0;
+    padding-left: 30px; }
+  .optimal-tree ul li[area-level="3"] {
+    padding: 0;
+    padding-left: 45px; }
+  .optimal-tree ul li:hover {
+    background: #888;
+    cursor: pointer; }
+
 /*# sourceMappingURL=batman.css.map */

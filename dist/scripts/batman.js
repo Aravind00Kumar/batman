@@ -64,7 +64,7 @@ var Batman =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -237,7 +237,7 @@ var hParser = function (element, context) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_factory__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_h__ = __webpack_require__(0);
 
@@ -912,8 +912,8 @@ dom.applyDefaultProjectionOptions = function (projectorOptions) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ProjectionFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectorFactory; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Projection__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Projector__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Projection__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Projector__ = __webpack_require__(10);
 
 
 var ProjectionFactory = (function () {
@@ -1348,6 +1348,180 @@ List.defaultOptions = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OptimalTree; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_h__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var OptimalTree = (function (_super) {
+    __extends(OptimalTree, _super);
+    /**
+     * Constructor to initiate the doughnut component
+     * @param element Context of the component
+     * @param options Component options
+     */
+    function OptimalTree(element, options) {
+        var _this = _super.call(this, 'OptimalTree', element, __assign({}, OptimalTree.defaultOptions, options)) || this;
+        if (_this.options.pageSize !== 0)
+            _this.options.autoPage = false;
+        _this.init();
+        _this.projector.append(_this.element, _this.render.bind(_this));
+        return _this;
+    }
+    OptimalTree.prototype.init = function () {
+        this._activeData = [];
+        var elementOffset = this.element.clientHeight;
+        if (this.options.pageSize === 0 || this.options.autoPage) {
+            this.options.pageSize = Math.ceil(elementOffset / this.options.height);
+            this._containerHeight = elementOffset;
+        }
+        else {
+            this._containerHeight = (this.options.height * this.options.pageSize);
+        }
+        this._containerScrollTop = 0;
+        this._start = 0;
+        this._end = this.options.pageSize;
+        this.getActiveRecords();
+    };
+    OptimalTree.prototype.open = function (item, event) {
+        if (item.hasOwnProperty('isOpened')) {
+            item.isOpened = !item.isOpened;
+        }
+        this.getActiveRecords();
+    };
+    OptimalTree.prototype.itemTemplate = function (item) {
+        if (this.options.template !== '') {
+            var template = document.createElement('template');
+            template.innerHTML = this.options.template;
+            var hTemplate = this.hParser((template.content && template.content.firstElementChild) || template.children[0], item);
+            return hTemplate;
+        }
+        else {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('span', [item.text]);
+        }
+    };
+    /**
+     * Virtual DOM H template method; in case of values provided it generated the multi arc template otherwise single vales template
+     */
+    OptimalTree.prototype.render = function () {
+        var _this = this;
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.optimal-tree.parent', {
+            style: "height: " + this._containerHeight + "px;"
+        }, [
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.child.container', { style: "height: " + this._containerHeight + "px;", onscroll: this.scrollEvent.bind(this) }, [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.child.data', {
+                    style: "top:" + this._containerScrollTop + "px;"
+                }, [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('ul.no-pad-mar', [this.getActiveRecords().map(function (item, index) {
+                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('li.flex', {
+                                'area-level': item.level,
+                                style: "height:" + _this.options.height + "px",
+                                key: item.id,
+                                onclick: _this.open.bind(_this, item)
+                            }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i.icon', { classes: { open: item.isOpened === true, close: item.isOpened === false } }),
+                                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i.', {
+                                    classes: {
+                                        'icons2': item.hasOwnProperty('isOpened'),
+                                        'icon-folder-o': item.isOpened === false,
+                                        'icon-folder-open-o': item.isOpened === true
+                                    }
+                                }),
+                                _this.itemTemplate(item)]);
+                        })])
+                ]),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.ghost', { style: "height:" + this._filteredData.length * this.options.height + "px" }),
+            ])
+        ]);
+    };
+    OptimalTree.prototype.scrollEvent = function (event) {
+        var start = Math.floor(event.currentTarget.scrollTop / this.options.height);
+        if (start <= 0) {
+            start = 0;
+            this._containerScrollTop = 0;
+        }
+        ;
+        var end = start + this.options.pageSize + 1;
+        if (end >= this.options.data.length)
+            end = this.options.data.length;
+        if (start !== this._start && end !== this._end) {
+            this._containerScrollTop = (start * this.options.height); //event.target.scrollTop;
+            this._start = start;
+            this._end = end;
+            this.getActiveRecords();
+        }
+    };
+    OptimalTree.prototype.isParentOpened = function (data, item, index) {
+        var level = item.level - 1;
+        var flag = false;
+        for (var i = index; i >= 0 && level !== -1; i--) {
+            if (data[i].level == level) {
+                flag = data[i].isOpened;
+                level--;
+                if (!flag)
+                    break;
+            }
+        }
+        return flag;
+    };
+    OptimalTree.prototype.getActiveRecords = function () {
+        var _this = this;
+        this._filteredData = this.options.data.filter(function (item, index) {
+            if (item.level === 0)
+                return item;
+            else {
+                if (_this.isParentOpened(_this.options.data, item, index)) {
+                    return item;
+                }
+            }
+        });
+        this._activeData = this._filteredData.slice(this._start, this._end);
+        return this._activeData;
+    };
+    OptimalTree.prototype.refresh = function () {
+        this.init();
+        this.projector.scheduleRender();
+    };
+    return OptimalTree;
+}(__WEBPACK_IMPORTED_MODULE_1__base_component__["a" /* BaseComponent */]));
+
+/**
+ * Component default option. These options can be overridden from constructor
+ */
+OptimalTree.defaultOptions = {
+    height: 40,
+    pageSize: 0,
+    data: [],
+    autoPage: true,
+    template: '',
+    icons: {
+        folder: ['icon-folder-o', 'icon-folder-open-o']
+    }
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Tree; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_h__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__base_component__ = __webpack_require__(1);
@@ -1530,29 +1704,6 @@ var Tree = (function (_super) {
         }
         return counter;
     };
-    // private updateDate(data, counter?: number, text?) {
-    //     if (counter === -1) return -1;
-    //     if (counter === undefined) counter = 0;
-    //     if (Array.isArray(data)) {
-    //         for (var index = 0; index < data.length; index++) {
-    //             var element = data[index];
-    //             let c = this.updateDate(element, counter++, text);
-    //             counter = c === -1 ? -1 : c;
-    //         }
-    //     } else {
-    //         if (data.text === text) {
-    //             data.isOpened = !data.isOpened;
-    //             counter = -1;
-    //             return;
-    //         } else if ((data.children && data.children.length > 0) && data.isOpened) {
-    //             data.children.forEach((item, index) => {
-    //                 let c = this.updateDate(item, counter++, text);
-    //                 counter = c === -1 ? -1 : c;
-    //             });
-    //         }
-    //     }
-    //     return counter;
-    // }
     Tree.prototype.itemTemplate = function (item) {
         if (this.options.template !== '') {
             var template = document.createElement('template');
@@ -1638,7 +1789,7 @@ Tree.defaultOptions = {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1664,7 +1815,7 @@ var XProjection = (function () {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1791,7 +1942,7 @@ var XProjector = (function () {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1802,8 +1953,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Dropdown", function() { return __WEBPACK_IMPORTED_MODULE_1__components_dropdown_dropdown__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_list_list__ = __webpack_require__(6);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "List", function() { return __WEBPACK_IMPORTED_MODULE_2__components_list_list__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tree_tree__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_tree_tree__ = __webpack_require__(8);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Tree", function() { return __WEBPACK_IMPORTED_MODULE_3__components_tree_tree__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_tree_optimal_tree__ = __webpack_require__(7);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "OptimalTree", function() { return __WEBPACK_IMPORTED_MODULE_4__components_tree_optimal_tree__["a"]; });
 // Comment that is displayed in the API documentation for the Doughnut module:
 /**
  * Welcome to the API documentation of the **batman** library.
@@ -1816,12 +1969,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utility_logger__ = __webpack_require__(14);
 
 /**
  * Global services and configuration for library
@@ -1851,7 +2005,7 @@ Global.Logger = __WEBPACK_IMPORTED_MODULE_0__utility_logger__["a" /* Logger */].
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1884,13 +2038,13 @@ var ConsoleWriter = (function () {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__message__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__console_writer__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__message__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__console_writer__ = __webpack_require__(13);
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -1983,7 +2137,7 @@ Logger.defaultOptions = {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
