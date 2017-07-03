@@ -341,19 +341,21 @@ div#global-profiler {
     .optimal-tree ul li .icons2 {
       height: 17px;
       width: inherit;
-      font-size: 16px;
-      padding-right: 5px; }
+      font-size: 16px; }
+    .optimal-tree ul li span {
+      padding-left: 5px; }
   .optimal-tree ul li[area-level="0"] {
-    padding: 0; }
+    padding: 0;
+    padding-left: 2px; }
   .optimal-tree ul li[area-level="1"] {
     padding: 0;
-    padding-left: 15px; }
+    padding-left: 17px; }
   .optimal-tree ul li[area-level="2"] {
     padding: 0;
-    padding-left: 30px; }
+    padding-left: 32px; }
   .optimal-tree ul li[area-level="3"] {
     padding: 0;
-    padding-left: 45px; }
+    padding-left: 47px; }
   .optimal-tree ul li:hover {
     background: #d2d2d2;
     cursor: pointer; }

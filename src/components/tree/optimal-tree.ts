@@ -16,8 +16,11 @@ export class OptimalTree
         data: [],
         autoPage: true,
         template: '',
+        caret: true,
         icons: {
             folder: ['icon-folder-o', 'icon-folder-open-o'],
+            plusMinus: ['icon-plus-round', 'icon-minus-round'],
+            noIcon: 'n'
         }
     }
 
@@ -92,12 +95,15 @@ export class OptimalTree
                                         style: `height:${this.options.height}px`,
                                         key: item.id,
                                         onclick: this.open.bind(this, item)
-                                    }, [h('i.icon', { classes: { open: item.isOpened === true, close: item.isOpened === false } }),
+                                    }, [h('i.icon', {
+                                        style: `display: ${this.options.caret === false ? 'none' : 'initial'}`,
+                                        classes: { open: item.isOpened === true, close: item.isOpened === false }
+                                    }),
                                     h('i', {
                                         classes: {
                                             'icons2': item.hasOwnProperty('isOpened'),
-                                            'icon-folder-o': item.isOpened === false,
-                                            'icon-folder-open-o': item.isOpened === true
+                                            [item.icon ? this.options.icons[item.icon][0] : 'n']: item.isOpened === false,
+                                            [item.icon ? this.options.icons[item.icon][1] : 'n']: item.isOpened === true
                                         }
                                     }),
                                     this.itemTemplate(item)]);

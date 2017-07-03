@@ -317,6 +317,10 @@ div#global-profiler {
   .optimal-tree ul li {
     overflow: hidden;
     align-items: center; }
+    .optimal-tree ul li i {
+      height: 0;
+      width: 0;
+      color: gray; }
     .optimal-tree ul li .icon {
       width: 0;
       height: 0;
@@ -327,18 +331,18 @@ div#global-profiler {
       display: initial;
       border-width: 4px 0 4px 7px;
       margin-right: 4px;
-      border-color: transparent transparent transparent #007bff; }
+      border-color: transparent transparent transparent gray; }
     .optimal-tree ul li .icon.open {
       display: initial;
       border-width: 0 0 8px 7px;
       margin-right: 4px;
       margin-top: -3px;
-      border-color: transparent transparent #007bff transparent; }
+      border-color: transparent transparent gray transparent; }
     .optimal-tree ul li .icons2 {
-      height: 20px;
+      height: 17px;
       width: inherit;
       font-size: 16px;
-      padding: 0 5px; }
+      padding-right: 5px; }
   .optimal-tree ul li[area-level="0"] {
     padding: 0; }
   .optimal-tree ul li[area-level="1"] {
@@ -351,7 +355,7 @@ div#global-profiler {
     padding: 0;
     padding-left: 45px; }
   .optimal-tree ul li:hover {
-    background: #888;
+    background: #d2d2d2;
     cursor: pointer; }
 
 /*# sourceMappingURL=batman.css.map */

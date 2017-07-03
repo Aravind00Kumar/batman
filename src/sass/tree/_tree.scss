@@ -86,7 +86,6 @@
         li {
             overflow: hidden;
             align-items: center;
-
             $color: gray;
 
             i {
@@ -122,27 +121,30 @@
                 height: 17px;
                 width: inherit;
                 font-size: 16px;
-                padding-right: 5px;
+            }
+            span{
+                padding-left: 5px;
             }
         }
 
         li[area-level="0"] {
             padding: 0;
+            padding-left: 2px;
         }
 
         li[area-level="1"] {
             padding: 0;
-            padding-left: 15px;
+            padding-left: 17px;
         }
 
         li[area-level="2"] {
             padding: 0;
-            padding-left: 30px;
+            padding-left: 32px;
         }
 
         li[area-level="3"] {
             padding: 0;
-            padding-left: 45px;
+            padding-left: 47px;
         }
 
         li:hover {

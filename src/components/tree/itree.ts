@@ -46,5 +46,6 @@ export interface IOptimalTreeOptions {
     pageSize?: number;
     autoPage?: boolean;
     template?: string;
-    icons?: any
+    icons?: any,
+    caret: boolean
 }
