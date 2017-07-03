@@ -987,10 +987,10 @@ var Doughnut = (function (_super) {
      */
     Doughnut.prototype.render = function () {
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.doughnut-component.parent', { style: "min-height:" + this.options.size + "px; min-width:" + this.options.size + "px" }, [
-            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.child.flex.center.grow', {
+            __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.child', {
                 'style': "transition: " + this.animationSpeed + "; transform:scale(" + (1 - (this.options.stroke) / this._scale) + ")"
             }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.head.flex.h3', [this.options.title])]),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.head.flex', [this.options.title])]),
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.child', {
                 key: this.options.title,
                 'tip': this.options.title,
@@ -1296,9 +1296,8 @@ var List = (function (_super) {
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.child.data', {
                     style: "top:" + this._containerScrollTop + "px;"
                 }, [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('ul.no-pad-mar', [this._activeData.map(function (item, index) {
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('ul.no-pad-mar', { style: "height:" + this.options.height + "px" }, [this._activeData.map(function (item, index) {
                             return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('li.flex', {
-                                style: "height:" + _this.options.height + "px",
                                 key: _this._start + index
                             }, _this.itemTemplate(item));
                         })])
@@ -1437,6 +1436,7 @@ var OptimalTree = (function (_super) {
                                 key: item.id,
                                 onclick: _this.open.bind(_this, item)
                             }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i.icon', {
+                                    style: "display: " + (_this.options.caret === false ? 'none' : 'initial'),
                                     classes: { open: item.isOpened === true, close: item.isOpened === false }
                                 }),
                                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i', {

@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        html, body, section { height:100%; background: gray; padding:0; margin:0 }
-        div { border: 1px solid black; }
-        
-        div[class^="a1"]{ background: orange; }
-        div[class^="b1"]{ background: orange; border: 1px solid black; }
+<style>
+    html,
+    body, section.page {
+        height: 100%;
+        background: gray;
+        padding: 0;
+        margin: 0
+    }
 
-        .flex{ display: flex; }
-        .flex.row{flex-direction: row}
-        .flex.column{flex-direction: column}
-        .flex.left{ justify-content: flex-start}
-        .flex.right{ justify-content: flex-end}
-        .flex.center{ justify-content: center}
-        .flex.auto{ justify-content: space-around}
+    div {
+        border: 1px solid black;
+    }
 
-        .flex.row { align-items: flex-start }
-        .flex.row.full { align-items: stretch }
+    div[class^="a1"] {
+        background: orange;
+    }
 
-        .flex.row > .full-x { flex: 1 1 0; text-align: center; }
-        .flex.vcenter{ align-content: center}
+    div[class^="b1"] {
+        background-color: blueviolet;
+        border: 1px solid black;
+    }
 
-    </style>
+    /* Container */
+    .flex { display: flex; }
+    .flex.row       { flex-direction: row; align-items: flex-start }
+    .flex.column    { flex-direction: column }
+
+    .flex.left      { justify-content: flex-start }
+    .flex.right     { justify-content: flex-end }
+    .flex.auto      { justify-content: space-around }
+    .flex.row.full  { align-items: stretch }
+    .flex.column.full { justify-content: stretch }
+
+    /* item level  */
+    .item-full      { flex: 1 1 0px; overflow: auto }
+    .flex.centerx   { justify-content: center }
+    .flex.centery   { align-items: center }
+    .flex.centerxy  { align-items: center;justify-content: center; }
+
+    .scrolly{overflow-y: auto; overflow-x: hidden}
+    .scrollx{overflow-y: hidden; overflow-x: auto}
+    .scrollxy{overflow: auto}
+    
+</style>
 
 <head>
     <title>Test Page</title>
@@ -29,18 +51,37 @@
 
 <body>
 
-    <section class="flex row full">
-        <div class="a1 full-x flex row full"> 
-            <div class="b1"> b2 </div>
-            <div class="b1"> b3 </div>
-            <div class="b1"> b4 </div>
+    <!--<section class="flex row full">
+        <div class="a1"> 
+            a
         </div>
-        <div class="a1 full-x row flex full">
-            <div class="full-x full flex vcenter"> a2</div>
+        <div class="a1 flex column item-full"> 
+            <span>1</span>
+            <span class="item-full centerx">1</span>
+            <span>1</span>
         </div>
-        <div class="a1 full-x"> a3 </div>
-        <div class="a1 full-x"> a4 </div>
+        <div class="a1"> 
+            c
+        </div>
+    </section>-->
+
+
+
+    <section class="page flex column">
+        <div class="header" style="min-height:40px; border:1px solid yellow">
+            header
+        </div>
+        <div class="page flex item-full" style="border:1px solid orange">
+            <div class="flex item-full scrolly" style="max-width:200px">
+
+            </div> 
+            <div class="flex item-full scrolly">
+
+            </div> 
+        </div>
     </section>
+
+
 </body>
 
 </html>

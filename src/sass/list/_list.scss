@@ -16,6 +16,8 @@
     ul{
         li{
             overflow: hidden;
+            height: inherit;
+            margin-top: 1px;
         }
     }
 }

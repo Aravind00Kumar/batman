@@ -3,7 +3,7 @@ var globalData = {};
 globalData.optimizesTreeData =
     [
         { id: '1', level: 0, text: 'Search Engine', isOpened: true, icon: 'folder' },
-        { id: '2', level: 1, text: 'Google', isOpened: false, icon: 'plusMinus' },
+        { id: '2', level: 1, text: 'Google', isOpened: false, icon: 'folder' },
         { id: '3', level: 2, text: 'V8', icon: '' },
         { id: '4', level: 2, text: 'V7', icon: '' },
         { id: '5', level: 1, text: 'Yahoo', icon: '' },
