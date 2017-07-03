@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data: window.globalData.optimizesTreeData, 
         height: 30, 
         pageSize: 5,
-        icon: globalData.icons
+        caret:false
     });
 
 });

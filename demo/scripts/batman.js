@@ -1436,15 +1436,20 @@ var OptimalTree = (function (_super) {
                                 style: "height:" + _this.options.height + "px",
                                 key: item.id,
                                 onclick: _this.open.bind(_this, item)
-                            }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i.icon', { classes: { open: item.isOpened === true, close: item.isOpened === false } }),
+                            }, [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i.icon', {
+                                    style: "display: " + (_this.options.caret === false ? 'none' : 'initial'),
+                                    classes: { open: item.isOpened === true, close: item.isOpened === false }
+                                }),
                                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('i', {
-                                    classes: {
-                                        'icons2': item.hasOwnProperty('isOpened'),
-                                        'icon-folder-o': item.isOpened === false,
-                                        'icon-folder-open-o': item.isOpened === true
-                                    }
+                                    classes: (_a = {
+                                            'icons2': item.hasOwnProperty('isOpened')
+                                        },
+                                        _a[item.icon ? _this.options.icons[item.icon][0] : 'n'] = item.isOpened === false,
+                                        _a[item.icon ? _this.options.icons[item.icon][1] : 'n'] = item.isOpened === true,
+                                        _a)
                                 }),
                                 _this.itemTemplate(item)]);
+                            var _a;
                         })])
                 ]),
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('div.ghost', { style: "height:" + this._filteredData.length * this.options.height + "px" }),
@@ -1511,8 +1516,11 @@ OptimalTree.defaultOptions = {
     data: [],
     autoPage: true,
     template: '',
+    caret: true,
     icons: {
-        folder: ['icon-folder-o', 'icon-folder-open-o']
+        folder: ['icon-folder-o', 'icon-folder-open-o'],
+        plusMinus: ['icon-plus-round', 'icon-minus-round'],
+        noIcon: 'n'
     }
 };
 
