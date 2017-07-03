@@ -32,16 +32,8 @@ header.main {
 }
 
 header.second {
-    .back {
-        position: absolute;
-        left: 0;
-        top: 0;
-        margin-left: 10px;
-    }
-
     height: 70px;
     color: #fff;
-
     a {
         color: inherit;
         text-decoration: none;
@@ -52,7 +44,7 @@ article.second {
     padding-right: 20px;
 
     nav, section {
-        height: 100%;
+        //height: 100%;
         padding-bottom: 20px;
     }
 
@@ -60,11 +52,6 @@ article.second {
         a {
             text-decoration: none;
         }
-
-        display: flex;
-        align-items: 'stretch';
-        overflow-y: auto;
-        overflow-x: hidden;
         padding: 0 10px 0 10px;
         max-width: 250px;
 

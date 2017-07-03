@@ -12,23 +12,22 @@
 
 </head>
 
-<body class="flex column">
+<body>
 
-    <header class="second flex vcenter center">
-        <h3 class="back">
+    <section class="page flex column">
+
+    <header class="flex row centerxy">
+        <div class="back flex centery no-mar-pad">
             <a href="../../index.html"> <i class="icon-ios-arrow-back"></i> </a>
-
-        </h3>
-
-        <img src="../../../logo_64.png" height="48" alt="">
-        <h2>
-            <a href="../"> Batman </a>
-        </h2>
-
+        </div>
+        <div class="flex item-full no-mar-pad centerxy">
+            <img class="flex no-mar-pad" src="../../../logo_64.png" height="48" alt="">
+            <a href="http://localhost:8000/"> Batman </a>
+        </div>
     </header>
 
-    <article class="second flex full row">
-        <nav class="flex full">
+    <article class="second flex item-full">
+        <nav class="flex item-full">
             <ul class="no-pad-mar">
                 <li class="flex">
                     <a href="#" class=""> Basic Example </a>
@@ -42,7 +41,7 @@
             </ul>
         </nav>
 
-        <section class="flex full row">
+        <section class="flex item-full column">
 
             <div class="panel">
                 <h2> Single mono color </h2>
@@ -117,6 +116,7 @@
 
     </article>
 
+    </section>
 
     <script src="../../scripts/batman-polifills.js"></script>
     <script src="../../scripts/batman.js"></script>

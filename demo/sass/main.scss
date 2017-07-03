@@ -31,16 +31,11 @@ input, label {
 .list {
     //    width: 500px;
     div {
-        height: initial;
+        height: inherit;
     }
 
     div.true {
-        background: #f2f2f2;
-    }
-
-    div, img {
-        //        justify-content: center;
-        align-self: center;
+        background: #82928a;
     }
 
     img {

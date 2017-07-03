@@ -51,35 +51,59 @@
   clear: both; }
 
 /* Flex*/
+.page {
+  height: 100%; }
+
 .flex {
   display: flex; }
 
-.flex.column {
-  flex-direction: column;
-  flex-wrap: wrap; }
-
 .flex.row {
   flex-direction: row;
-  flex-wrap: wrap; }
+  align-items: flex-start; }
 
-.flex.center {
-  align-items: center; }
+.flex.column {
+  flex-direction: column; }
 
-.flex.vcenter {
-  justify-content: center;
-  align-self: center; }
+.flex.left {
+  justify-content: flex-start; }
 
-.flex.nowrap {
-  flex-wrap: nowrap; }
+.flex.right {
+  justify-content: flex-end; }
 
-.flex.container {
+.flex.auto {
+  justify-content: space-around; }
+
+.flex.row.full {
   align-items: stretch; }
 
-.flex.grow > * {
-  flex-grow: 1; }
+.flex.column.full {
+  justify-content: stretch; }
 
-.full {
-  flex: 1; }
+/* item level  */
+.item-full {
+  flex: 1 1 0px;
+  overflow: auto; }
+
+.flex.centerx {
+  justify-content: center; }
+
+.flex.centery {
+  align-items: center; }
+
+.flex.centerxy {
+  align-items: center;
+  justify-content: center; }
+
+.scrolly {
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+.scrollx {
+  overflow-y: hidden;
+  overflow-x: auto; }
+
+.scrollxy {
+  overflow: auto; }
 
 /* Visibility*/
 .hide {
@@ -260,7 +284,9 @@ div#global-profiler {
     .list .container .ghost {
       width: 100%; }
   .list ul li {
-    overflow: hidden; }
+    overflow: hidden;
+    height: inherit;
+    margin-top: 1px; }
 
 .tree {
   overflow: hidden;

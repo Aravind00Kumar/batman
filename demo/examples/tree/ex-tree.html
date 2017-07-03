@@ -12,44 +12,50 @@
 
 </head>
 
-<body class="flex column">
+<body>
 
-    <header class="second flex vcenter center">
-        <h3 class="back">
-            <a href="../../index.html"> <i class="icon-ios-arrow-back"></i> </a>
-        </h3>
+    <section class="page flex column">
 
-        <img src="../../../logo_64.png" height="48" alt="">
-        <h2>
-            <a href="../../index.html"> Batman </a>
-        </h2>
-
-    </header>
-
-    <article class="second flex full row">
-        <nav class="flex full">
-            <ul class="no-pad-mar">
-                <li class="flex">
-                    <a href="#" class=""> Basic Example </a>
-                </li>
-                <li class="flex">
-                    <a class="selected" href="#" class=""> Basic Example </a>
-                </li>
-                <li class="flex">
-                    <a href="#" class=""> Basic Example </a>
-                </li>
-            </ul>
-        </nav>
-
-        <section class="flex full row">
-
-            <div class="panel">
-                <h2> Example 1 </h2>
-                <div id="t1"></div>
+        <header class="flex row centerxy">
+            <div class="back flex centery no-mar-pad">
+                <a href="../../index.html"> <i class="icon-ios-arrow-back"></i> </a>
             </div>
-        </section>
+            <div class="flex item-full no-mar-pad centerxy">
+                <img class="flex no-mar-pad" src="../../../logo_64.png" height="48" alt="">
+                <a href="http://localhost:8000/"> Batman </a>
+            </div>
+        </header>
 
-    </article>
+        <article class="second flex item-full">
+            <nav class="flex item-full">
+                <ul class="no-pad-mar">
+                    <li class="flex">
+                        <a href="#" class=""> Basic Example </a>
+                    </li>
+                    <li class="flex">
+                        <a class="selected" href="#" class=""> Basic Example </a>
+                    </li>
+                    <li class="flex">
+                        <a href="#" class=""> Basic Example </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="flex item-full column scrolly">
+
+                <div class="panel flex column no-mar-collapse" style="min-height:250px">
+                    <h2> Example 1 </h2>
+                    <div>
+                        height: 30, pageSize: 10
+                    </div>
+                    <div id="t1" class="flex"></div>
+                </div>
+
+            </section>
+
+        </article>
+
+    </section>
 
     <script src="../../scripts/batman-polifills.js"></script>
     <script src="../../scripts/batman.js"></script>
@@ -58,50 +64,3 @@
 </body>
 
 </html>
-
-
-<!-- Example 1 -->
-<!--<div class="panel">
-        <div id="l1"></div>
-    </div>-->
-
-
-<!-- Example 2 -->
-
-<!--<div class="panel flex full column">
-        <h2> Header  </h2>
-        <div id="l1" class="flex full"></div>
-    </div>-->
-
-
-<!-- Example 3 -->
-
-<!--<div class="flex row full">
-        <div id="l1" class="flex full mar-2x"></div>
-        <div id="l2" class="flex full mar-2x"></div>
-    </div>-->
-
-
-
-<!-- Example 4 -->
-
-<!--<div class="panel flex full column">
-        <h2> Header  </h2>
-        <div id="l1" class="flex full"></div>
-    </div>-->
-
-
-<!-- Example 5 -->
-
-<!--<div class="flex row full">
-        <div id="l1" class="flex full mar-2x"></div>
-        <div id="l2" class="flex full mar-2x"></div>
-    </div>-->
-
-
-<!-- Example 6 -->
-
-<!--<div class="panel flex full column">
-        <h2> Header  </h2>
-        <div id="l1" class="flex full"></div>
-    </div>-->

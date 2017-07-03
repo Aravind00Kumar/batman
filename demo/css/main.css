@@ -29,11 +29,6 @@ header.main {
 header.second {
   height: 70px;
   color: #fff; }
-  header.second .back {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin-left: 10px; }
   header.second a {
     color: inherit;
     text-decoration: none; }
@@ -41,13 +36,8 @@ header.second {
 article.second {
   padding-right: 20px; }
   article.second nav, article.second section {
-    height: 100%;
     padding-bottom: 20px; }
   article.second nav {
-    display: flex;
-    align-items: 'stretch';
-    overflow-y: auto;
-    overflow-x: hidden;
     padding: 0 10px 0 10px;
     max-width: 250px; }
     article.second nav a {
@@ -126,11 +116,9 @@ input, label {
   margin: 2px; }
 
 .list div {
-  height: initial; }
+  height: inherit; }
 .list div.true {
-  background: #f2f2f2; }
-.list div, .list img {
-  align-self: center; }
+  background: #82928a; }
 .list img {
   padding: 0 10px; }
 .list .head {

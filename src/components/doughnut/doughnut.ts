@@ -48,10 +48,10 @@ export class Doughnut extends BaseComponent<IDoughnutOptions> implements IDoughn
     private render(): VNode {
         return h('div.doughnut-component.parent',
             { style: `min-height:${this.options.size}px; min-width:${this.options.size}px` }, [
-                h('div.child.flex.center.grow', {
+                h('div.child', {
                     'style': `transition: ${this.animationSpeed}; transform:scale(${1 - (this.options.stroke) / this._scale})`
                 }, [h('img', { src: this.options.image, style: this.options.image ? 'display:block' : 'display:none' }),
-                h('div.head.flex.h3', [this.options.title])]),
+                h('div.head.flex', [this.options.title])]),
                 h('div.child', {
                     key: this.options.title,
                     'tip': this.options.title,
