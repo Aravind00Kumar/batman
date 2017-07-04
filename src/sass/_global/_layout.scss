@@ -94,7 +94,7 @@
 .flex.auto      { justify-content: space-around }
 .flex.row.full  { align-items: stretch }
 .flex.column.full { justify-content: stretch }
-
+.flex.wrap      {flex-wrap: wrap}
 /* item level  */
 .item-full      { flex: 1 1 0px; overflow: auto }
 .flex.centerx   { justify-content: center }

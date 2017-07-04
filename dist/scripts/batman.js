@@ -1297,7 +1297,7 @@ var List = (function (_super) {
                     style: "top:" + this._containerScrollTop + "px;"
                 }, [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('ul.no-pad-mar', { style: "height:" + this.options.height + "px" }, [this._activeData.map(function (item, index) {
-                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('li.flex', {
+                            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__common_h__["a" /* h */])('li.flex.centery', {
                                 key: _this._start + index
                             }, _this.itemTemplate(item));
                         })])
