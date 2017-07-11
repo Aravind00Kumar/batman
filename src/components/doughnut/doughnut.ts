@@ -1,7 +1,5 @@
-import { h } from '../../common/h';
-import { Projector, ProjectorOptions, VNode } from '../../common/interfaces'
+import { BaseComponent, ProjectorOptions, VNode, h } from '../../common/common';
 
-import { BaseComponent } from '../base-component';
 import { IDoughnutComponent, IDoughnutOptions, IDoughnutValue } from './idoughnut';
 
 export class Doughnut extends BaseComponent<IDoughnutOptions> implements IDoughnutComponent {

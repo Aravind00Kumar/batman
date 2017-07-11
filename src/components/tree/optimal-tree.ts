@@ -1,6 +1,5 @@
-import { h, hParser } from '../../common/h';
-import { Projector, ProjectorOptions, VNode } from '../../common/interfaces';
-import { BaseComponent, UIComponent } from '../base-component';
+import { BaseComponent, UIComponent, h, hParser, VNode  } from '../../common/common';
+
 import { ITreeComponent, IOptimalTreeOptions, IOptimalTreeNode } from './itree';
 
 

@@ -7,14 +7,18 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "webpack && concurrently \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
+    "start": "webpack && concurrently \"tsc -p -w tsconfigumd.json\" \"tsc -p -w tsconfigumdjs.json\" \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
+    "declarations": "tsc -p tsconfigumd.json",
     "lite": "lite-server",
     "docs": "typedoc --out documentation/ src/ --name batman --readme readme.md --hideGenerator",
     "commit": "git cz",
     "release": "semantic-release-gitlab changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "installglobalmodules": "npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g",
-    "setup":" npm run installglobalmodules & npm install & npm link typescript & npm run docs & npm link typescript & npm start"
+    "setup": "npm run installglobalmodules & npm install & npm link typescript & npm run docs & npm link typescript & npm start",
+    "webpack-batman":"webpack --config webpack.config.umd.js",
+    "build-pack":"npm pack ./@batman",
+    "build":"npm run webpack-batman npm run build-pack"
   },
   "keywords": [
     "Batman"
@@ -22,10 +26,12 @@
   "author": "Aravind Kumar P",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^3.4.0",
+    "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.0.1",
     "lite-server": "^2.3.0",
-    "ts-loader": "^2.1.0",
+    "rollup-plugin-ts": "^0.1.0",
+    "ts-loader": "^2.2.2",
+    "typescript": "^2.4.1",
     "webpack": "^2.6.1"
   },
   "config": {

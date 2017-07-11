@@ -1,8 +1,6 @@
 import { Projection, Projector, ProjectionOptions, ProjectorOptions, VNode, VNodeProperties } from './interfaces';
 import { dom } from './dom';
 
-
-
 /**
  * Creates a [[Projector]] instance using the provided projectionOptions.
  *

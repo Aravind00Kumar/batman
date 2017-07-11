@@ -1,8 +1,6 @@
-import Global from '../global'
-import { ILogger } from '../utility/logger'
-import { ProjectorFactory } from '../common/factory';
-import { VNode, Projector, ProjectorOptions } from '../common/interfaces';
-import { h } from '../common/h';
+import { Global, Configuration } from './global'
+import { ILogger, Logger } from './utility/logger'
+import { ProjectorFactory, VNode, Projector, ProjectorOptions, h } from './core/core';
 
 export interface UIComponent {
     render(): VNode
@@ -20,15 +18,16 @@ export class BaseComponent<O> {
     protected animationSpeed: string;
 
     private lastKey = 0;
+    private readonly configuration: Configuration;
 
     constructor(name, element: HTMLElement, options: O, projectorOptions?: ProjectorOptions) {
         BaseComponent.Name = name;
         BaseComponent.Version = Global.Version
 
-        this.logger = Global.Logger;
+        this.logger = Logger.getInstance();
         this.projector = ProjectorFactory.createProjector();
         this.animationSpeed = Global.AnimationDuration + 'ms';
-
+        this.configuration = new Configuration();
         this.element = element;
         this.options = options;
 
@@ -108,4 +107,7 @@ export class BaseComponent<O> {
         return h(selector, properties, [children.filter(function (c) { return !!c; })]);
     }
 
-} 
+}
+
+export { ProjectorOptions, VNode, h, hParser } from './core/core'
+export { Configuration, Global } from './global';

@@ -6,18 +6,14 @@ module.exports = {
     context: __dirname,
     entry: {
         // application entry point
-        common:['./src/common/common.ts' ],
-        doughnut: './src/components/doughnut/doughnut.ts',
-        list: './src/components/list/list.ts',
-        tree: './src/components/tree/optimal-tree.ts'
+        batman: './src/components.ts'
     },
     output: {
         libraryTarget: 'var',
         library: 'Batman',
-        path: __dirname + '/demo/scripts/multiple-module/',
+        path: __dirname + '/demo/scripts/single-module/',
         filename: "[name].js",
-        sourceMapFilename: "[name].js.map",
-        chunkFilename: "[id].js"
+        sourceMapFilename: "[name].js.map"
     },
 
     resolve: {
@@ -36,11 +32,5 @@ module.exports = {
             { from: __dirname + '/src/batman-polifills.js', to: __dirname + '/demo/scripts/batman-polifills.js' },
             { from: __dirname + '/src/batman-polifills.js', to: __dirname + '/dist/scripts/batman-polifills.js' }
         ], { copyUnmodified: true }),
-       
-        // Individual modules
-        new webpack.optimize.CommonsChunkPlugin({
-            names: 'common',
-            minChunks: Infinity
-        })
     ]
 }

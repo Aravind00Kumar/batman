@@ -2,13 +2,14 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "sourceMap": true,
-    "module": "es2015",
-    "baseUrl": "src",
+    "module": "umd",
+    "moduleResolution": "node",
     "declaration":true,
-    "declarationDir": "./"
+    "declarationDir": "@batman",
+    "outDir": "@batman",
+    "baseUrl": "."
   },
   "include": [
       "src/**/*"
   ]
 }
-

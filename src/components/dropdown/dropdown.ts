@@ -4,9 +4,8 @@
  * Licensed under MIT 
  * --------------------------------------------------------------------------
  */
-import { h } from '../../common/h';
+import { BaseComponent, h, VNode } from '../../common/common';
 
-import { BaseComponent } from '../base-component'
 
 export interface IDropdownOptions {
     class?: string
@@ -34,7 +33,7 @@ export class Dropdown extends BaseComponent<IDropdownOptions> implements IDropdo
         this.projector.append(this.element, this.render.bind(this));
     }
 
-    public render() {
+    public render():VNode {
         return h('div.context', {
             style: 'height:600px; width:600px; border:1px solid orange',
             onmousemove: this.moveMouse.bind(this),

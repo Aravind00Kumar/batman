@@ -1,7 +1,4 @@
-import { h, hParser } from '../../common/h';
-import { Projector, ProjectorOptions, VNode } from '../../common/interfaces';
-
-import { BaseComponent, UIComponent } from '../base-component'
+import { BaseComponent, UIComponent, VNode, h, hParser } from '../../common/common';
 import { IListComponent, IListOptions, IListValue } from './ilist'
 
 export class List extends BaseComponent<IListOptions> implements UIComponent, IListComponent {
@@ -76,7 +73,7 @@ export class List extends BaseComponent<IListOptions> implements UIComponent, IL
                         h('div.child.data', {
                             style: `top:${this._containerScrollTop}px;`
                         }, [
-                                h('ul.no-pad-mar',{style: `height:${this.options.height}px`}, [this._activeData.map((item, index) => {
+                                h('ul.no-pad-mar', { style: `height:${this.options.height}px` }, [this._activeData.map((item, index) => {
                                     return h('li.flex.centery', {
                                         key: this._start + index
                                     }, this.itemTemplate(item));
