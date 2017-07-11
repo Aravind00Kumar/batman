@@ -29,7 +29,7 @@
       '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
       '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
 
-      '@batman/components': 'npm:@batman/components.js',
+      'batman/components': 'npm:batman/components.js',
       
       // other libraries
       'rxjs':                      'npm:rxjs',

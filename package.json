@@ -18,7 +18,7 @@
     "setup": "npm run installglobalmodules & npm install & npm link typescript & npm run docs & npm link typescript & npm start",
     "webpack-batman":"webpack --config webpack.config.umd.js",
     "build-pack":"npm pack ./@batman",
-    "build":"npm run webpack-batman npm run build-pack"
+    "build":"npm run webpack-batman & npm pack ./@batman"
   },
   "keywords": [
     "Batman"

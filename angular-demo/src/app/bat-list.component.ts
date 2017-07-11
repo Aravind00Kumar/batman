@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 
 
-import { List } from '@batman/components';
+import { List } from 'batman/components';
 
 @Component({
     selector: 'bat-list',
