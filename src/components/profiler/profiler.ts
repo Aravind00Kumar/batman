@@ -1,9 +1,7 @@
-import { h } from '../../common/h';
-import { ProjectorFactory } from '../../common/factory';
-import { Projector, ProjectorOptions, VNode } from '../../common/interfaces';
+import { h, Projector, ProjectorOptions, VNode, ProjectorFactory  } from '../../common/core/core';
 
-import { IWriter } from '../../utility/writer'
-import { IMessage } from '../../utility/message'
+import { IWriter } from '../../common/utility/writer'
+import { IMessage } from '../../common/utility/message'
 
 /**
  * Interface for profiler options

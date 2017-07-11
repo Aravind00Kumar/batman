@@ -1,8 +1,10 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
-import { AppComponent }  from './app.component';
+import { AppComponent } from './app.component';
+import { BatListComponent } from './bat-list.component';
+
 
 @NgModule({
   imports: [
@@ -10,8 +12,12 @@ import { AppComponent }  from './app.component';
     FormsModule // <-- import the FormsModule before binding with [(ngModel)]
   ],
   declarations: [
-    AppComponent
+    AppComponent, BatListComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(){
+    
+  }
+}

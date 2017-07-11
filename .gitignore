@@ -11,3 +11,14 @@ documentation
 
 # ignore all javascript files under src folder
 src/**/*.js
+
+# ignore build folder
+@batman
+
+# ignore demo scripts folder
+demo/scripts
+demo/css
+
+# ignore demo scripts folder
+dist/scripts
+dist/css

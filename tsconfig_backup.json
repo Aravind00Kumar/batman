@@ -9,3 +9,21 @@
       "src/**/*"
   ]
 }
+
+
+
+
+
+// angular 1 compilation
+// {
+//   "compilerOptions": {
+//     "skipLibCheck": true,
+//     "sourceMap": true,
+//     "module": "es2015",
+//     "baseUrl": "src"
+//   },
+//   "include": [
+//       "src/**/*"
+//   ]
+// }
+
