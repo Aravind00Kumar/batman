@@ -6,40 +6,35 @@ module.exports = {
     context: __dirname,
     entry: {
         // application entry point
-        common:['./src/common/common.ts' ],
-        doughnut: './src/components/doughnut/doughnut.ts',
-        list: './src/components/list/list.ts',
-        tree: './src/components/tree/optimal-tree.ts'
+        core: ['./node_modules/@batman/core/core.js'],
+        doughnut: './packages/components/src/doughnut/doughnut.ts',
+        list: './packages/components/src/list/list.ts',
+        tree: './packages/components/src/tree/optimal-tree.ts'
     },
     output: {
         libraryTarget: 'var',
         library: 'Batman',
-        path: __dirname + '/demo/scripts/multiple-module/',
+        path: __dirname + '/demo/scripts/modules/',
         filename: "[name].js",
         sourceMapFilename: "[name].js.map",
         chunkFilename: "[id].js"
     },
-
     resolve: {
         extensions: [".ts", ".js"]
     },
     module: {
         loaders: [
-            { test: /\.ts?$/, loader: "ts-loader" }
+            {
+                test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({
+                    configFileName: 'tsconfig.es5.multi.json'
+                })
+            }
         ]
     },
     devtool: "source-map",
     plugins: [
-        new CopyWebpackPlugin([
-            { from: __dirname + '/demo/css/batman.css', to: __dirname + '/dist/css/batman.css' },
-            { from: __dirname + '/demo/scripts/batman.js', to: __dirname + '/dist/scripts/batman.js' },
-            { from: __dirname + '/src/batman-polifills.js', to: __dirname + '/demo/scripts/batman-polifills.js' },
-            { from: __dirname + '/src/batman-polifills.js', to: __dirname + '/dist/scripts/batman-polifills.js' }
-        ], { copyUnmodified: true }),
-       
-        // Individual modules
         new webpack.optimize.CommonsChunkPlugin({
-            names: 'common',
+            names: 'core',
             minChunks: Infinity
         })
     ]

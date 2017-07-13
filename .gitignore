@@ -20,5 +20,7 @@ demo/scripts
 demo/css
 
 # ignore demo scripts folder
-dist/scripts
-dist/css
+dist
+
+# ignore tgz files
+*.tgz

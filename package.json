@@ -1,6 +1,6 @@
 {
   "name": "batman",
-  "version": "v1.0.0-alpha.1",
+  "version": "v1.0.0-alpha.2",
   "description": "UI Components in vanilla js (TypeScript)",
   "main": "demo/scripts/batman.js",
   "directories": {
@@ -16,9 +16,21 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "installglobalmodules": "npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g",
     "setup": "npm run installglobalmodules & npm install & npm link typescript & npm run docs & npm link typescript & npm start",
-    "webpack-batman":"webpack --config webpack.config.umd.js",
-    "build-pack":"npm pack ./@batman",
-    "build":"npm run webpack-batman & npm pack ./@batman"
+    "webpack-batman": "webpack --config webpack.config.umd.js",
+    "webpack-single": "webpack --config webpack.single-module.config.js",
+    "webpack-multiple": "webpack --config webpack.multiple-module.config.js & copyfiles -f demo/scripts/modules/*.js dist/scripts/modules",
+    "build-pack": "npm pack ./@batman",
+    "build": "npm run webpack-batman & npm pack ./@batman",
+    "build-core": "webpack --config webpack.config.core.umd.js & npm pack ./dist/output/core & npm run move-tgz",
+    "build-components": "webpack --config webpack.config.components.umd.js & npm pack ./dist/output/components & npm run move-tgz",
+    "pack-core": "webpack --config webpack.config.core.umd.js & npm pack ./dist/output/core",
+    "pack-components": "webpack --config webpack.config.components.umd.js & npm pack ./dist/output/components ",
+    "copy-tgz": "copyfiles *.tgz dist/packages",
+    "del-tgz": "del-cli *.tgz",
+    "move-tgz": "npm run copy-tgz & npm run del-tgz",
+    "build-all": "npm run pack-core & npm run pack-components & npm run move-tgz",
+    "install-core": "npm install ./dist/packages/batman-core-1.0.0-alpha.2.tgz --save",
+    "reinstall-core": "npm uninstall ./dist/packages/batman-core-1.0.0-alpha.2.tgz & npm run install-core"
   },
   "keywords": [
     "Batman"
@@ -42,5 +54,8 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://code.siemens.com:aravind.pampana/batman.git#commit-ish"
+  },
+  "dependencies": {
+    "@batman/core": "file:dist\\packages\\batman-core-1.0.0-alpha.2.tgz"
   }
 }

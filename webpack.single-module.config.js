@@ -5,13 +5,12 @@ var path = require('path');
 module.exports = {
     context: __dirname,
     entry: {
-        // application entry point
-        batman: './src/components.ts'
+        batman: './packages/components/src/components.ts'
     },
     output: {
         libraryTarget: 'var',
         library: 'Batman',
-        path: __dirname + '/demo/scripts/single-module/',
+        path: __dirname + '/demo/scripts/',
         filename: "[name].js",
         sourceMapFilename: "[name].js.map"
     },
@@ -21,7 +20,11 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.ts?$/, loader: "ts-loader" }
+            {
+                test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({
+                    configFileName: 'tsconfig.es5.json'
+                })
+            }
         ]
     },
     devtool: "source-map",
