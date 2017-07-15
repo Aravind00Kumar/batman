@@ -1,6 +1,5 @@
-var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var path = require('path');
+var config = require('./config/global');
 
 module.exports = {
     context: __dirname,
@@ -34,7 +33,21 @@ module.exports = {
     devtool: "source-map",
     plugins: [
         new CopyWebpackPlugin([
-            { from: __dirname + '/build/package.core.json', to: __dirname + '/dist/output/core/package.json' }
+            {
+                from: __dirname + '/build/package.core.json', to: __dirname + '/dist/output/core/package.json',
+                transform: function (content, path) {
+                    var package = JSON.parse(content.toString());;
+                    package.name = config.scope + '/core';
+                    package.version = config.version;
+                    package.author = config.author;
+                    package.license = config.license;
+                    package.keywords = config.keywords;
+                    package.keywords.push(config.scope + '-core');
+                    package.keywords.push(config.name + '-core');
+                    return new Buffer.from(JSON.stringify(package));
+                }
+            },
+            { from: __dirname + '/packages/core/src/polyfills.js', to: __dirname + '/dist/output/core/polyfills.js' }
         ], { copyUnmodified: true }),
     ]
 }

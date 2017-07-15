@@ -2,35 +2,53 @@
   "name": "batman",
   "version": "v1.0.0-alpha.2",
   "description": "UI Components in vanilla js (TypeScript)",
-  "main": "demo/scripts/batman.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "start": "webpack && concurrently \"tsc -p -w tsconfigumd.json\" \"tsc -p -w tsconfigumdjs.json\" \"scss src/sass/main.scss:demo/css/batman.css --watch\" \"scss demo/sass/main.scss:demo/css/main.css --watch\" \"webpack -w\" \"lite-server\" ",
-    "declarations": "tsc -p tsconfigumd.json",
+    //"start": "webpack && concurrently \"tsc -p -w tsconfigumd.json\" \"tsc -p -w tsconfigumdjs.json\"  \"webpack -w\" \"lite-server\" ",
+
+    "styles-dev":"scss src/sass/main.scss:dist/css/batman.css --watch & scss demo/sass/main.scss:demo/css/main.css --watch",
+    "tsc-dev":"",
     "lite": "lite-server",
     "docs": "typedoc --out documentation/ src/ --name batman --readme readme.md --hideGenerator",
     "commit": "git cz",
     "release": "semantic-release-gitlab changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "installglobalmodules": "npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli -g",
-    "setup": "npm run installglobalmodules & npm install & npm link typescript & npm run docs & npm link typescript & npm start",
-    "webpack-batman": "webpack --config webpack.config.umd.js",
-    "webpack-single": "webpack --config webpack.single-module.config.js",
-    "webpack-multiple": "webpack --config webpack.multiple-module.config.js & copyfiles -f demo/scripts/modules/*.js dist/scripts/modules",
-    "build-pack": "npm pack ./@batman",
-    "build": "npm run webpack-batman & npm pack ./@batman",
-    "build-core": "webpack --config webpack.config.core.umd.js & npm pack ./dist/output/core & npm run move-tgz",
-    "build-components": "webpack --config webpack.config.components.umd.js & npm pack ./dist/output/components & npm run move-tgz",
-    "pack-core": "webpack --config webpack.config.core.umd.js & npm pack ./dist/output/core",
-    "pack-components": "webpack --config webpack.config.components.umd.js & npm pack ./dist/output/components ",
+    "setup": "npm run install-global-modules & npm install & npm link typescript & npm run docs & npm link typescript & npm start",
+    "install-global-modules": "npm install typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli del-cli copyfiles -g",
+    "styles": "scss --update -t compact src/sass/main.scss:dist/css/batman.css",
+    "styles-prod": "scss --update -t compressed src/sass/main.scss:dist/css/batman.min.css",
+    "build-styles": "npm run styles & npm run styles-prod",
+    "copy-styles": "copyfiles -f dist/css/*.* public/css",
+    "styles-publish": "npm run build-styles & npm run copy-styles",
+    "webpack-single": "webpack --config webpack.config.single.js",
+    "webpack-single-prod": "webpack --config webpack.config.single.prod.js -p",
+    "build-single": "npm run webpack-single & npm run webpack-single-prod",
+    "webpack-multi": "webpack --config webpack.config.multi.js",
+    "webpack-multi-prod": "webpack -p --config webpack.config.multi.prod.js",
+    "build-multi": "npm run webpack-multi & npm run webpack-multi-prod",
+    "copy-scripts": "copyfiles -f dist/scripts/*.* public/scripts/",
+    "scripts-publish": "npm run build-single & npm run build-multi & npm run copy-scripts",
+    "webpack-core": "webpack --config webpack.config.core.umd.js",
+    "webpack-core-prod": "webpack -p --config webpack.config.core.umd.prod.js ",
+    "build-core": "npm run webpack-core & npm run webpack-core-prod & npm pack ./dist/output/core & npm run move-tgz",
+    "webpack-components": "webpack --config webpack.config.components.umd.js",
+    "webpack-components-prod": "webpack -p --config webpack.config.components.umd.prod.js",
+    "build-components": "npm run webpack-components & npm run webpack-components-prod & npm pack ./dist/output/components & npm run move-tgz",
+    "build-all": "npm run build-styles & npm run build-single & npm run build-multi & npm run build-core & npm run build-components",
+    "rebuild-all": "npm run clean-dist & npm run build-all",
+    "publish-all": "npm run build-all & npm run copy-styles & npm run copy-scripts",
+    "republish-all": "npm run rebuild-all & npm run copy-styles & npm run copy-scripts",
     "copy-tgz": "copyfiles *.tgz dist/packages",
     "del-tgz": "del-cli *.tgz",
     "move-tgz": "npm run copy-tgz & npm run del-tgz",
-    "build-all": "npm run pack-core & npm run pack-components & npm run move-tgz",
+    "clean-dist": "del-cli dist",
+    "clean-documentation": "del-cli documentation",
+    "clean": "npm run clean-dist & npm run clean-documentation",
+    "clean-cache": "npm cache clean [<path>]",
     "install-core": "npm install ./dist/packages/batman-core-1.0.0-alpha.2.tgz --save",
-    "reinstall-core": "npm uninstall ./dist/packages/batman-core-1.0.0-alpha.2.tgz & npm run install-core"
+    "reinstall-core": "npm uninstall ./dist/packages/batman-core-1.0.0-alpha.2.tgz --save & npm run install-core"
   },
   "keywords": [
     "Batman"
@@ -46,6 +64,9 @@
     "typescript": "^2.4.1",
     "webpack": "^2.6.1"
   },
+  "dependencies": {
+    "@batman/core": "file:dist\\packages\\batman-core-1.0.0-alpha.2.tgz"
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -54,8 +75,5 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://code.siemens.com:aravind.pampana/batman.git#commit-ish"
-  },
-  "dependencies": {
-    "@batman/core": "file:dist\\packages\\batman-core-1.0.0-alpha.2.tgz"
   }
 }

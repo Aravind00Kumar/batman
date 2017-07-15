@@ -1,6 +1,5 @@
-var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var path = require('path');
+var config = require('./config/global');
 
 module.exports = {
     context: __dirname,
@@ -17,7 +16,7 @@ module.exports = {
         umdNamedDefine: true
     },
     externals: {
-        '@batman/core/core': '@batman/core/core'
+        [config.scope + '/core/core']: config.scope + '/core/core'
     },
     resolve: {
         // Add '.ts' and '.tsx' as a resolvable extension.
@@ -36,7 +35,20 @@ module.exports = {
     devtool: "source-map",
     plugins: [
         new CopyWebpackPlugin([
-            { from: __dirname + '/build/package.components.json', to: __dirname + '/dist/output/components/package.json' }
+            {
+                from: __dirname + '/build/package.components.json', to: __dirname + '/dist/output/components/package.json',
+                transform: function (content, path) {
+                    var package = JSON.parse(content.toString());;
+                    package.name = config.scope + '/components';
+                    package.version = config.version;
+                    package.author = config.author;
+                    package.license = config.license;
+                    package.keywords = config.keywords;
+                    package.keywords.push(config.scope + '-components');
+                    package.keywords.push(config.name + '-components');
+                    return new Buffer.from(JSON.stringify(package));
+                }
+            },
         ], { copyUnmodified: true }),
     ]
 }

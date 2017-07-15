@@ -1,8 +1,8 @@
 {
   "port": 8000,
-  "files": ["./src/**/*.{html,htm,css,js}",
-            "./demo/**/*.{html,htm,css,js}",
+  "files": ["./packages/**/*.{html,htm,css,js}",
+            "./public/**/*.{html,htm,css,js}",
             "./docs/**/*.{png}",
             "./documentation/**/*.{html,htm,css,js}"],
-  "server": { "baseDir": "./", "index":"demo/index.html" }
+  "server": { "baseDir": "./", "index":"public/index.html" }
 }
