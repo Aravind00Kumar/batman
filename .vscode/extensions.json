@@ -1,0 +1,10 @@
+{
+  // See http://go.microsoft.com/fwlink/?LinkId=827846
+  // for the documentation about the extensions.json format
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "eg2.tslint",
+    "robertohuertasm.vscode-icons",
+    "sasa.vscode-sass-format"
+  ]
+}

@@ -16,9 +16,11 @@ src/**/*.js
 @batman
 
 # ignore demo scripts folder
-demo/scripts
-demo/css
+public/scripts
+public/css
 
-# ignore demo scripts folder
-dist/scripts
-dist/css
+# ignore distribution folder
+dist
+
+# ignore tgz files
+*.tgz

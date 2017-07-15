@@ -1,6 +1,38 @@
 {
-	"files.exclude" :{
-		"**/*.js": { "when": "$(basename).ts"},
+	"files.exclude": {
+		"**/*.js": {
+			"when": "$(basename).ts"
+		},
 		"**/*.map": true
-	}
-} 
+	},
+	"vsicons.projectDetection.disableDetect": true,
+	"vsicons.associations.files": [
+		{
+			"icon": "webpack",
+			"extensions": [
+				"webpack.config.components.umd.js",
+				"webpack.config.core.umd.js",
+				"webpack.config.multi.js",
+				"webpack.config.single.js",
+				"webpack.config.components.umd.prod.js",
+				"webpack.config.core.umd.prod.js",
+				"webpack.config.multi.prod.js",
+				"webpack.config.single.prod.js"
+			],
+			"filename": true,
+			"format": "svg"
+		},
+				{
+			"icon": "tsconfig",
+			"extensions": [
+				"tsconfig.components.json",
+				"tsconfig.core.json",
+				"tsconfig.multi.json",
+				"tsconfig.single.json"
+			],
+			"filename": true,
+			"format": "svg"
+		}
+
+	]
+}
