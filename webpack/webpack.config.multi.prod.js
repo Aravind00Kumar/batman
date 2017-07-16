@@ -1,9 +1,12 @@
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var config = require('./config/global');
+var config = require('../config/global');
+var path = require('path');
+
+let dirname = path.join(__dirname, '../');
 
 module.exports = {
-    context: __dirname,
+    context: dirname,
     entry: {
         // application entry point
         core: ['./node_modules/' + config.scope + '/core/core.js'],
@@ -14,7 +17,7 @@ module.exports = {
     output: {
         libraryTarget: 'var',
         library: config.libraryName,
-        path: __dirname + '/dist/scripts/' + config.name + '/',
+        path: dirname + '/dist/scripts/' + config.name + '/',
         filename: "[name].min.js",
         sourceMapFilename: "[name].min.js.map",
         chunkFilename: "[id].min.js"
@@ -23,7 +26,7 @@ module.exports = {
         extensions: [".ts", ".js"]
     },
     module: {
-        loaders: [{ test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({ configFileName: 'tsconfig.multi.json' }) }]
+        loaders: [{ test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({ configFileName: 'webpack/tsconfig.multi.json' }) }]
     },
     devtool: "source-map",
     plugins: [
@@ -32,7 +35,7 @@ module.exports = {
             minChunks: Infinity
         }),
         new CopyWebpackPlugin([
-            { from: __dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: __dirname + '/dist/scripts/' + config.name + '/polyfills.min.js' }
+            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/scripts/' + config.name + '/polyfills.min.js' }
         ], { copyUnmodified: true }),
 
     ]

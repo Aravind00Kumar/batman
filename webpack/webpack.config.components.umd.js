@@ -1,15 +1,17 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var config = require('./config/global');
+var config = require('../config/global');
+var path = require('path');
 
+let dirname = path.join(__dirname, '../');
 module.exports = {
-    context: __dirname,
+    context: dirname,
     entry: {
         components: './packages/components/src/components.ts'
     },
     output: {
         libraryTarget: 'umd',
         publicPath: "/dist/output/components/",
-        path: __dirname + '/dist/output/components',
+        path: dirname + '/dist/output/components',
         filename: "[name].js",
         sourceMapFilename: "[name].js.map",
         chunkFilename: "[id].js",
@@ -27,7 +29,7 @@ module.exports = {
             // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
             {
                 test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({
-                    configFileName: 'tsconfig.components.json'
+                    configFileName: 'webpack/tsconfig.components.json'
                 })
             }
         ]
@@ -36,7 +38,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {
-                from: __dirname + '/build/package.components.json', to: __dirname + '/dist/output/components/package.json',
+                from: dirname + '/build/package.components.json', to: dirname + '/dist/output/components/package.json',
                 transform: function (content, path) {
                     var package = JSON.parse(content.toString());;
                     package.name = config.scope + '/components';
