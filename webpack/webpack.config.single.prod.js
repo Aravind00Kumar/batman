@@ -12,7 +12,7 @@ module.exports = {
     output: {
         libraryTarget: 'var',
         library: config.libraryName,
-        path: dirname + '/dist/scripts/',
+        path: dirname + '/dist/output/es5/',
         filename: "[name].min.js",
         sourceMapFilename: "[name].min.js.map"
     },
@@ -26,7 +26,7 @@ module.exports = {
     devtool: "source-map",
     plugins: [
         new CopyWebpackPlugin([
-            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/scripts/' + config.name + '-polyfills.min.js' }
+            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/output/es5/' + config.name + '-polyfills.min.js' }
         ], { copyUnmodified: true }),
     ]
 }

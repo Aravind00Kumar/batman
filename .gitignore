@@ -1,5 +1,6 @@
 # Ignore node_modules folder
 node_modules
+
 # Ignore node_modules folder
 documentation
 
@@ -9,18 +10,13 @@ documentation
 # ignore all source map
 *.map
 
-# ignore all javascript files under src folder
-src/**/*.js
-
-# ignore build folder
-@batman
-
-# ignore demo scripts folder
+# ignore public scripts folder
 public/scripts
 public/css
 
-# ignore distribution folder
+# ignore distribution and folder
 dist
+build
 
 # ignore tgz files
 *.tgz

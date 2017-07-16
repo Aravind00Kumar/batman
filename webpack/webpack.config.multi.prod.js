@@ -17,7 +17,7 @@ module.exports = {
     output: {
         libraryTarget: 'var',
         library: config.libraryName,
-        path: dirname + '/dist/scripts/' + config.name + '/',
+        path: dirname + '/dist/output/es5-components/',
         filename: "[name].min.js",
         sourceMapFilename: "[name].min.js.map",
         chunkFilename: "[id].min.js"
@@ -35,7 +35,7 @@ module.exports = {
             minChunks: Infinity
         }),
         new CopyWebpackPlugin([
-            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/scripts/' + config.name + '/polyfills.min.js' }
+            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/output/es5-components/polyfills.min.js' }
         ], { copyUnmodified: true }),
 
     ]

@@ -37,7 +37,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {
-                from: dirname + '/build/package.core.json', to: dirname + '/dist/output/core/package.json',
+                from: dirname + '/config/package.core.json', to: dirname + '/dist/output/core/package.json',
                 transform: function (content, path) {
                     var package = JSON.parse(content.toString());;
                     package.name = config.scope + '/core';
