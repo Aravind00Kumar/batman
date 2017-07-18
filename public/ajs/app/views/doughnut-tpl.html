@@ -1,0 +1,106 @@
+<nav class="flex item-full">
+    <ul class="no-pad-mar">
+        <li class="flex">
+            <a href="#" class=""> Basic Example </a>
+        </li>
+        <li class="flex">
+            <a class="selected" href="#" class=""> Basic Example </a>
+        </li>
+        <li class="flex">
+            <a href="#" class=""> Basic Example </a>
+        </li>
+    </ul>
+</nav>
+
+<section class="flex item-full column">
+
+    <div class="panel">
+        <h2> Single mono color </h2>
+        <div class="flex column nowrap">
+            <bat-doughnut options="doughnutCtrl.example1.options"></bat-doughnut>
+            <div class="flex column">
+                <div class="flex row nowrap">
+                    <label> Start Angle</label>
+                    <label> End Angle</label>
+                    <label> Stroke </label>
+                </div>
+                <div class="flex row nowrap">
+                    <input id="startAngle" placeholder="Start angle" ng-model="doughnutCtrl.example1.options.startAngle" />
+                    <input id="endAngle" placeholder="End angle" ng-model="doughnutCtrl.example1.options.endAngle" />
+                    <input id="strokeValue" readonly ng-model="doughnutCtrl.example1.options.stroke">
+                    <button id="apply" ng-click="doughnutCtrl.example1.refresh()"> Apply</button><br>
+                </div>
+                <div class="flex row nowrap">
+                    <input id="start" type="range" min="0" max="360" step="1" ng-model="doughnutCtrl.example1.options.startAngle" ng-change="doughnutCtrl.example1.refresh()">
+                    <input id="end" type="range" min="0" max="360" step="1" ng-model="doughnutCtrl.example1.options.endAngle" ng-change="doughnutCtrl.example1.refresh()">
+                    <input id="stroke" type="range" min="2" max="10" step="1" ng-model="doughnutCtrl.example1.options.stroke" ng-change="doughnutCtrl.example1.refresh()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2> Single mono color </h2>
+        <div class="flex column nowrap">
+            <bat-doughnut options="doughnutCtrl.example2.options"></bat-doughnut>
+            <div class="flex column">
+                <div class="flex row nowrap">
+                    <label> Start Angle</label>
+                    <label> End Angle</label>
+                    <label> Stroke </label>
+                </div>
+                <div class="flex row nowrap">
+                    <input placeholder="Start angle" ng-model="doughnutCtrl.example2.options.startAngle" />
+                    <input placeholder="End angle" ng-model="doughnutCtrl.example2.options.endAngle" />
+                    <input readonly ng-model="doughnutCtrl.example2.options.stroke">
+                    <button ng-click="doughnutCtrl.example2.refresh()"> Apply</button><br>
+                </div>
+                <div class="flex row nowrap">
+                    <input type="range" min="0" max="360" step="1" ng-model="doughnutCtrl.example2.options.startAngle" ng-change="doughnutCtrl.example2.refresh()">
+                    <input type="range" min="0" max="360" step="1" ng-model="doughnutCtrl.example2.options.endAngle" ng-change="doughnutCtrl.example2.refresh()">
+                    <input type="range" min="2" max="10" step="1" ng-model="doughnutCtrl.example2.options.stroke" ng-change="doughnutCtrl.example2.refresh()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel">
+        <h2> Multi color </h2>
+        <div class="flex row">
+            <bat-doughnut options="doughnutCtrl.m1.options"></bat-doughnut>
+            <ul>
+                <li><b style="background:#e91e63"></b> Task 1 - 20%</li>
+                <li><b style="background:#009688"></b> Task 2 - 15%</li>
+                <li><b style="background:#ff5722"></b> Task 3 - 10%</li>
+                <li><b style="background:#00bcd4"></b> Task 4 - 25%</li>
+                <li><b style="background:#9c27b0"></b> Task 5 - 30%</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2> Justice League episodes</h2>
+        <div class="flex row">
+            <bat-doughnut options="doughnutCtrl.m2.options"></bat-doughnut>
+        </div>
+        <ul>
+            <li><b style="background:#e91e63"></b> Secret Origins</li>
+            <li><b style="background:#009688"></b> In Blackest Night</li>
+            <li><b style="background:#585858"></b> The Enemy Below</li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="panel">
+        <h2> Justice League Superheros Strength </h2>
+        <div class="flex row wrap">
+            <div class="pad-2x" ng-repeat="item in doughnutCtrl.m3 track by $index">
+                <bat-doughnut options="item"></bat-doughnut>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>

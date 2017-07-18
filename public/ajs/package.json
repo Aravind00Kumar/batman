@@ -9,6 +9,8 @@
   "author": "Aravind Kumar P",
   "license": "ISC",
   "dependencies": {
+    "@batman/es5": "file:..\\..\\build\\batman-es5-1.0.0-alpha.2.tgz",
+    "@batman/es5-components": "file:..\\..\\build\\batman-es5-components-1.0.0-alpha.2.tgz",
     "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.5"
   }

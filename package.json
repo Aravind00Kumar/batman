@@ -62,7 +62,7 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
-    "@batman/core": "file:dist\\packages\\batman-core-1.0.0-alpha.2.tgz"
+    "@batman/core": "file:build\\batman-core-1.0.0-alpha.2.tgz"
   },
   "config": {
     "commitizen": {
