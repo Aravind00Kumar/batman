@@ -11,7 +11,8 @@
     ]
   },
   "include": [
-    "../packages",
+    "../packages/core",
+    "../packages/components",
     "../node_modules/@batman"
   ],
   "exclude": [
