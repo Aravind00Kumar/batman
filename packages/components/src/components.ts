@@ -8,7 +8,7 @@
 import { Doughnut } from './doughnut/doughnut';
 import { List } from './list/list';
 import { Tree } from './tree/tree';
-import { OptimalTree } from './tree/optimal-tree';
+import { OptimalTree, IOptimalTreeNode, IOptimalTreeOptions } from './tree/optimal-tree';
 
 // import all components
-export { Doughnut, List, Tree, OptimalTree }; 
+export { Doughnut, List, Tree, OptimalTree, IOptimalTreeNode, IOptimalTreeOptions }; 

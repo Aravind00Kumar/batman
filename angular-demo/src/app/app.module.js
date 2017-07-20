@@ -14,6 +14,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms"); // <-- NgModel lives here
 var app_component_1 = require("./app.component");
 var bat_list_component_1 = require("./bat-list.component");
+var bat_tree_component_1 = require("./bat-tree.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,7 +27,7 @@ AppModule = __decorate([
             forms_1.FormsModule // <-- import the FormsModule before binding with [(ngModel)]
         ],
         declarations: [
-            app_component_1.AppComponent, bat_list_component_1.BatListComponent
+            app_component_1.AppComponent, bat_list_component_1.BatListComponent, bat_tree_component_1.BatTreeComponent
         ],
         bootstrap: [app_component_1.AppComponent]
     }),

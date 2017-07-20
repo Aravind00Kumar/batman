@@ -15,7 +15,9 @@ export class Hero {
       <label>name: </label>
       <input [(ngModel)]="hero.name" placeholder="name">
     </div>
-    <bat-list></bat-list>
+    <div style="height:400px;">
+      <bat-tree></bat-tree>
+    </div>
     `
 })
 export class AppComponent {

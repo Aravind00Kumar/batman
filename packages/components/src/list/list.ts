@@ -7,13 +7,6 @@ export interface IListComponent {
     refresh(): void;
 }
 
-/**
- * Interface for doughnut component values
- */
-export interface IListValue {
-    percentage: number,
-    color: string
-}
 
 /**
  * Interface for doughnut component options

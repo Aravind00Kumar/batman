@@ -81,6 +81,9 @@
             width: 100%;
         }
     }
+    .container.nonactive {
+        overflow: auto;
+    }
 
     ul {
         li {
@@ -94,7 +97,7 @@
                 color: $color;
             }
 
-            .icon {
+            .caret {
                 width: 0;
                 height: 0;
                 border-style: solid;
@@ -102,14 +105,14 @@
                 display: none;
             }
 
-            .icon.close {
+            .caret.close {
                 display: initial;
                 border-width: 4px 0 4px 7px;
                 margin-right: 4px;
                 border-color: transparent transparent transparent $color;
             }
 
-            .icon.open {
+            .caret.open {
                 display: initial;
                 border-width: 0 0 8px 7px;
                 margin-right: 4px;
@@ -117,10 +120,11 @@
                 border-color: transparent transparent $color transparent;
             }
 
-            .icons2 {
+            .icons, img {
                 height: 17px;
                 width: inherit;
                 font-size: 16px;
+                width:17px;
             }
             span{
                 padding-left: 5px;
