@@ -41,7 +41,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {
-                from: dirname + '/config/package.aoi.json', to: dirname + '/dist/output/aio/package.json',
+                from: dirname + 'config\\package.aio.json', to: dirname + '\\dist\\output\\aio\\package.json',
                 transform: function (content, path) {
                     var package = JSON.parse(content.toString());;
                     package.name = config.scope + '/aio';

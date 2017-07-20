@@ -5,10 +5,14 @@
  */
 
 // import all components
-import { Doughnut } from './doughnut/doughnut';
-import { List } from './list/list';
+import { Doughnut, IDoughnutComponent, IDoughnutOptions } from './doughnut/doughnut';
+import { List, IListOptions, IListComponent } from './list/list';
 import { Tree } from './tree/tree';
-import { OptimalTree, IOptimalTreeNode, IOptimalTreeOptions } from './tree/optimal-tree';
+import { OptimalTree, ITreeComponent, IOptimalTreeNode, IOptimalTreeOptions } from './tree/optimal-tree';
 
 // import all components
-export { Doughnut, List, Tree, OptimalTree, IOptimalTreeNode, IOptimalTreeOptions }; 
+export {
+    Doughnut, IDoughnutComponent, IDoughnutOptions,
+    List, IListComponent, IListOptions,
+    Tree, OptimalTree, ITreeComponent, IOptimalTreeOptions, IOptimalTreeNode
+}; 

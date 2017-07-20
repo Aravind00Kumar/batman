@@ -35,6 +35,11 @@
     "webpack-components": "webpack --config webpack/webpack.config.components.umd.js",
     "webpack-components-prod": "webpack -p --config webpack/webpack.config.components.umd.prod.js",
     "build-components": "npm run webpack-components & npm run webpack-components-prod & npm run copy-styles-components & npm pack ./dist/output/components & npm run move-tgz",
+
+    "webpack-aio": "webpack --config webpack/webpack.config.aio.umd.js",
+    "webpack-aio-prod": "webpack -p --config webpack/webpack.config.aio.umd.prod.js",
+    "build-aio": "npm run webpack-aio & npm run webpack-aio-prod & npm run copy-styles-components & npm pack ./dist/output/aio & npm run move-tgz",
+
     "build-all": "npm run build-styles & npm run build-single & npm run build-multi & npm run build-core & npm run build-components",
     "rebuild-all": "npm run clean-dist & npm run build-all",
     "publish-all": "npm run build-all & npm run copy-styles",

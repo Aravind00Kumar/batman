@@ -30,8 +30,10 @@
       '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
 
       // 'batman/components': 'npm:batman/components.js',
-      '@batman/components/components': 'npm:@batman/components/components.js',
-      '@batman/core/core': 'npm:@batman/core/core.js',
+      '@batman/components/components': 'npm:@batman/components/components.min.js',
+      '@batman/core/core': 'npm:@batman/core/core.min.js',
+      '@batman/aio/module': 'npm:@batman/aio/module.min.js',
+      '@batman/aio/list': 'npm:@batman/aio/list.min.js',
 
       // other libraries
       'rxjs': 'npm:rxjs',

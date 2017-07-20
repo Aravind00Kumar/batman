@@ -17,7 +17,9 @@
 				"webpack.config.components.umd.prod.js",
 				"webpack.config.core.umd.prod.js",
 				"webpack.config.multi.prod.js",
-				"webpack.config.single.prod.js"
+				"webpack.config.single.prod.js",
+				"webpack.config.aio.umd.js",
+				"webpack.config.aio.umd.prod.js"
 			],
 			"filename": true,
 			"format": "svg"
@@ -28,7 +30,8 @@
 				"tsconfig.components.json",
 				"tsconfig.core.json",
 				"tsconfig.multi.json",
-				"tsconfig.single.json"
+				"tsconfig.single.json",
+				"tsconfig.aio.json"
 			],
 			"filename": true,
 			"format": "svg"

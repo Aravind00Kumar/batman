@@ -162,4 +162,4 @@ export class OptimalTree
 
 }
 
-export { IOptimalTreeNode, IOptimalTreeOptions };
+export { ITreeComponent, IOptimalTreeNode, IOptimalTreeOptions };
