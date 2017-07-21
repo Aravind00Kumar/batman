@@ -6,15 +6,14 @@ let dirname = path.join(__dirname, '../');
 module.exports = {
     context: dirname,
     entry: {
-        module: './packages/aio/src/module.ts',
-        list: './packages/aio/src/list.ts'
+        'batman.module': './packages/aio/src/batman.module.ts'
     },
     output: {
         libraryTarget: 'umd',
         publicPath: "/dist/output/aio/",
         path: dirname + '/dist/output/aio',
         filename: "[name].min.js",
-        //sourceMapFilename: "[name].min.js.map",
+        sourceMapFilename: "[name].min.js.map",
         chunkFilename: "[id].min.js",
         umdNamedDefine: true
     },
@@ -27,6 +26,6 @@ module.exports = {
     module: {
         loaders: [{ test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({ configFileName: 'webpack/tsconfig.aio.json' }) }]
     },
-    //devtool: "source-map"
+    devtool: "source-map"
 
 }

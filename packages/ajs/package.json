@@ -1,0 +1,22 @@
+{
+  "name": "batman",
+  "short": "bat",
+  "version": "v1.0.0-alpha.2",
+  "description": "UI Components in vanilla js (TypeScript)",
+  "scripts": {
+    "install-es5-components": "npm install ../../build/batman-es5-components-1.0.0-alpha.2.tgz --save",
+    "uninstall-es5-components": "npm uninstall @batman/core",
+    "reinstall-es5-components": "npm run uninstall-core & npm run install-core"
+  },
+  "keywords": [
+    "Batman-components"
+  ],
+  "author": "Aravind Kumar P",
+  "license": "ISC",
+  "dependencies": {
+    "@batman/core": "file:..\\..\\build\\batman-core-1.0.0-alpha.2.tgz",
+    "@batman/es5-components": "file:..\\..\\build\\batman-es5-components-1.0.0-alpha.2.tgz",
+    "@types/angular": "^1.6.27",
+    "angular": "^1.6.5"
+  }
+}

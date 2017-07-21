@@ -32,8 +32,7 @@
       // 'batman/components': 'npm:batman/components.js',
       '@batman/components/components': 'npm:@batman/components/components.min.js',
       '@batman/core/core': 'npm:@batman/core/core.min.js',
-      '@batman/aio/module': 'npm:@batman/aio/module.min.js',
-      '@batman/aio/list': 'npm:@batman/aio/list.min.js',
+      '@batman/aio/batman.module': 'npm:@batman/aio/batman.module.js',
 
       // other libraries
       'rxjs': 'npm:rxjs',

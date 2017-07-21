@@ -18,7 +18,8 @@ const global = {
     libraryName: libraryName,
     keywords: package.keywords,
     author: package.author,
-    license: package.license
+    license: package.license,
+    short: package.short
 };
 
 module.exports = global;

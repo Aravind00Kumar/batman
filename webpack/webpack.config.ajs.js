@@ -8,16 +8,13 @@ let dirname = path.join(__dirname, '../');
 module.exports = {
     context: dirname,
     entry: {
-        // application entry point
-        core: ['./packages/components/node_modules/' + config.scope + '/core/core.js'],
-        doughnut: './packages/components/src/doughnut/doughnut.ts',
-        list: './packages/components/src/list/list.ts',
-        tree: './packages/components/src/tree/optimal-tree.ts'
+        module: './packages/ajs/src/module.ts',
+        list: './packages/ajs/src/list.ts'
     },
     output: {
-        libraryTarget: 'var',
-        library: config.libraryName,
-        path: dirname + '/dist/output/es5-components/',
+        libraryTarget: 'this',
+        library: config.libraryName + 'AJS',
+        path: dirname + '/dist/output/ajs/',
         filename: "[name].js",
         sourceMapFilename: "[name].js.map",
         chunkFilename: "[id].js"
@@ -25,28 +22,31 @@ module.exports = {
     resolve: {
         extensions: [".ts", ".js"]
     },
+    externals: {
+        angular: 'angular'
+    },
     module: {
-        loaders: [{ test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({ configFileName: 'webpack/tsconfig.multi.json' }) }]
+        loaders: [{ test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({ configFileName: 'webpack/tsconfig.ajs.json' }) }]
     },
     devtool: "source-map",
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            names: 'core',
+            names: 'module',
             minChunks: Infinity
         }),
         new CopyWebpackPlugin([
-            { from: dirname + '/packages/components/node_modules/' + config.scope + '/core/polyfills.js', to: dirname + '/dist/output/es5-components/polyfills.js' },
+            { from: dirname + '/packages/components/node_modules/' + config.scope + '/core/polyfills.js', to: dirname + '/dist/output/ajs/polyfills.js' },
             {
-                from: dirname + '/config/package.es5.components.json', to: dirname + '/dist/output/es5-components/package.json',
+                from: dirname + '/config/package.ajs.json', to: dirname + '/dist/output/ajs/package.json',
                 transform: function (content, path) {
                     var package = JSON.parse(content.toString());;
-                    package.name = config.scope + '/es5-components';
+                    package.name = config.scope + '/ajs';
                     package.version = config.version;
                     package.author = config.author;
                     package.license = config.license;
                     package.keywords = config.keywords;
-                    package.keywords.push(config.scope + '-es5-components');
-                    package.keywords.push(config.name + '-es5-components');
+                    package.keywords.push(config.scope + '-ajs');
+                    package.keywords.push(config.name + '-ajs');
                     return new Buffer.from(JSON.stringify(package));
                 }
             }

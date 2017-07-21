@@ -9,7 +9,7 @@ module.exports = {
     context: dirname,
     entry: {
         // application entry point
-        core: ['./node_modules/' + config.scope + '/core/core.js'],
+        core: ['./packages/components/node_modules/' + config.scope + '/core/core.js'],
         doughnut: './packages/components/src/doughnut/doughnut.ts',
         list: './packages/components/src/list/list.ts',
         tree: './packages/components/src/tree/optimal-tree.ts'
@@ -33,10 +33,6 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             names: 'core',
             minChunks: Infinity
-        }),
-        new CopyWebpackPlugin([
-            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/output/es5-components/polyfills.min.js' }
-        ], { copyUnmodified: true }),
-
+        })
     ]
 }

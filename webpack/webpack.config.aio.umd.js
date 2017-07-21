@@ -6,8 +6,7 @@ let dirname = path.join(__dirname, '../');
 module.exports = {
     context: dirname,
     entry: {
-        module: './packages/aio/src/module.ts',
-        list: './packages/aio/src/list.ts'
+        'batman.module': './packages/aio/src/batman.module.ts'
     },
     output: {
         libraryTarget: 'umd',

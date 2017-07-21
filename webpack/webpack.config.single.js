@@ -31,7 +31,7 @@ module.exports = {
     devtool: "source-map",
     plugins: [
         new CopyWebpackPlugin([
-            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.js', to: dirname + '/dist/output/es5/' + config.name + '-polyfills.js' },
+            { from: dirname + '/packages/components/node_modules/' + config.scope + '/core/polyfills.js', to: dirname + '/dist/output/es5/' + config.name + '-polyfills.js' },
             {
                 from: dirname + '/config/package.es5.json', to: dirname + '/dist/output/es5/package.json',
                 transform: function (content, path) {

@@ -23,10 +23,5 @@ module.exports = {
     module: {
         loaders: [{ test: /\.ts?$/, loader: 'ts-loader?' + JSON.stringify({ configFileName: 'webpack/tsconfig.single.json' }) }]
     },
-    devtool: "source-map",
-    plugins: [
-        new CopyWebpackPlugin([
-            { from: dirname + '/node_modules/' + config.scope + '/core/polyfills.min.js', to: dirname + '/dist/output/es5/' + config.name + '-polyfills.min.js' }
-        ], { copyUnmodified: true }),
-    ]
+    devtool: "source-map"
 }

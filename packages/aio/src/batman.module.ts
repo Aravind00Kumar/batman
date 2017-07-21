@@ -2,11 +2,8 @@ import { NgModule } from '@angular/core';
 import { BatListComponent } from './list';
 
 @NgModule({
-  declarations: [ BatListComponent ]
+  declarations: [BatListComponent],
+  exports: [BatListComponent]
 })
 
-export class ComponentsModule {
-  constructor(){
-    
-  }
-}
+export class BatmanModule { }

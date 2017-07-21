@@ -20,6 +20,9 @@ export class Hero {
     <div style="height:400px;">
       <bat-list [options]="listOptions"></bat-list>
     </div>
+    <div style="height:400px;">
+      <bat-list [options]="listOptions"></bat-list>
+    </div>
     `
 })
 export class AppComponent {
