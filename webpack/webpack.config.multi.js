@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var config = require('../config/global');
 var path = require('path');
 
@@ -30,6 +31,7 @@ module.exports = {
     },
     devtool: "source-map",
     plugins: [
+        //new BundleAnalyzerPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             names: 'core',
             minChunks: Infinity

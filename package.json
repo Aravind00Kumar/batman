@@ -29,7 +29,7 @@
     "build-single": "npm run webpack-single & npm run webpack-single-prod & npm run copy-styles-single & npm pack ./dist/output/es5 & npm run move-tgz",
     "webpack-multi": "webpack --config webpack/webpack.config.multi.js",
     "webpack-multi-prod": "webpack -p --config webpack/webpack.config.multi.prod.js",
-    "build-multi": "npm run webpack-multi & npm run webpack-multi-prod & npm run copy-styles-multi & npm pack ./dist/output/es5-components & npm run move-tgz",
+    "build-multi": "npm run webpack-multi & npm pack ./dist/output/es5-components & npm run move-tgz",
     "webpack-core": "webpack --config webpack/webpack.config.core.umd.js",
     "webpack-core-prod": "webpack -p --config webpack/webpack.config.core.umd.prod.js ",
     "build-core": "npm run webpack-core & npm run webpack-core-prod & npm run copy-styles-core & npm pack ./dist/output/core & npm run move-tgz",
@@ -40,6 +40,8 @@
     "webpack-aio-prod": "webpack -p --config webpack/webpack.config.aio.umd.prod.js",
     "build-aio": "npm run webpack-aio & npm run webpack-aio-prod & npm run copy-styles-components & npm pack ./dist/output/aio & npm run move-tgz",
     "webpack-ajs": "webpack --config webpack/webpack.config.ajs.js",
+    "webpack-ajs-prod": "webpack -p --config webpack/webpack.config.ajs.prod.js",
+    "build-ajs": "npm run webpack-ajs & npm run webpack-ajs-prod & npm run copy-styles-components & npm pack ./dist/output/ajs & npm run move-tgz",
     "build-all": "npm run build-styles & npm run build-single & npm run build-multi & npm run build-core & npm run build-components",
     "rebuild-all": "npm run clean-dist & npm run build-all",
     "publish-all": "npm run build-all & npm run copy-styles",
@@ -68,7 +70,8 @@
     "rollup-plugin-ts": "^0.1.0",
     "ts-loader": "^2.2.2",
     "typescript": "^2.4.1",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-bundle-analyzer": "^2.8.3"
   },
   "dependencies": {},
   "config": {

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('app', ['ui.router'])
+    angular.module('app', ['ui.router','batman'])
         .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
             $stateProvider.state({
@@ -15,6 +15,13 @@
                     templateUrl: 'app/views/doughnut-tpl.html',
                     controller: 'app.doughnutController',
                     controllerAs: 'doughnutCtrl'
+                })
+                .state({
+                    name: 'list',
+                    url: '/list',
+                    templateUrl: 'app/views/list-tpl.html',
+                    controller: 'app.listController',
+                    controllerAs: 'listCtrl'
                 });
             $urlRouterProvider.otherwise('/home');
         }])
