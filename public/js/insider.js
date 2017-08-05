@@ -46,7 +46,7 @@ var AppModule;
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                         var controllerInstance = new route.controller();
                         el.innerHTML = module.template(xmlHttp.responseText, controllerInstance);
-                        controllerInstance.onload(el);
+                        if(toString.call(controllerInstance.onload) === '[object Function]')controllerInstance.onload(el);
                     }
                 }
                 xmlHttp.open("GET", route.templateId, true);
@@ -82,7 +82,8 @@ var AppModule;
     function ListMenu(element, options) {
         var _that = this;
         this.__proto__ = new BaseComponent(element, 'menu', options);
-        this.selected = this.options.data[0];
+        var url = location.hash.slice(1) || '/';
+        this.selected = this.options.data.find(function (item) { return item.url == url });
         this.render = function () {
             return h('ul.no-pad-mar',
                 [this.options.data.map(function (item, index) {

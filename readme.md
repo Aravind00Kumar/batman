@@ -4,7 +4,7 @@ Batman is a native JavaScript UI components library developed using TypeScript, 
 
 ```
 <!-- include only to support IE browsers -->
-<script src="../dist/batman-polifills.js"></script>
+<script src="../dist/batman-polyfills.js"></script>
 
 <script src="../dist/batman.js"></script>
 <link href="../dist/css/batman.css" rel="stylesheet" />
@@ -25,7 +25,7 @@ In the `index.html`
     <div class="flex">
         <div id="demo" style="height:200px; width:200px"></div>
     </div>
-    <script src="./scripts/batman-polifills.js"></script>
+    <script src="./scripts/batman-polyfills.js"></script>
     <script src="./scripts/batman.js"></script>
     <script src="main.js"></script>
 </body>
