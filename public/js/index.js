@@ -14,7 +14,8 @@
         { text: 'Complex template', url: '/list-complex-template', template: 'list/complex-template.htm', controller: 'complexTemplateController' },
         { text: 'Custom event', url: '/list-custom-event', template: 'list/custom-event.htm', controller: 'customEventController' },
         { text: 'Huge data', url: '/lis-huge-data', template: 'list/huge-data.htm', controller: 'hugeDataController' },
-        { text: 'Tree', url: '/tree-home', template: 'tree/home.htm', controller: 'treeHomeController' }
+        { text: 'Tree', url: '/tree-home', template: 'tree/home.htm', controller: 'treeHomeController' },
+        { text: 'Basic', url: '/tree-basic', template: 'tree/basic.htm', controller: 'basicController' }
     ];
     componentRoutes.forEach(function (route) {
         module.route(route.url, route.template, route.controller);
