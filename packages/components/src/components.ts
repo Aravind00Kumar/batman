@@ -10,9 +10,10 @@ import { List, IListOptions, IListComponent } from './list/list';
 import { Tree } from './tree/tree';
 import { OptimalTree, ITreeComponent, IOptimalTreeNode, IOptimalTreeOptions } from './tree/optimal-tree';
 
+
 // import all components
 export {
     Doughnut, IDoughnutComponent, IDoughnutOptions,
     List, IListComponent, IListOptions,
-    Tree, OptimalTree, ITreeComponent, IOptimalTreeOptions, IOptimalTreeNode
+    Tree, OptimalTree, ITreeComponent, IOptimalTreeOptions, IOptimalTreeNode,
 }; 

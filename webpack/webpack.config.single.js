@@ -6,7 +6,7 @@ let dirname = path.join(__dirname, '../');
 module.exports = {
     context: dirname,
     entry: {
-        [config.name]: './packages/components/src/components.ts'
+        [config.name]: './packages/components/src/components-core.ts'
     },
     output: {
         libraryTarget: 'var',

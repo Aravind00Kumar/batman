@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var config = require('../config/global');
 var path = require('path');
 
@@ -10,18 +10,18 @@ module.exports = {
     context: dirname,
     entry: {
         // application entry point
-        core: ['./packages/components/node_modules/' + config.scope + '/core/core.js'],
+        core: './packages/components/node_modules/' + config.scope + '/core/core.js',
         doughnut: './packages/components/src/doughnut/doughnut.ts',
         list: './packages/components/src/list/list.ts',
         tree: './packages/components/src/tree/optimal-tree.ts'
     },
     output: {
         libraryTarget: 'var',
-        library: config.libraryName,
+        library: [config.libraryName, '[name]'],
         path: dirname + '/dist/output/es5-components/',
         filename: "[name].js",
         sourceMapFilename: "[name].js.map",
-        chunkFilename: "[id].js"
+        chunkFilename: "[id].js",
     },
     resolve: {
         extensions: [".ts", ".js"]
