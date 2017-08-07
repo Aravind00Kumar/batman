@@ -11,10 +11,13 @@
   "dependencies": {
     "@batman/ajs": "file:..\\..\\build\\batman-ajs-1.0.0-alpha.2.tgz",
     "@batman/components": "file:..\\..\\build\\batman-components-1.0.0-alpha.2.tgz",
+    "@batman/components-es5": "file:..\\..\\build\\batman-components-es5-1.0.0-alpha.2.tgz",
     "@batman/core": "file:..\\..\\build\\batman-core-1.0.0-alpha.2.tgz",
+    "@batman/core-es5": "file:..\\..\\build\\batman-core-es5-1.0.0-alpha.2.tgz",
     "@batman/es5": "file:..\\..\\build\\batman-es5-1.0.0-alpha.2.tgz",
     "@batman/es5-components": "file:..\\..\\build\\batman-es5-components-1.0.0-alpha.2.tgz",
     "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.5"
-  }
+  },
+  "devDependencies": {}
 }

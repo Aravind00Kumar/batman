@@ -1,4 +1,4 @@
-import { BaseComponent, h, hParser, VNode } from '@batman/core/core';
+import { BaseComponent, ProjectorOptions, VNode, h } from './../libs';
 
 import { ITreeComponent, IOptimalTreeOptions, IOptimalTreeNode } from './itree';
 

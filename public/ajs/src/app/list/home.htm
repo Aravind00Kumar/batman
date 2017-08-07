@@ -1,0 +1,34 @@
+<h1 class="h1"> List Component Example</h1>
+<h2 class="h5"> Installation and usage</h2>
+
+<ul>
+    <li> Add the following scripts in index.html file
+        <div class="pad-mar-2x no-mar-collapse">
+            <code>
+                &lt;script src="./node_modules/@batman/es5-components/list.js"></script></br>
+            </code>
+        </div>
+    </li>
+    <li>
+        In <code>index.html</code> add the following code
+        </br>
+        <code>&lt;div class="panel flex item-full column no-mar-collapse">
+            <br>&lt;div id="l1" class="flex item-full"></div>
+        <br>&lt;/div></code>
+    </li>
+    <li>
+        In <code>script.js</code> add the following jscode
+        <code>
+            <br>document.addEventListener("DOMContentLoaded", function () {
+            <br> <span class="pad-mar-2x no-mar-collapse"> var dataSource = [{ "text": "0" }, { "text": "1" }, { "text": "2" }]; </span>
+            <br> <span class="pad-mar-2x no-mar-collapse">var List = window.Batman.list.List;</span>
+            <br> <span class="pad-mar-2x no-mar-collapse">new List(document.getElementById("li"), { </span>
+            <br><span class="pad-mar-2x no-mar-collapse"> <span class="pad-mar-2x no-mar-collapse">data: dataSource, </span></span>
+            <br><span class="pad-mar-2x no-mar-collapse"> <span class="pad-mar-2x no-mar-collapse">height: 30, </span></span>
+            <br><span class="pad-mar-2x no-mar-collapse"> <span class="pad-mar-2x no-mar-collapse">pageSize: 5 </span></span>
+            <br> <span class="pad-mar-2x no-mar-collapse">});</span>
+            <br> });</span>
+        </code>
+    </li>
+
+</ul>

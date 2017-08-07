@@ -13,8 +13,12 @@ export class Module {
 export abstract class AbstractDirective{
     public controllerAs: string;
     public bindToController?: boolean | {[boundProperty: string]: string};
-    public restrict: 'E';
+    public restrict =  'E';
+    public template =  '<div class="flex item-full"></div>';
+    public replace  =  true;
+
     constructor(name: string){
+        this.replace = true;
         this.controllerAs = `${name}Ctrl`;
         this.bindToController = {
             options:'=?'

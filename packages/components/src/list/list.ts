@@ -1,4 +1,5 @@
-import { BaseComponent, VNode, h, hParser } from '@batman/core/core';
+import { BaseComponent, ProjectorOptions, VNode, h, hParser } from './../libs';
+
 
 /**
  * List component interface

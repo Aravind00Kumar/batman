@@ -1,8 +1,16 @@
 {
   "port": 8000,
-  "files": ["./packages/**/*.{html,htm,css,js}",
-            "./public/**/*.{html,htm,css,js}",
-            "./docs/**/*.{png}",
-            "./documentation/**/*.{html,htm,css,js}"],
-  "server": { "baseDir": "./", "index":"public/index.html" }
+  "files": [
+    "./packages/**/*.{html,htm,css,js}",
+    "./public/**/*.{html,htm,css,js}",
+    "./docs/**/*.{png}",
+    "./documentation/**/*.{html,htm,css,js}",
+    "./dist/**/*.{js}"
+  ],
+  "server": {
+    "baseDir": "./",
+    "index": "public/index.html"
+  },
+  "exclude": true,
+  "excludedFileTypes": ["./packages/components/node_modules/**/*.*"]
 }
