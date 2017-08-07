@@ -3,20 +3,27 @@
 
 <ul>
     <li> Install the packages
-        <div class="pad-mar-2x no-mar-collapse"><code>npm install ..\\build\\batman-es5-1.0.0-alpha.2.tgz</code></div>
+        <div class="pad-mar-2x no-mar-collapse"><code>npm install ..\\build\\batman-core-es5-1.0.0-alpha.2.tgz</code><br>
+            <code>npm install ..\\build\\batman-components-es5-1.0.0-alpha.2.tgz</code><br>
     </li>
-    <li> Add the following scripts in <code>index.html</code> file
+    <li> Add the following <code>scripts<code> and <code>styles</code> in index.html file
+
         <div class="pad-mar-2x no-mar-collapse">
             <code>
-                &lt;script src="./node_modules/@batman/es5-components/polyfills.js"></script></br>
-                &lt;script src="./node_modules/@batman/es5-components/core.js"></script></br>
+            &lt;link rel="stylesheet" href="./node_modules/@batman/core-es5/batman.css">
+            </code>
+        </div>
+        <div class="pad-mar-2x no-mar-collapse">
+            <code>
+                &lt;script src="./node_modules/@batman/core-es5/polyfills.js"></script></br>
+                &lt;script src="./node_modules/@batman/core-es5/core.js"></script></br>
             </code>
         </div>
     </li>
     <li> Add individual component files in <code>index.html</code>
         <div class="pad-mar-2x no-mar-collapse">
             <code>
-                &lt;script src="./node_modules/@batman/es5-components/{component}.js"></script></br>
+                &lt;script src="./node_modules/@batman/components-es5/{component}.js"></script></br>
             </code>
             <br>
             <code>{component}</code> : list , tree and etc

@@ -4,10 +4,9 @@ Batman is a native JavaScript UI components library developed using TypeScript, 
 
 ```
 <!-- include only to support IE browsers -->
-<script src="../dist/batman-polyfills.js"></script>
 
-<script src="../dist/batman.js"></script>
-<link href="../dist/css/batman.css" rel="stylesheet" />
+    <script src="./node_modules/@batman/core-es5/polyfills.js"></script>
+
 ```
 
 ## How to use
@@ -19,15 +18,20 @@ In the `index.html`
 <html>
 <head>
     <title>Demo</title>
-    <link rel="stylesheet" href="./css/batman.css">
+    <link rel="stylesheet" href="./node_modules/@batman/core-es5/batman.css">
 </head>
 <body>
     <div class="flex">
         <div id="demo" style="height:200px; width:200px"></div>
     </div>
-    <script src="./scripts/batman-polyfills.js"></script>
-    <script src="./scripts/batman.js"></script>
+
+    <script src="./node_modules/@batman/core-es5/polyfills.js"></script>>
+    <script src="./node_modules/@batman/core-es5/core.js"></script>
+    <script src="./node_modules/@batman/components-es5/doughnut.js"></script> 
+    <script src="./node_modules/@batman/components-es5/list.js"></script>
+    <script src="./node_modules/@batman/components-es5/tree.js"></script> 
     <script src="main.js"></script>
+
 </body>
 </html>
 ```
@@ -36,14 +40,16 @@ In `main.js`
 
 ```
 document.addEventListener('DOMContentLoaded', function () {
-    new Batman.Doughnut(document.getElementById('demo'), {
-        values: [ { percentage: 30, color: '#a52a22'} ], 
-        sectorColor: '#03a9f4',
-        title:'Batman'
+    var List = Batman.list.List;
+    var dataSource = [{ "text": "0" }, { "text": "1" }];
+    new List(document.getElementById('demo'), {
+        data: this.dataSource,
+        height: 30,
     });
 });
 
 ```
+> Use `npm start` to run and see the configuration for `angularjs` and `angulario` projects
 
 ## Development Environment setup 
 Install the following applications 
@@ -59,11 +65,7 @@ Install the following applications
 ```
 npm run setup 
 ```
-> Setup installs the following global modules 
->
-> `typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli`
-> 
-> Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command 'npm start'
+> Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command `npm start`
 >   
 > Have a look on [contribution guidelines](https://code.siemens.com/aravind.pampana/batman/blob/master/CONTRIBUTING.md)
 
@@ -75,7 +77,7 @@ npm start
 ### Demo application page
 
 ```
-http://localhost:8000/demo/index.html
+http://localhost:8000/index.html
 ```
 
 ### Generate documentation 
