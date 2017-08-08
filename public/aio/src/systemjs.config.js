@@ -6,7 +6,7 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': '../node_modules/'
     },
     // map tells the System loader where to look for things
     map: {
@@ -29,10 +29,16 @@
       '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
       '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
 
-      // 'batman/components': 'npm:batman/components.js',
-      '@batman/components/components': 'npm:@batman/components/components.min.js',
-      '@batman/core/core': 'npm:@batman/core/core.min.js',
-      '@batman/aio/batman.module': 'npm:@batman/aio/batman.module.js',
+      //// production
+      // '@batman/components/components': 'npm:@batman/components/components.min.js',
+      // '@batman/core/core': 'npm:@batman/core/core.min.js',
+      // '@batman/aio/batman.module': 'npm:@batman/aio/batman.module.js',
+
+
+      //enable it for CORE_DEBUG
+      '@batman/components/components': '../../../dist/output/components/components.js',
+      '@batman/core/core': '../../../dist/output/core/core.js',
+      '@batman/aio/batman.module': '../../../dist/output/aio/batman.module.js',
 
       // other libraries
       'rxjs': 'npm:rxjs',

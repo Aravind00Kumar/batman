@@ -20,7 +20,9 @@ module.exports = {
     externals: {
         [config.scope + '/core/core']: config.scope + '/core/core',
         [config.scope + '/components/components']: config.scope + '/components/components',
-        '@angular/core': '@angular/core'
+        '@angular/core': '@angular/core',
+        //enable it for CORE_DEBUG
+        //['./libs']: 'Batman.core'
     },
     resolve: {
         // Add '.ts' and '.tsx' as a resolvable extension.
@@ -40,7 +42,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {
-                from: dirname + 'config\\package.aio.json', to: dirname + '\\dist\\output\\aio\\package.json',
+                from: dirname + 'config\\package-aio.json', to: dirname + '\\dist\\output\\aio\\package.json',
                 transform: function (content, path) {
                     var package = JSON.parse(content.toString());;
                     package.name = config.scope + '/aio';

@@ -20,7 +20,7 @@ module.exports = {
     externals: {
         [config.scope + '/core/core']: config.scope + '/core/core',
         //enable it for CORE_DEBUG
-        ['./../libs']: 'Batman.core'
+        //['./../libs']: 'Batman.core'
     },
     resolve: {
         // Add '.ts' and '.tsx' as a resolvable extension.

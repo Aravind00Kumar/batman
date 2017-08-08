@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, ElementRef } from '@angular/core';
-import { List, IListComponent, IListOptions } from '@batman/components/components';
+import { List, IListComponent, IListOptions } from './libs';
 
 
 @Component({

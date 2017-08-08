@@ -31,19 +31,19 @@ module.exports.translate = function(load){
 
       return 'templateUrl: "' + resolvedUrl + '"';
     })
-    .replace(stylesRegex, function(match, relativeUrls) {
-      var urls = [];
+    // .replace(stylesRegex, function(match, relativeUrls) {
+    //   var urls = [];
 
-      while ((match = stringRegex.exec(relativeUrls)) !== null) {
-        if (match[2].startsWith('.')) {
-          urls.push('"' + basePath + match[2].substr(1) + '"');
-        } else {
-          urls.push('"' + match[2] + '"');
-        }
-      }
+    //   while ((match = stringRegex.exec(relativeUrls)) !== null) {
+    //     if (match[2].startsWith('.')) {
+    //       urls.push('"' + basePath + match[2].substr(1) + '"');
+    //     } else {
+    //       urls.push('"' + match[2] + '"');
+    //     }
+    //   }
 
-      return "styleUrls: [" + urls.join(', ') + "]";
-    });
+    //   return "styleUrls: [" + urls.join(', ') + "]";
+    // });
 
   return load;
 };
