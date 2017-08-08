@@ -94,11 +94,11 @@ import { Component } from '@angular/core';
 })export class AppHomeComponent{} 
 
 const appRoutes: Routes = [
-  { path: '', component: AppHomeComponent },
-  { path: 'home', component: AppHomeComponent },
-  { path: 'list-home', component: ListHomeComponent },
-  { path: 'list-basic', component: BasicListComponent },
-  { path: 'list-auto-resize', component: BasicListComponent }
+  { path: '', component: AppHomeComponent, pathMatch: 'full' },
+  { path: 'home', component: AppHomeComponent, pathMatch: 'full' },
+  { path: 'list-home', component: ListHomeComponent, pathMatch: 'full' },
+  { path: 'list-basic', component: BasicListComponent, pathMatch: 'full' },
+  { path: 'list-auto-resize', component: BasicListComponent, pathMatch: 'full' }
 ];
 
 
