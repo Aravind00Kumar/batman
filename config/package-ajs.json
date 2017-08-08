@@ -1,3 +1,7 @@
 {
-  "description": "UI Components in vanilla js (TypeScript); es5 components"
+  "description": "UI Components in vanilla js (TypeScript); es5 components",
+  "dependencies": {
+    "@batman/core-es5": "file:..\\batman-core-es5-1.0.0-alpha.2.tgz",
+    "@batman/components-es5": "file:..\\batman-components-es5-1.0.0-alpha.2.tgz"
+  }
 }

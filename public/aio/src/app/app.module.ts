@@ -18,9 +18,7 @@ import { Component } from '@angular/core';
 <ul>
     <li> Install the packages
         <div class="pad-mar-2x no-mar-collapse">
-            <code>npm install ..\\build\\batman-core-1.0.0-alpha.2.tgz</code><br>
-            <code>npm install ..\\build\\batman-components-1.0.0-alpha.2.tgz</code><br>
-            <code>npm install ..\\build\\batman-aio-1.0.0-alpha.2.tgz</code>
+            <code>npm install ..\\\\build\\\\batman-aio-1.0.0-alpha.2.tgz</code>
         </div>
     </li>
     <li> 

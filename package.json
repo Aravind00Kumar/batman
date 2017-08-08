@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start":"concurrently \"npm run styles-dev\" \"npm run webpack-core:watch\" \"npm run webpack-components-es5:watch\" \"lite-server -w\"",
+    "start":"lite-server",
+    "debug":"concurrently \"npm run styles-dev\" \"npm run webpack-core:watch\" \"npm run webpack-components-es5:watch\" \"npm run webpack-ajs:watch\" \"npm run webpack-aio:watch\" \"npm run ts-dev-aio\" \"lite-server -w\"",
 
     "start-ajs":"concurrently \"npm run styles-dev\" \"npm run webpack-ajs:watch\" \"lite-server -w\"",
     "start-aio":"concurrently \"npm run styles-dev\" \"npm run webpack-aio:watch\" \"npm run ts-dev-aio\" \"lite-server -w\"",
@@ -71,7 +72,7 @@
     "del-tgz": "del-cli *.tgz",
     "move-tgz": "npm run copy-tgz & npm run del-tgz",
 
-    "build-all":"npm run build-core-es5-lite & npm run build-components-es5-lite & npm run build-core-lite & npm run build-components-lite & npm run build-aio-lite & npm run build-ajs-lite & npm run move-tgz",
+    "build-all":"npm run build-styles & npm run build-core-es5-lite & npm run build-components-es5-lite & npm run build-core-lite & npm run build-components-lite & npm run build-aio-lite & npm run build-ajs-lite & npm run move-tgz",
 
     "clean-dist": "del-cli dist",
     "clean-build": "del-cli build",

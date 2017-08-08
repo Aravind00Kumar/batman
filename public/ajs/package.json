@@ -4,16 +4,14 @@
   "description": "A sample angularjs application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install-batman": "npm install ../../build/batman-ajs-1.0.0-alpha.2.tgz --save",
+    "uninstall-batman": "npm uninstall @batman/ajs"
   },
   "author": "Aravind Kumar P",
   "license": "ISC",
   "dependencies": {
     "@batman/ajs": "file:..\\..\\build\\batman-ajs-1.0.0-alpha.2.tgz",
-    "@batman/components-es5": "file:..\\..\\build\\batman-components-es5-1.0.0-alpha.2.tgz",
-    "@batman/core-es5": "file:..\\..\\build\\batman-core-es5-1.0.0-alpha.2.tgz",
     "@uirouter/angularjs": "^1.0.5",
     "angular": "^1.6.5"
-  },
-  "devDependencies": {}
+  }
 }
