@@ -11,7 +11,10 @@ cache:
 build:
   stage: build
   script:
+    - npm config set proxy http://194.138.0.4:9400/
+    - npm config set https-proxy http://194.138.0.4:9400/
     - npm install
+    - npm build-core
     - npm run e2e-setup
 test:
   stage: test
