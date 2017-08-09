@@ -1,18 +1,19 @@
-stages:
-  # build
-  # test
-  - release
+image: node:8.0.0
 
+cache:
+    paths:
+    - node/modules/
+    
 cache:
   paths:  
   - node_modules/   
 
-release:
-  before_script:
-    - npm install
-  image: node:8
-  only:
-    - dev@batman/batman
+build:
+  stage: build
   script:
-    - $(npm bin)/semantic-release-gitlab
-  stage: release
+    - npm install
+    - npm run e2e-setup
+test:
+  stage: test
+  script:
+    - npm run e2e
