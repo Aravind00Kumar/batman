@@ -1,10 +1,12 @@
 var path = require('path');
 
-let suites = { 
-  e2e2: "./tests/e2e/**/*spec.js" 
+let suites = {
+    e2e: "./tests/e2e/**/*spec.js"
 };
 
 exports.config = {
+    baseUrl: 'http://localhost:8000/',
+
     framework: 'jasmine',
     /**
      *  setting up protractor to start webdriver manger automatically
@@ -17,22 +19,28 @@ exports.config = {
      *  Enable this to start webdriver manually
      *  `webdriver start node_modules/.bin/webdriver-manager start` is the command to start webdriver manual
      */
-     //seleniumAddress: 'http://localhost:4444/wd/hub',
+    //seleniumAddress: 'http://localhost:4444/wd/hub',
     suites: suites,
     onPrepare: function () {
-        var caps = browser.getCapabilities()
+        global.isAngularSite = function (flag) {
+            browser.ignoreSynchronization = !flag;
+        };
+        global.pageLoad = browser.wait(function () {
+            return browser.driver.findElement(by.tagName('body')).isDisplayed();
+        }, 1000);
     },
     capabilities: {
         'browserName': 'chrome',
-    /**
-     * Enable it to run chrome in headless mode like PhantomJS    
-     */ 
-    // chromeOptions: {
-    //      args: [ "--headless", "--disable-gpu", "--window-size=800x600" ]
-    // }
+        /**
+         * Enable it to run chrome in headless mode like PhantomJS    
+         */
+        // chromeOptions: {
+        //      args: [ "--headless", "--disable-gpu", "--window-size=800x600" ]
+        // }
     },
     allScriptsTimeout: 999999,
     jasmineNodeOpts: {
         defaultTimeoutInterval: 999999
     },
+    getPageTimeout : 100000
 };

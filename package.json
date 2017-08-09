@@ -78,6 +78,7 @@
   "author": "Aravind Kumar P",
   "license": "ISC",
   "devDependencies": {
+    "@types/protractor": "^4.0.0",
     "commitizen": "^2.9.6",
     "concurrently": "^3.5.0",
     "conventional-changelog-cli": "^1.3.2",
@@ -93,7 +94,7 @@
     "typedoc": "^0.8.0",
     "typescript": "^2.4.2",
     "webpack": "^3.4.1"
-  },
+   },
   "dependencies": {},
   "config": {
     "commitizen": {

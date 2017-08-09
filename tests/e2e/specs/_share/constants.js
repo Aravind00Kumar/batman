@@ -1,3 +1,3 @@
 module.exports = {
-    baseUrl: 'http://localhost:8080/public/ajs/src/'
+    devUrl: 'http://localhost:8080/public/ajs/src/index.html'
 };
