@@ -1,10 +1,6 @@
 image: node:8.0.0
 
 cache:
-    paths:
-    - node/modules/
-    
-cache:
   paths:  
   - node_modules/   
 
@@ -14,9 +10,4 @@ build:
     - npm config set proxy http://194.138.0.4:9400/
     - npm config set https-proxy http://194.138.0.4:9400/
     - npm install
-    - npm build-core
-    - npm run e2e-setup
-test:
-  stage: test
-  script:
-    - npm run e2e
+    - npm run build-core
