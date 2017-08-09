@@ -22,6 +22,7 @@
     "styles": "scss --update -t compact packages/sass/main.scss:dist/css/batman.css",
     "styles-prod": "scss --update -t compressed packages/sass/main.scss:dist/css/batman.min.css",
     "build-styles": "npm run styles & npm run styles-prod",
+    "build-styles-node": "node-sass packages/sass/main.scss dist/css/batman.css & node-sass packages/sass/main.scss dist/css/batman.min.css",
     "copy-styles": "copyfiles -f dist/css/*.* public/css",
     "copy-styles-core-es5": "copyfiles -f dist/css/*.* dist/output/core-es5/css",
     "copy-styles-components-es5": "copyfiles -f dist/css/*.* dist/output/components-es5/css",
@@ -87,6 +88,7 @@
     "cz-conventional-changelog": "^2.0.0",
     "del-cli": "^1.1.0",
     "lite-server": "^2.3.0",
+    "node-sass": "^4.5.3",
     "protractor": "^5.1.2",
     "rollup-plugin-ts": "^0.1.0",
     "semantic-release-gitlab": "^4.0.17",
@@ -94,7 +96,7 @@
     "typedoc": "^0.8.0",
     "typescript": "^2.4.2",
     "webpack": "^3.4.1"
-   },
+  },
   "dependencies": {},
   "config": {
     "commitizen": {
