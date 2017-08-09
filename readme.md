@@ -95,6 +95,33 @@ npm docs
 http://localhost:8000/documentation/index.html
 ```
 
+### E2E
+
+Setup
+
+```
+    npm run e2e:setup
+```    
+> Make sure the following paths are valid in `protractor.config.js`
+>
+> `seleniumServerJar: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.4.0.jar")`
+>
+> `chromeDriver: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/chromedriver_2.31.exe")`
+>    
+> 
+
+Setting up Chrome DevTools for Protractor debugging
+* Install the extension [Node.js V8 --inspector Manager (NiM)](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj?hl=en-US)
+* Restart Chrome browser
+
+Debugging
+
+* In vscode use `Protractor` from debug window.
+
+* In case if you want to use Chrome DevTools
+    * open Chrome browser
+    * run `npm run e2e:debug` from command prompt
+
 ## Technology Stack
 * SASS
 * TypeScript
