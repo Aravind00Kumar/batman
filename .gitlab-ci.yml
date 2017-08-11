@@ -7,9 +7,6 @@ cache:
 build:
   stage: build
   script:
-    - sudo apt-get update
-    - apt-get install ruby
-    - gem install sass
     - npm config set proxy http://194.138.0.4:9400/
     - npm config set https-proxy http://194.138.0.4:9400/
     - npm run setup
