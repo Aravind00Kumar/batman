@@ -23,8 +23,7 @@
 
         this.listOptions = {
             data: this.data,
-            height: 30,
-            onLoad: function (api) {  vm.listOptions.api = api; },
+            height: 30
         };
         window.addEventListener('resize', function () {
             vm.listOptions.api.refresh();
@@ -87,13 +86,11 @@
 
         this.list1Options = {
             height: 88,
-            onLoad: function (api) {  vm.list1Options.api = api; },
             template: '<div class="flex item-full centery"><img [src]="icon" height="50" /><div class="flex column centerx"> <span class="head" [value]="name"></span><span [value]="text"></span><span class="desc" [value]="description"></span></div></div>'
         };
 
         this.list2Options = {
             height: 88,
-            onLoad: function (api) { this.list2Options.api = api; }.bind(this),
             template: '<div class="flex item-full centery"><img [src]="icon" height="50" /><div class="flex column centerx"> <span class="head" [value]="name"></span><span [value]="text"></span><span class="desc" [value]="description"></span></div></div>'
         };
     }])

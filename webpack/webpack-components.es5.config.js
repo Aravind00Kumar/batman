@@ -11,7 +11,8 @@ module.exports = {
     entry: {
         doughnut: './packages/components/src/doughnut/doughnut.ts',
         list: './packages/components/src/list/list.ts',
-        tree: './packages/components/src/tree/optimal-tree.ts'
+        tree: './packages/components/src/tree/optimal-tree.ts',
+        table: './packages/components/src/table/table.ts'
     },
     output: {
         libraryTarget: 'var',

@@ -3,10 +3,10 @@ import * as angular from 'angular';
 import { Module, AbstractDirective, DirectiveFactory } from './module'
 
 
-class ListController{
+class ListController {
     public list: any;
     public options: any;
-    public refresh(){
+    public refresh() {
         this.list.options.data = this.options.data;
         this.list.refresh();
     }
@@ -20,15 +20,13 @@ export default class ListDirective extends AbstractDirective {
         this.controller = ListController;
     }
 
-    public link(scope, elmnt, attrs, ctrl) {
+    public link(scope, element, attrs, ctrl) {
         var List = window['Batman'].list.List;
-        ctrl.list = new List(elmnt[0], ctrl.options);
-        if (ctrl.options['onLoad']) {
-            ctrl.options['onLoad'].call(ctrl, {
-                refresh: ctrl.refresh.bind(ctrl)
-            });
-        }
-
+        ctrl.list = new List(element[0], ctrl.options);
+        ctrl.options.api = {
+            __list: ctrl.list,
+            refresh: ctrl.refresh.bind(ctrl)
+        };
     }
 
 }

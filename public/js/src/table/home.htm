@@ -1,0 +1,35 @@
+<h1 class="h1"> table Component Example</h1>
+<h2 class="h5"> Installation and usage</h2>
+
+<ul>
+    <li> Add the following <code>scripts<code> and <code>styles</code> in index.html file
+
+        <div class="pad-mar-2x no-mar-collapse">
+            <code>
+            &lt;link rel="stylesheet" href="./node_modules/@batman/core-es5/batman.css">
+            </code>
+        </div>
+        <div class="pad-mar-2x no-mar-collapse">
+            <code>
+                &lt;script src="./node_modules/@batman/core-es5/polyfills.js"></script></br>
+                &lt;script src="./node_modules/@batman/core-es5/core.js"></script></br>
+                &lt;script src="./node_modules/@batman/components-es5/table.js"></script></br>
+            </code>
+        </div>
+    </li>
+    <li>
+        In <code>script.js</code> add the following jscode
+        <code>
+            <br>document.addEventListener("DOMContentLoaded", function () {
+            <br> <span class="pad-mar-2x no-mar-collapse"> var dataSource = [{ "text": "0" }, { "text": "1" }, { "text": "2" }]; </span>
+            <br> <span class="pad-mar-2x no-mar-collapse">var Table = window.Batman.table.Table;</span>
+            <br> <span class="pad-mar-2x no-mar-collapse">new Table(document.getElementById("t1"), { </span>
+            <br><span class="pad-mar-2x no-mar-collapse"> <span class="pad-mar-2x no-mar-collapse">data: dataSource, </span></span>
+            <br><span class="pad-mar-2x no-mar-collapse"> <span class="pad-mar-2x no-mar-collapse">height: 30, </span></span>
+            <br><span class="pad-mar-2x no-mar-collapse"> <span class="pad-mar-2x no-mar-collapse">pageSize: 5 </span></span>
+            <br> <span class="pad-mar-2x no-mar-collapse">});</span>
+            <br> });</span>
+        </code>
+    </li>
+
+</ul>

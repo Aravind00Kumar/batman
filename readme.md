@@ -74,6 +74,11 @@ npm run setup
 ```
 npm start
 ```
+>
+> To debug the code start development server with `npm run start-dev` command instead of `npm start`.
+> 
+> This command allows to watch changes in the `core`, `components`, `ajs`, `aio` and `public` folders and update the browser. 
+>
 ### Demo application page
 
 ```
@@ -121,6 +126,23 @@ Debugging
 * In case if you want to use Chrome DevTools
     * open Chrome browser
     * run `npm run e2e:debug` from command prompt
+
+Execute E2E tests
+
+```
+    npm run e2e
+```
+
+
+## Contribution Guide
+
+How to check-in code
+* Stage your changes with command `git add .`
+* Commit your changes with command `npm run commit` and follow the instructions
+
+> `npm run commit` is configured with [commitizen](https://github.com/commitizen/cz-cli) module, which helps to generate change log from commit messages
+> 
+> Read more about [commitizen](https://github.com/commitizen/cz-cli)
 
 ## Technology Stack
 * SASS

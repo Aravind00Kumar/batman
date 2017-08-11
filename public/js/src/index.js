@@ -15,7 +15,9 @@
         { text: 'Custom event', url: '/list-custom-event', template: 'list/custom-event.htm', controller: 'customEventController' },
         { text: 'Huge data', url: '/list-huge-data', template: 'list/huge-data.htm', controller: 'hugeDataController' },
         { text: 'Tree', url: '/tree-home', template: 'tree/home.htm', controller: 'treeHomeController' },
-        { text: 'Basic', url: '/tree-basic', template: 'tree/basic.htm', controller: 'treeBasicController' }
+        { text: 'Basic', url: '/tree-basic', template: 'tree/basic.htm', controller: 'treeBasicController' },
+        { text: 'Table', url: '/table-home', template: 'table/home.htm', controller: 'tableHomeController' },
+        { text: 'Basic', url: '/table-basic', template: 'table/basic.htm', controller: 'tableBasicController' }
     ];
     componentRoutes.forEach(function (route) {
         module.route(route.url, route.template, route.controller);

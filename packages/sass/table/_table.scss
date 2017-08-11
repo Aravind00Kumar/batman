@@ -1,0 +1,28 @@
+
+.table { 
+    .row { 
+        display: table-row;
+        height:30px; 
+            .cell:last-child{
+                border-right-color: #010101;
+            }
+    }
+    .header { display: table-header-group; }
+    .body { 
+        display: table-row-group; 
+        :last-child{
+            .cell{
+                border-bottom-color: #010101;
+            }
+        } 
+    }
+    .footer { display: table-footer-group; }
+    .cell { 
+        display: table-cell;
+        width:120px; 
+        border: 1px solid #010101;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+    }
+    
+ }
