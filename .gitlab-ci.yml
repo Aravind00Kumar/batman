@@ -7,17 +7,5 @@ cache:
 build:
   stage: build
   script:
-    - npm config set proxy http://194.138.0.4:9400/
-    - npm config set https-proxy http://194.138.0.4:9400/
-    - npm install
-    - npm run build-styles-node
-    - npm run build-core
-    - npm run build-core-es5
-    - npm --prefix ./packages/components i ./packages/components 
-    - npm run build-components
-    - npm run build-components-es5
-    - npm --prefix ./packages/ajs i ./packages/ajs 
-    - npm --prefix ./packages/aio i ./packages/aio 
-    - npm run build-ajs
-    - npm run build-aio
-    
+    - npm run setup
+
