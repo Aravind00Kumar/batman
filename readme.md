@@ -1,4 +1,4 @@
-![alt](https://github.com/Aravind00Kumar/batman/blob/master/logo_64.png) 
+![alt](https://raw.githubusercontent.com/Aravind00Kumar/batman/master/logo_64.png) 
 # Batman
 Batman is a native JavaScript UI components library developed using TypeScript, SASS and virtual DOM concept. Easy to use, include following files in the html file.
 
