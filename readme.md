@@ -61,12 +61,13 @@ Install the following applications
 * [Python](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python) (optional)
 
 ## Setup
+> Folder structure `D:\office\CODE\`
 
-> folder structure `D:\office\CODE\`
 ```
 git clone git@code.siemens.com:ui-developers/git.git
 npm run setup 
 ```
+
 > Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command `npm start`
 >   
 > Have a look on [contribution guidelines](https://code.siemens.com/aravind.pampana/batman/blob/master/CONTRIBUTING.md)
@@ -74,13 +75,18 @@ npm run setup
 ### Start `lite-server` 
 
 ```
+// run examples
 npm start
+
+// run examples in watch mode for development
+npm run start-dev
+
 ```
->
+
 > To debug the code start development server with `npm run start-dev` command instead of `npm start`.
 > 
 > This command allows to watch changes in the `core`, `components`, `ajs`, `aio` and `public` folders and update the browser. 
->
+
 ### Demo application page
 
 ```
@@ -134,7 +140,7 @@ Execute E2E tests
 ```
     npm run e2e
 ```
-
+> Before executing the end to end tests make sure that lite server is up and running or open a new command prompt and run `npm start` 
 
 ## Contribution Guide
 
