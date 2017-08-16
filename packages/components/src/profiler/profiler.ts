@@ -14,7 +14,6 @@ export interface IProfilerOptions {
 /**
  * This is a component which allow developer to write messages in DOM 
  */
-
 export class ProfilerWriter implements IWriter {
     /**
      * Component default option. These options can be overridden from constructor
