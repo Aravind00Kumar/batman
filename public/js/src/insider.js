@@ -1,5 +1,5 @@
 var AppModule;
-
+var toString = ({}).toString;
 (function (module) {
     var cache = {};
     function template(str, data) {

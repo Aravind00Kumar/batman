@@ -53,16 +53,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 ## Development Environment setup 
 Install the following applications 
+* [VS Code](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-visual-studio-code)
 * [Git-SCM](https://code.siemens.com/ui-developers/git/blob/master/readme.md#git-scm-installation)
 * [Node.js](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-nodejs-and-configuring-proxy)
 * [Ruby](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-ruby-and-configure-proxy)
 * [SASS](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-sass)
-* [Python](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python)
-* [VS Code](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-visual-studio-code)
+* [Python](https://code.siemens.com/ui-developers/git/blob/master/readme.md#setup-python) (optional)
 
 ## Setup
 
+> folder structure `D:\office\CODE\`
 ```
+git clone git@code.siemens.com:ui-developers/git.git
 npm run setup 
 ```
 > Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command `npm start`
