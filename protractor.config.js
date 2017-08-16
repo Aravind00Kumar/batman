@@ -11,7 +11,7 @@ exports.config = {
     /**
      *  setting up protractor to start webdriver manger automatically
      */
-    seleniumServerJar: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.4.0.jar"),
+    seleniumServerJar: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.5.0.jar"),
     chromeDriver: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/chromedriver_2.31.exe"),
     seleniumPort: 4444,
 

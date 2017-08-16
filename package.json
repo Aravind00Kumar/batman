@@ -24,7 +24,7 @@
     "release": "semantic-release-gitlab changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "styles": "scss --update -t compact packages/sass/main.scss:dist/css/batman.css",
-    "styles-public": "scss public/sass/main.scss:public/css/main.css",
+    "styles-public": "scss --update public/sass/main.scss:public/css/main.css",
     "styles-prod": "scss --update -t compressed packages/sass/main.scss:dist/css/batman.min.css",
     "build-styles": "npm run styles & npm run styles-prod",
     "build-styles-node": "node-sass packages/sass/main.scss dist/css/batman.css & node-sass packages/sass/main.scss dist/css/batman.min.css",
