@@ -1,4 +1,5 @@
 {
+	"typescript.tsdk": "./node_modules/typescript/lib/",
 	"files.exclude": {
 		"**/*.js": {
 			"when": "$(basename).ts"
@@ -10,21 +11,27 @@
 		{
 			"icon": "webpack",
 			"extensions": [
-				"webpack.config.components.umd.js",
-				"webpack.config.core.umd.js",
-				"webpack.config.multi.js",
-				"webpack.config.single.js",
-				"webpack.config.components.umd.prod.js",
-				"webpack.config.core.umd.prod.js",
-				"webpack.config.multi.prod.js",
-				"webpack.config.single.prod.js"
+				"webpack.aio.config.js",
+				"webpack.aio.prod.config.js",
+				"webpack.ajs.config.js",
+				"webpack.ajs.prod.config.js",
+				"webpack-components.es5.config.js",
+				"webpack-components.es5.prod.config.js",
+				"webpack-components.umd.config.js",
+				"webpack-components.umd.prod.config.js",
+				"webpack-core.es5.config.js",
+				"webpack-core.es5.prod.config.js",
+				"webpack-core.umd.config.js",
+				"webpack-core.umd.prod.config.js"
 			],
 			"filename": true,
 			"format": "svg"
 		},
-				{
+		{
 			"icon": "tsconfig",
 			"extensions": [
+				"tsconfig.aio.json",
+				"tsconfig.ajs.json",
 				"tsconfig.components.json",
 				"tsconfig.core.json",
 				"tsconfig.multi.json",
@@ -33,6 +40,5 @@
 			"filename": true,
 			"format": "svg"
 		}
-
 	]
 }

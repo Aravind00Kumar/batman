@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Batman Angular Demo</title>
+  <base href="/public/aio/src/">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link href="https://file.myfontastic.com/XHcDAQxEChjYzE2z9DGiWh/icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://localhost:8000/dist/css/batman.css">
+  <link rel="stylesheet" href="http://localhost:8000/public/css/main.css">
+
+  <link rel="shortcut icon" href="../img/favicon.ico" />
+
+  <!-- Polyfills -->
+  <script src="../node_modules/core-js/client/shim.min.js"></script>
+  <script src="../node_modules/zone.js/dist/zone.js"></script>
+  <script src="../node_modules/systemjs/dist/system.src.js"></script>
+
+  <script src="systemjs.config.js"></script>
+  <script>
+    System.import('main.js').catch(function (err) { console.error(err); });
+  </script>
+</head>
+
+<body>
+
+
+  <section class="page flex column">
+
+    <header class="flex second row centerxy">
+      <div class="back flex centery no-mar-pad">
+        <a href="../../index.html"> <i class="icon-ios-arrow-back"></i> </a>
+      </div>
+      <div class="flex item-full no-mar-pad centerxy">
+        <img class="flex no-mar-pad" src="../../../../logo_64.png" height="48" alt="">
+        <a href="http://localhost:8000/"> Batman </a>
+      </div>
+    </header>
+
+    <article class="second flex item-full">
+      <nav class="flex item-full" id="navbar" my-nav>
+      </nav>
+
+      <section class="flex item-full column scrolly">
+        <my-app>Loading...</my-app>
+      </section>
+
+    </article>
+  </section>
+
+
+
+</body>
+
+</html>

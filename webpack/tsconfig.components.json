@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "baseUrl": "../packages/components/src",
+        "declaration": true,
+        "declarationDir": "../",
+        "lib": [
+            "es2015",
+            "dom"
+        ]
+    },
+    "include": [
+        "../packages/components/src"
+    ],
+    "exclude": [
+        "../node_modules"
+    ]
+}

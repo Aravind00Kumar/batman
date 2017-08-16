@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "baseUrl": "../packages/aio/src/",
+        "declaration": true,
+        "declarationDir": "../",
+        "lib": [
+            "es2015",
+            "dom"
+        ]
+    },
+    "include": [
+        "../packages/aio/src"
+    ],
+    "exclude": [
+        "../node_modules"
+    ]
+}

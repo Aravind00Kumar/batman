@@ -1,4 +1,4 @@
-import { BaseComponent, ProjectorOptions, VNode, h } from '@batman/core/core';
+import { BaseComponent, ProjectorOptions, VNode, h, hParser } from './../libs';
 
 /**
  * Doughnut component interface

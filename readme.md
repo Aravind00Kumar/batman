@@ -1,13 +1,12 @@
-![alt](https://github.com/Aravind00Kumar/batman/blob/master/logo_64.png) 
+![alt](https://raw.githubusercontent.com/Aravind00Kumar/batman/master/logo_64.png) 
 # Batman
 Batman is a native JavaScript UI components library developed using TypeScript, SASS and virtual DOM concept. Easy to use, include following files in the html file.
 
 ```
 <!-- include only to support IE browsers -->
-<script src="../dist/batman-polifills.js"></script>
 
-<script src="../dist/batman.js"></script>
-<link href="../dist/css/batman.css" rel="stylesheet" />
+    <script src="./node_modules/@batman/core-es5/polyfills.js"></script>
+
 ```
 
 ## How to use
@@ -19,15 +18,20 @@ In the `index.html`
 <html>
 <head>
     <title>Demo</title>
-    <link rel="stylesheet" href="./css/batman.css">
+    <link rel="stylesheet" href="./node_modules/@batman/core-es5/batman.css">
 </head>
 <body>
     <div class="flex">
         <div id="demo" style="height:200px; width:200px"></div>
     </div>
-    <script src="./scripts/batman-polifills.js"></script>
-    <script src="./scripts/batman.js"></script>
+
+    <script src="./node_modules/@batman/core-es5/polyfills.js"></script>>
+    <script src="./node_modules/@batman/core-es5/core.js"></script>
+    <script src="./node_modules/@batman/components-es5/doughnut.js"></script> 
+    <script src="./node_modules/@batman/components-es5/list.js"></script>
+    <script src="./node_modules/@batman/components-es5/tree.js"></script> 
     <script src="main.js"></script>
+
 </body>
 </html>
 ```
@@ -36,14 +40,16 @@ In `main.js`
 
 ```
 document.addEventListener('DOMContentLoaded', function () {
-    new Batman.Doughnut(document.getElementById('demo'), {
-        values: [ { percentage: 30, color: '#a52a22'} ], 
-        sectorColor: '#03a9f4',
-        title:'Batman'
+    var List = Batman.list.List;
+    var dataSource = [{ "text": "0" }, { "text": "1" }];
+    new List(document.getElementById('demo'), {
+        data: this.dataSource,
+        height: 30,
     });
 });
 
 ```
+> Use `npm start` to run and see the configuration for `angularjs` and `angulario` projects
 
 ## Development Environment setup 
 Install the following applications 
@@ -59,11 +65,7 @@ Install the following applications
 ```
 npm run setup 
 ```
-> Setup installs the following global modules 
->
-> `typescript typedoc commitizen cz-conventional-changelog semantic-release-gitlab conventional-changelog-cli`
-> 
-> Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command 'npm start'
+> Setup auto starts the development server use (`Ctrl + C`) to stop the server, to start again use command `npm start`
 >   
 > Have a look on [contribution guidelines](https://code.siemens.com/aravind.pampana/batman/blob/master/CONTRIBUTING.md)
 
@@ -72,10 +74,15 @@ npm run setup
 ```
 npm start
 ```
+>
+> To debug the code start development server with `npm run start-dev` command instead of `npm start`.
+> 
+> This command allows to watch changes in the `core`, `components`, `ajs`, `aio` and `public` folders and update the browser. 
+>
 ### Demo application page
 
 ```
-http://localhost:8000/demo/index.html
+http://localhost:8000/index.html
 ```
 
 ### Generate documentation 
@@ -92,6 +99,50 @@ npm docs
 ```
 http://localhost:8000/documentation/index.html
 ```
+
+### E2E
+
+Setup
+
+```
+    npm run e2e:setup
+```    
+> Make sure the following paths are valid in `protractor.config.js`
+>
+> `seleniumServerJar: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.4.0.jar")`
+>
+> `chromeDriver: path.join(__dirname, "node_modules/protractor/node_modules/webdriver-manager/selenium/chromedriver_2.31.exe")`
+>    
+> 
+
+Setting up Chrome DevTools for Protractor debugging
+* Install the extension [Node.js V8 --inspector Manager (NiM)](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj?hl=en-US)
+* Restart Chrome browser
+
+Debugging
+
+* In vscode use `Protractor` from debug window.
+
+* In case if you want to use Chrome DevTools
+    * open Chrome browser
+    * run `npm run e2e:debug` from command prompt
+
+Execute E2E tests
+
+```
+    npm run e2e
+```
+
+
+## Contribution Guide
+
+How to check-in code
+* Stage your changes with command `git add .`
+* Commit your changes with command `npm run commit` and follow the instructions
+
+> `npm run commit` is configured with [commitizen](https://github.com/commitizen/cz-cli) module, which helps to generate change log from commit messages
+> 
+> Read more about [commitizen](https://github.com/commitizen/cz-cli)
 
 ## Technology Stack
 * SASS

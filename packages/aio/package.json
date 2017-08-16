@@ -1,0 +1,16 @@
+{
+  "name": "aio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-batman": "npm install ../../build/batman-components-1.0.0-alpha.2.tgz --save",
+    "uninstall-batman": "npm uninstall @batman/components"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/core": "^4.3.0",
+    "@batman/components": "file:..\\..\\build\\batman-components-1.0.0-alpha.2.tgz"
+  }
+}

@@ -1,7 +1,7 @@
-import { h, ProjectorOptions, VNode, ProjectorFactory  } from '@batman/core/core';
+import { BaseComponent, ProjectorOptions, VNode, h, hParser, ProjectorFactory } from './../libs';
 
-import { IWriter } from '@batman/core/utility/writer'
-import { IMessage } from '@batman/core/utility/message'
+import { IWriter } from './../libs';
+import { IMessage } from './../libs';
 
 /**
  * Interface for profiler options
@@ -14,7 +14,6 @@ export interface IProfilerOptions {
 /**
  * This is a component which allow developer to write messages in DOM 
  */
-
 export class ProfilerWriter implements IWriter {
     /**
      * Component default option. These options can be overridden from constructor

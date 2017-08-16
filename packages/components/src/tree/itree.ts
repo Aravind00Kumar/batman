@@ -16,18 +16,6 @@ export interface ITreeNode {
 }
 
 /**
- * Interface for doughnut component values
- */
-export interface IOptimalTreeNode {
-    id: string;
-    text: string;
-    level: number;
-    isOpened?: boolean;
-    icon?: string;
-}
-
-
-/**
  * Interface for doughnut component options
  */
 
@@ -40,12 +28,23 @@ export interface ITreeOptions {
 
 }
 
+
+/**
+ * Interface for OptimalTree component values
+ */
+export interface IOptimalTreeNode {
+    id?: string;
+    text?: string;
+    level?: number;
+    isOpened?: boolean;
+    icon?: string[] | string;
+}
+
 export interface IOptimalTreeOptions {
     height?: number;
     data?: IOptimalTreeNode[];
     pageSize?: number;
     autoPage?: boolean;
     template?: string;
-    icons?: any,
-    caret: boolean
+    caret?: boolean;
 }

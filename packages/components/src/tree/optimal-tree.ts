@@ -1,4 +1,4 @@
-import { BaseComponent, h, hParser, VNode  } from '@batman/core/core';
+import { BaseComponent, ProjectorOptions, VNode, h } from './../libs';
 
 import { ITreeComponent, IOptimalTreeOptions, IOptimalTreeNode } from './itree';
 
@@ -16,11 +16,7 @@ export class OptimalTree
         autoPage: true,
         template: '',
         caret: true,
-        icons: {
-            folder: ['icon-folder-o', 'icon-folder-open-o'],
-            plusMinus: ['icon-plus-round', 'icon-minus-round'],
-            noIcon: 'n'
-        }
+
     }
 
     private _start: number;
@@ -44,6 +40,7 @@ export class OptimalTree
     private init() {
         this._activeData = [];
         let elementOffset = this.element.clientHeight;
+
         if (this.options.pageSize === 0 || this.options.autoPage) {
             this.options.pageSize = Math.ceil(elementOffset / this.options.height);
             this._containerHeight = elementOffset;
@@ -55,6 +52,7 @@ export class OptimalTree
         this._end = this.options.pageSize;
         this.getActiveRecords()
     }
+
 
     public open(item, event) {
         if (item.hasOwnProperty('isOpened')) {
@@ -94,23 +92,28 @@ export class OptimalTree
                                         style: `height:${this.options.height}px`,
                                         key: item.id,
                                         onclick: this.open.bind(this, item)
-                                    }, [h('i.icon', {
+                                    }, [h('i.caret', {
                                         style: `display: ${this.options.caret === false ? 'none' : 'initial'}`,
                                         classes: { open: item.isOpened === true, close: item.isOpened === false }
-                                    }),
-                                    h('i', {
-                                        classes: {
-                                            'icons2': item.hasOwnProperty('isOpened'),
-                                            [item.icon ? this.options.icons[item.icon][0] : 'n']: item.isOpened === false,
-                                            [item.icon ? this.options.icons[item.icon][1] : 'n']: item.isOpened === true
-                                        }
-                                    }),
+                                    }), this.displayIcon(item),
                                     this.itemTemplate(item)]);
                                 })])
                             ]),
                         h('div.ghost', { style: `height:${this._filteredData.length * this.options.height}px` }),
-                    ])
-            ])
+                    ])])
+    }
+
+    private displayIcon(item: IOptimalTreeNode) {
+        // return h('i', {
+        //     classes: {
+        //         'icons': item.hasOwnProperty('isOpened'),
+        //         [item.icon ? this.options.icons[item.icon][0] : 'n']: item.isOpened === false,
+        //         [item.icon ? this.options.icons[item.icon][1] : 'n']: item.isOpened === true
+        //     }
+        // }),
+        return h('img', {
+            src: item.isOpened == undefined ? item.icon.toString() : item.isOpened == false ? item.icon[0] : item.icon[1]
+        })
     }
 
     private scrollEvent(event) {
@@ -158,3 +161,5 @@ export class OptimalTree
     }
 
 }
+
+export { ITreeComponent, IOptimalTreeNode, IOptimalTreeOptions };

@@ -1,4 +1,5 @@
-import { BaseComponent, VNode, h, hParser } from '@batman/core/core';
+import { BaseComponent, ProjectorOptions, VNode, h, hParser } from './../libs';
+
 
 /**
  * List component interface
@@ -7,13 +8,6 @@ export interface IListComponent {
     refresh(): void;
 }
 
-/**
- * Interface for doughnut component values
- */
-export interface IListValue {
-    percentage: number,
-    color: string
-}
 
 /**
  * Interface for doughnut component options

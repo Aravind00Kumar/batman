@@ -1,13 +1,13 @@
 
 # Sass Styling
-This folder contains all the stylesheets controlled from a single source. 
+This folder contains all the style sheets controlled from a single source. 
 This folder serves primarily 2 purposes: 
 * First is to avoid abrupt changes from multiple sources leading to conflicts by replacing it with a single source.
 * Maintaining uniformity by creating semantic stylings.
 
 ## Folders Involved
 ### _global 
-Contains all the global stylings and typrographies, which in turn use files in _mixin, _skins and _variables folders.
+Contains all the global stylings and typographies, which in turn use files in _mixin, _skins and _variables folders.
 
 ### _mixin
 Mixin folder contains files that lets the user make groups of CSS declarations that he/she wants to reuse throughout their application.

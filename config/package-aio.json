@@ -1,0 +1,8 @@
+{
+  "description": "UI Components in vanilla js (TypeScript); Angular io components",
+  "dependencies": {
+    "@batman/core": "file:..\\batman-core-1.0.0-alpha.2.tgz",
+    "@batman/components": "file:..\\batman-components-1.0.0-alpha.2.tgz"
+  }
+
+}

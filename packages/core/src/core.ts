@@ -112,3 +112,5 @@ export { ProjectorOptions, VNode } from './interfaces'
 export { Configuration, Global } from './global';
 export { ProjectionFactory, ProjectorFactory } from './factory';
 export { h, hParser } from './h';
+export { IWriter } from './utility/writer';
+export { IMessage } from './utility/message';
