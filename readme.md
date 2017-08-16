@@ -155,10 +155,12 @@ Execute E2E tests
 ### New Developer / Tester
 * Request for developer access
 * Create a new `user` / `feature` branch and upstream to remote repository 
+
 ```
     git checkout -b sunil
     git push -u origin sunil
 ``` 
+
 > use your name or feature name in place of `sunil`
 
 How to check-in code
