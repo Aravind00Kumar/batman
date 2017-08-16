@@ -138,6 +138,23 @@ Execute E2E tests
 
 ## Contribution Guide
 
+### Branching model
+* `Master` is the release branch 
+* `Dev` is the developer branch
+* `<user>` is the individual developer branch
+* `<feature>` is the individual feature branches
+
+`user` and `feature` branches are derived from `dev`; Once development completes user can request a merge from `user/feature` branch to `Dev`
+
+### New Developer / Tester
+* Request for developer access
+* Create a new `user` / `feature` branch and upstream to remote repository 
+```
+    git checkout -b sunil
+    git push -u origin sunil
+``` 
+> use your name or feature name in place of `sunil`
+
 How to check-in code
 * Stage your changes with command `git add .`
 * Commit your changes with command `npm run commit` and follow the instructions
