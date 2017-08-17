@@ -10,22 +10,19 @@ variables:
   NPM_CONFIG_LOGLEVEL: warn
 
 
-
-services:
- - ruby:2.2
- 
 cache:
   paths:
   - node_modules/
 
 before_script:
-  - gem install sass  --no-ri --no-rdoc
-  - npm i typescript -g --registry https://devops.bt.siemens.com/artifactory/api/npm/npm-all
+  - npm config set proxy http://194.138.0.3:9400
+  - npm i typescript -g
   - npm link typescript
+  - npm install -g amdefine
+  - npm install
 
-
-test_async:
+build:
   script:
   - npm run setup:styles
-
-
+  - npm run build-core
+  
