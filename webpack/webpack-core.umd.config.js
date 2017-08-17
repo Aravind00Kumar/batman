@@ -4,6 +4,10 @@ var path = require('path');
 
 let dirname = path.join(__dirname, '../');
 
+
+console.log('#########' + __dirname);
+
+
 module.exports = {
     context: dirname,
     entry: {
@@ -37,9 +41,9 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {
-                from: dirname + '/config/package-core.umd.json', to: dirname + '/dist/output/core/package.json',
+                from: path.join(__dirname, '../config/package-core.umd.json'), to: path.join(__dirname, '../dist/output/core/package.json'),
                 transform: function (content, path) {
-                    var package = JSON.parse(content.toString());;
+                    var package = JSON.parse(content.toString());
                     package.name = config.scope + '/core';
                     package.version = config.version;
                     package.author = config.author;
@@ -50,7 +54,7 @@ module.exports = {
                     return new Buffer.from(JSON.stringify(package));
                 }
             },
-            { from: dirname + '/packages/core/src/polyfills.js', to: dirname + '/dist/output/core/polyfills.js' }
+            { from: path.join(__dirname, '../packages/core/src/polyfills.js'), to: path.join(__dirname, '../dist/output/core/polyfills.js') }
         ], { copyUnmodified: true }),
     ]
 }
