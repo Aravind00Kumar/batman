@@ -4,9 +4,7 @@ var path = require('path');
 
 let dirname = path.join(__dirname, '../');
 
-
 console.log('#########' + __dirname);
-
 
 module.exports = {
     context: dirname,
@@ -51,6 +49,7 @@ module.exports = {
                     package.keywords = config.keywords;
                     package.keywords.push(config.scope + '-core');
                     package.keywords.push(config.name + '-core');
+                    console.log('##### package.json - copied #####')
                     return new Buffer.from(JSON.stringify(package));
                 }
             },

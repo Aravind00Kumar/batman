@@ -35,7 +35,7 @@ module.exports = {
     devtool: "source-map",
     plugins: [
         new CopyWebpackPlugin([
-            { from: dirname + '/packages/core/src/polyfills.min.js', to: dirname + '/dist/output/core/polyfills.min.js' }
+            { from: path.join(__dirname, '../packages/core/src/polyfills.min.js'), to: path.join(__dirname, '../dist/output/core/polyfills.min.js') }
         ], { copyUnmodified: true })
     ]
 }
