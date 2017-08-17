@@ -11,14 +11,14 @@ cache:
   - node_modules/
 
 before_script:
-  - npm config set proxy http://194.138.0.3:9400
-  - npm i typescript -g
-  - npm link typescript
-  - npm install -g amdefine
-  - npm install
+#  - npm config set proxy http://194.138.0.3:9400
+#  - npm i typescript -g
+#  - npm link typescript
+#  - npm install -g amdefine
+#  - npm install
 
 build:
   script:
-  - npm run setup:styles
-  - npm run build-core
+#  - npm run setup:styles
+#  - npm run build-core
   
