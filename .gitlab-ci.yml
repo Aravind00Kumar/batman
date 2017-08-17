@@ -6,10 +6,6 @@ image: "node:8.0.0"
 # This folder is cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 
-variables:
-  NPM_CONFIG_LOGLEVEL: warn
-
-
 cache:
   paths:
   - node_modules/
