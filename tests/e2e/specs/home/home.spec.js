@@ -5,7 +5,7 @@ beforeEach(function () {
 
 describe('Batman home page', function () {
 
-    it('should load', function () {
+    it('Should load', function () {
         browser.driver.get(pageURL);
         pageLoad.then(function () {
             expect(browser.getCurrentUrl()).toBe(pageURL);
@@ -20,7 +20,7 @@ describe('Batman home page', function () {
         });
 
     });
-    it('should navigate to the demo example page', function () {
+    it('Should navigate to the demo example page', function () {
         browser.driver.get(pageURL);
         pageLoad.then(function () {
             expect(browser.getCurrentUrl()).toBe(pageURL);
@@ -34,7 +34,7 @@ describe('Batman home page', function () {
                 })
         });
     });
-    it('should navigate to the JavaScript example page', function () {
+    it('Should navigate to the JavaScript example page', function () {
         browser.driver.get(pageURL + 'public/index.html');
         pageLoad.then(function () {
             browser.driver.findElement(by.id('_js'))
