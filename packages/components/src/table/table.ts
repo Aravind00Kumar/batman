@@ -130,7 +130,7 @@ export class Table extends BaseComponent<ITableOptions> implements ITableCompone
                 this.containerScrollTop = (start * this.options.height)//event.target.scrollTop;
                 this.start = start;
                 this.end = end;
-                //this.activeData = this.options.data.slice(this.start, this.end);
+                this.activeData = this.options.data.slice(this.start, this.end);
             }
             this.scrollTop = event.currentTarget.scrollTop;
         }

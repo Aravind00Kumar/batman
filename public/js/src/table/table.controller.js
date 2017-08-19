@@ -719,7 +719,7 @@
                 data: this.data,
                 height: 40,
                 pageSize:15,
-                isCacheEnabled:false,
+                //isCacheEnabled:false,
                 rowClick : function(){
                     console.log(this.email);
                 },
