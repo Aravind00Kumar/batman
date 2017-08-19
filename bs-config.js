@@ -6,7 +6,7 @@ module.exports = function (bs) {
             "./public/**/*.{html,htm,css,js}",
             "./docs/**/*.{png}",
             "./documentation/**/*.{html,htm,css,js}",
-            "./dist/**/*.{js}"
+            "./dist/**/*.*"
         ],
         "server": {
             "baseDir": "./",

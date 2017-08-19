@@ -90,7 +90,29 @@ export class BaseComponent<O> {
                         this.logger.error(`'${elm.value}' is not a valid function or not implemented in the component options`);
                     }
                 } else {
-                    properties[elementName] = elm.value;
+                    // Evaluate expressions
+                    if (elm.value.indexOf('{') !== -1) {
+                        var fn = new Function("obj",
+                            "var p=[],print=function(){p.push.apply(p,arguments);};" +
+                            "with(obj){p.push('" +
+                            elm.value.replace(/[\r\t\n]/g, " ")
+                                .split("{{").join("\t")
+                                .replace(/((^|}})[^\t]*)'/g, "$1\r")
+                                .replace(/\t(.*?)}}/g, "',$1,'")
+                                .split("\t").join("');")
+                                .split("}}").join("p.push('")
+                                .split("\r").join("\\'")
+                            + "');}return p.join('');");
+
+                        if (element.tagName.toUpperCase() === 'INPUT') {
+                            properties["value"] = fn(context);
+                        } else
+                            properties["innerHTML"] = fn(context);;
+                    } else {
+                        properties[elementName] = elm.value;
+
+                    }
+
                 }
         }
         if (element.id) {

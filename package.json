@@ -15,6 +15,7 @@
     "setup:public": "npm --prefix /public/ajs i public/ajs & npm --prefix /public/aio i public/aio",
     "start": "lite-server",
     "start-dev": "concurrently \"npm run styles-dev\" \"npm run webpack-core-es5:watch\" \"npm run webpack-core:watch\" \"npm run webpack-components-es5:watch\" \"npm run webpack-components:watch\" \"npm run webpack-ajs:watch\" \"npm run webpack-aio:watch\" \"npm run ts-dev-aio\" \"lite-server -w\"",
+    "start-dev-lite": "concurrently \"npm run styles-dev\" \"npm run webpack-core-es5:watch\" \"npm run webpack-core:watch\" \"npm run webpack-components-es5:watch\" \"npm run webpack-components:watch\" \"lite-server -w\"",
     "start-ajs": "concurrently \"npm run styles-dev\" \"npm run webpack-ajs:watch\" \"lite-server -w\"",
     "start-aio": "concurrently \"npm run styles-dev\" \"npm run webpack-aio:watch\" \"npm run ts-dev-aio\" \"lite-server -w\"",
     "ts-dev-aio": "tsc -w -p public/aio/src",
