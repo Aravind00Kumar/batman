@@ -1,24 +1,28 @@
 # This file is a template, and might need editing before it works on your project.
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
-image: "node:8.0.0"
+image: node:8.0.0
 
 # This folder is cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 
+variables:
+  NPM_CONFIG_LOGLEVEL: warn
+
+before_script:
+  - npm install simpl-cli --global --registry https://devops.bt.siemens.com/artifactory/api/npm/npm-all
+  - simpl config
+  - npm i typescript -g
+  - npm link typescript
+  - npm install -g amdefine
+  - npm install
+  
 cache:
   paths:
   - node_modules/
 
-before_script:
-#  - npm config set proxy http://194.138.0.3:9400
-#  - npm i typescript -g
-#  - npm link typescript
-#  - npm install -g amdefine
-#  - npm install
-
 build:
   script:
-#  - npm run setup:styles
-#  - npm run build-core
+  - npm run setup:styles
+  - npm run build-core
   
