@@ -45,7 +45,7 @@ article.second {
 
     nav, section {
         //height: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 0;
     }
 
     nav {
@@ -91,6 +91,7 @@ article.second {
         background: rgba(256, 256, 256, 0.9);
         overflow: auto;
         padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
